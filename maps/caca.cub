@@ -1,7 +1,7 @@
-NO 	./textures/caca.png
-SO ./textures/caca.png
-EA ./textures/caca.png
-WE ./textures/caca.png
+NO 	./textures/sky.png
+SO ./textures/sky.png
+EA ./textures/sky.png
+WE ./textures/sky.png
 
 
 F 255,200,80
