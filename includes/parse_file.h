@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 13:10:12 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 12:47:58 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:42:34 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "cub3d.h"
 
-typedef enum	e_id
+typedef enum e_id
 {
 	north_tx,
 	south_tx,
@@ -27,13 +27,13 @@ typedef enum	e_id
 	other
 }	t_id;
 
-typedef enum	e_color_id
+typedef enum e_color_id
 {
 	floor_id,
 	ceiling_id
 }	t_color_id;
 
-typedef struct	e_rgb
+typedef struct e_rgb
 {
 	int	red;
 	int	green;

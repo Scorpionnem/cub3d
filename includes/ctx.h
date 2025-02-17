@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 12:28:29 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:42:15 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "cub3d.h"
 
-typedef	struct	s_maths
+typedef struct s_maths
 {
 	double		pos_x;
 	double		pos_y;
@@ -31,14 +31,14 @@ typedef	struct	s_maths
 	long int	color;
 }	t_maths;
 
-typedef struct	s_winfo
+typedef struct s_winfo
 {
 	mlx_image_t		*img;
 	mlx_texture_t	*wall_tx[4];
 	mlx_t			*mlx;
 }	t_winfo;
 
-typedef struct	s_ginfo
+typedef struct s_ginfo
 {
 	int				x;
 	int				y;
@@ -49,13 +49,13 @@ typedef struct	s_ginfo
 	unsigned int	colors[2];
 }	t_ginfo;
 
-typedef struct	s_file
+typedef struct s_file
 {
 	char	**lines;
 	int		lines_count;
 }	t_file;
 
-typedef struct	s_ctx
+typedef struct s_ctx
 {
 	t_ginfo		ginfo;
 	t_winfo		winfo;

@@ -6,12 +6,12 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:37:24 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 11:22:05 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:42:55 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_STRINGS_H
-# define CUB3D_STRINGS_H
+#ifndef STRINGS_H
+# define STRINGS_H
 
 // ERROR MESSAGES
 # define ERROR_NL "Error\n"
@@ -29,10 +29,12 @@
 # define PLAYER_COUNT_ERROR "Invalid amount of player spawning position\n"
 # define INVALID_MAP_SIDES "Map walls are not closed\n"
 # define TEXTURE_LOAD_FAIL "Failed to load texture\n"
+# define INVALID_CHARS "Invalid character in map\n"
 
 // MISC
 # define CUB_NAME "cub3D"
 # define CUB_FILE "buc."
 # define PLAYER_CHARSET "NSEW"
+# define MAP_CHARSET "10NSWE"
 
 #endif
