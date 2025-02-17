@@ -6,32 +6,30 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:17 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 11:35:32 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:40:57 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_map.h"
 
-static int	charset_iter(char **map, char *charset)
+static int	check_valid_charset(char **map, char *charset)
 {
 	int	i;
 	int	j;
-	int	res;
 
 	i = 0;
-	res = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (ft_strchr(charset, map[i][j]))
-				res++;
+			if (!ft_strchr(charset, map[i][j]))
+				return (0);
 			j++;
 		}
 		i++;
 	}
-	return (res);
+	return (1);
 }
 
 static void	get_player_pos(t_ctx *ctx)
@@ -93,6 +91,8 @@ static int	check_sides_valid(char **map)
 
 int	parse_map(t_ctx *ctx)
 {
+	if (!check_valid_charset(ctx->ginfo.map, MAP_CHARSET))
+		return (!!print_error(INVALID_CHARS));
 	if (!check_sides_valid(ctx->ginfo.map))
 		return (!!print_error(INVALID_MAP_SIDES));
 	if (charset_iter(ctx->ginfo.map, PLAYER_CHARSET) != 1)
