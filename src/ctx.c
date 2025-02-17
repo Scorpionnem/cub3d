@@ -6,23 +6,11 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:06 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 11:29:14 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 12:26:34 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_tx_path(t_ctx *ctx)
-{
-	if (ctx->ginfo.wall_tx[north_tx])
-		free(ctx->ginfo.wall_tx[north_tx]);
-	if (ctx->ginfo.wall_tx[south_tx])
-		free(ctx->ginfo.wall_tx[south_tx]);
-	if (ctx->ginfo.wall_tx[east_tx])
-		free(ctx->ginfo.wall_tx[east_tx]);
-	if (ctx->ginfo.wall_tx[west_tx])
-		free(ctx->ginfo.wall_tx[west_tx]);
-}
 
 void	ctx_deinit(t_ctx *ctx)
 {
@@ -60,7 +48,7 @@ void	print_ctx(t_ctx *ctx)
 	printf("\nMap: \n");
 	for (int i = 0; ctx->ginfo.map[i]; i++)
 		printf("%s\n", ctx->ginfo.map[i]);
-	printf("Spawn X:%d Spawn Y:%d", ctx->ginfo.x, ctx->ginfo.x);
+	printf("\nSpawn X:%d Spawn Y:%d\n", ctx->ginfo.x, ctx->ginfo.x);
 }
 
 int	ctx_init(t_ctx *ctx, char *filename)
