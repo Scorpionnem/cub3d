@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 09:55:16 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 11:23:10 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 15:44:38 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "libft.h"
 # include "get_next_line.h"
+
+#define screen_width 1050
+#define screen_height 800
 
 # include "MLX42.h"
 # include "error.h"
@@ -25,6 +28,8 @@
 # include "parse_map.h"
 # include "utils.h"
 # include "textures.h"
+# include "hooks.h"
+# include "render.h"
 
 # include <math.h>
 # include <fcntl.h>
