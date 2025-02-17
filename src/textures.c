@@ -6,11 +6,23 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:17:26 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 11:22:57 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 12:05:35 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "textures.h"
+
+void	free_tx_path(t_ctx *ctx)
+{
+	if (ctx->ginfo.wall_tx[north_tx])
+		free(ctx->ginfo.wall_tx[north_tx]);
+	if (ctx->ginfo.wall_tx[south_tx])
+		free(ctx->ginfo.wall_tx[south_tx]);
+	if (ctx->ginfo.wall_tx[east_tx])
+		free(ctx->ginfo.wall_tx[east_tx]);
+	if (ctx->ginfo.wall_tx[west_tx])
+		free(ctx->ginfo.wall_tx[west_tx]);
+}
 
 void	free_textures(t_ctx	*ctx)
 {
