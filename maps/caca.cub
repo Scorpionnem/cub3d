@@ -1,7 +1,7 @@
-NO 	./textures/wall.png
-SO ./textures/wall.png
-WE ./textures/wall.png
-EA ./textures/wall.png
+NO 	./textures/north.png
+SO ./textures/south.png
+EA ./textures/east.png
+WE ./textures/west.png
 
 
 F 255,255,255
