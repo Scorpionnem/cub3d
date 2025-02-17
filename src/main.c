@@ -6,14 +6,14 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:09:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 14:39:42 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 15:16:44 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define screen_width 1050
-#define screen_height 800
+#define screen_height 800	
 
 // static void	break_block(t_ctx *ctx)
 // {
@@ -127,6 +127,7 @@ static void	frame_loop(void *ctx_ptr)
 		for (int j = 0; j < screen_height; j++)
 		{
 			if (j < screen_height / 2)
+      			// mlx_put_pixel(ctx->winfo.img, i, j, ctx->ginfo.colors[ceiling_id]);
       			mlx_put_pixel(ctx->winfo.img, i, j, uint8_to_uint32(&ctx->winfo.wall_tx[north_tx]->pixels[(i + (j * ctx->winfo.wall_tx[north_tx]->width)) * 4]));	
 			else
       			mlx_put_pixel(ctx->winfo.img, i, j, ctx->ginfo.colors[floor_id]);
@@ -299,7 +300,7 @@ int main(int ac, char **av)
 	ctx.maths.time = 0;
 	ctx.maths.old_time = 0;
 	print_ctx(&ctx);
-	// mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	ctx.winfo.mlx = mlx_init(screen_width, screen_height, "caca3d", true);
 	ctx.winfo.img = mlx_new_image(ctx.winfo.mlx, screen_width, screen_height);
 	// ctx.tx = mlx_load_png("wall.png");
