@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:06 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 12:26:34 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:44:29 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	print_ctx(t_ctx *ctx)
 	printf("\nMap: \n");
 	for (int i = 0; ctx->ginfo.map[i]; i++)
 		printf("%s\n", ctx->ginfo.map[i]);
-	printf("\nSpawn X:%d Spawn Y:%d\n", ctx->ginfo.x, ctx->ginfo.x);
+	printf("\nSpawn X:%d Spawn Y:%d Facing: %c\n", ctx->ginfo.x, ctx->ginfo.x, ctx->ginfo.spawn_facing);
 }
 
 int	ctx_init(t_ctx *ctx, char *filename)

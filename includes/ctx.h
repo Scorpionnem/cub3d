@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 13:42:15 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:42:23 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_ginfo
 {
 	int				x;
 	int				y;
+	char			spawn_facing;
 	char			**map;
 	int				map_height;
 	int				map_width;

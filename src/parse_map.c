@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:50:17 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 13:40:57 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:43:06 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	get_player_pos(t_ctx *ctx)
 		{
 			if (ft_strchr(PLAYER_CHARSET, ctx->ginfo.map[x][y]))
 			{
+				ctx->ginfo.spawn_facing = ctx->ginfo.map[x][y];
 				ctx->ginfo.x = x;
 				ctx->ginfo.y = y;
 				ctx->ginfo.map[x][y] = '0';

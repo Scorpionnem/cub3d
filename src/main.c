@@ -6,14 +6,99 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:09:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 14:18:10 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:39:42 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define screen_width 800
+#define screen_width 1050
 #define screen_height 800
+
+// static void	break_block(t_ctx *ctx)
+// {
+// 	int x = screen_width / 2;
+
+// 	double camera_x = 2 * x / (float)screen_width - 1;
+// 		double ray_dir_x = ctx->maths.dir_x + ctx->maths.plane_x * camera_x;
+// 		double ray_dir_y = ctx->maths.dir_y + ctx->maths.plane_y * camera_x;		
+
+// 		int	map_x = (int)ctx->maths.pos_x;
+// 		int	map_y = (int)ctx->maths.pos_y;
+
+// 		double	side_dist_x;
+// 		double	side_dist_y;
+
+// 		double delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
+// 		double delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
+// 		double perp_wall_dist = 0;
+
+// 		int	step_x;
+// 		int	step_y;
+
+// 		int	hit = 0;
+		
+// 		if (ray_dir_x < 0)
+//     	{
+//     		step_x = -1;
+//     		side_dist_x = (ctx->maths.pos_x - map_x) * delta_dist_x;
+//     	}
+//     	else
+//     	{
+//     		step_x = 1;
+//     		side_dist_x = (map_x + 1.0 - ctx->maths.pos_x) * delta_dist_x;
+//     	}
+//     	if (ray_dir_y < 0)
+//     	{
+//     		step_y = -1;
+//     		side_dist_y = (ctx->maths.pos_y - map_y) * delta_dist_y;
+//     	}
+//     	else
+//     	{
+//     		step_y = 1;
+//     		side_dist_y = (map_y + 1.0 - ctx->maths.pos_y) * delta_dist_y;
+//     	}
+// 		int	side;
+
+// 		while (hit == 0)
+// 		{
+// 			if (side_dist_x < side_dist_y)
+// 			{
+// 				side_dist_x += delta_dist_x;
+// 				map_x += step_x;
+// 				side = 0;
+// 			}
+// 			else
+// 			{
+// 				side_dist_y += delta_dist_y;
+// 				map_y += step_y;
+// 				side = 1;
+// 			}
+// 			if (ctx->ginfo.map[map_x][map_y] == '1')
+// 				hit = 1;
+// 		}
+
+// 		double wall_x;
+//     	if (side == 0) wall_x = ctx->maths.pos_y + perp_wall_dist * ray_dir_y;
+//     	else           wall_x = ctx->maths.pos_x + perp_wall_dist * ray_dir_x;
+//     	wall_x -= floor((wall_x));
+
+// 		if (side == 0)
+// 			perp_wall_dist = (side_dist_x - delta_dist_x);
+//     	else
+// 			perp_wall_dist = (side_dist_y - delta_dist_y);
+
+//     	int line_height = (int)(screen_height / perp_wall_dist);
+
+//     	int draw_start = -line_height / 2 + screen_height / 2;
+//     	if (draw_start < 0)
+// 			draw_start = 0;
+//     	int draw_end = line_height / 2 + screen_height / 2;
+//     	if (draw_end > screen_height)
+// 			draw_end = screen_height;
+
+// 		ctx->ginfo.map[map_x][map_y] = '0';
+// }
 
 long int	get_time_usec(void)
 {
@@ -25,7 +110,6 @@ long int	get_time_usec(void)
 
 static void	frame_loop(void *ctx_ptr)
 {
-	
 	t_ctx	*ctx;
 
 	ctx = ctx_ptr;
@@ -149,6 +233,7 @@ static void	frame_loop(void *ctx_ptr)
     }
 }
 
+
 static void	key_hook(mlx_key_data_t keydata, void *ctx_ptr)
 {
 	t_ctx	*ctx;
@@ -192,6 +277,8 @@ static void	key_hook(mlx_key_data_t keydata, void *ctx_ptr)
       ctx->maths.plane_x = ctx->maths.plane_x * cos(ctx->maths.rot_speed) - ctx->maths.plane_y * sin(ctx->maths.rot_speed);
       ctx->maths.plane_y = old_plane_x * sin(ctx->maths.rot_speed) + ctx->maths.plane_y * cos(ctx->maths.rot_speed);
     }
+	// if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+		// break_block(ctx);
 	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(ctx->winfo.mlx);
   }
