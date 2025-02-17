@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:09:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/15 18:09:24 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 11:32:45 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,8 +256,8 @@ int main(int ac, char **av)
 		return (!!print_error(PARSE_WRONG_AC));
 	if (!ctx_init(&ctx, av[1]))
  		return (1);
-	ctx.maths.pos_x = 4;
-	ctx.maths.pos_y = 6;
+	ctx.maths.pos_x = ctx.ginfo.x;
+	ctx.maths.pos_y = ctx.ginfo.y;
 	ctx.maths.dir_x = -1;
 	ctx.maths.dir_y = 0;
 	ctx.maths.plane_x = 0;
@@ -265,7 +265,7 @@ int main(int ac, char **av)
 	ctx.maths.time = 0;
 	ctx.maths.old_time = 0;
 	print_ctx(&ctx);
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	// mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	ctx.winfo.mlx = mlx_init(screen_width, screen_height, "caca3d", true);
 	ctx.winfo.img = mlx_new_image(ctx.winfo.mlx, screen_width, screen_height);
 	// ctx.tx = mlx_load_png("wall.png");
@@ -274,6 +274,7 @@ int main(int ac, char **av)
 	mlx_loop_hook(ctx.winfo.mlx, frame_loop, &ctx);
 	mlx_key_hook(ctx.winfo.mlx, key_hook, &ctx);
 	mlx_loop(ctx.winfo.mlx);
+	mlx_delete_image(ctx.winfo.mlx, ctx.winfo.img);
 	mlx_terminate(ctx.winfo.mlx);
 	ctx_deinit(&ctx);
 }

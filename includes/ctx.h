@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/15 17:57:05 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 11:08:56 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct	s_winfo
 
 typedef struct	s_ginfo
 {
-	float			x;
-	float			y;
+	int				x;
+	int				y;
 	char			**map;
 	int				map_height;
 	int				map_width;

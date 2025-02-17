@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_manip.c                                     :+:      :+:    :+:   */
+/*   parse_map.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 16:12:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 11:39:48 by mbatty           ###   ########.fr       */
+/*   Created: 2025/02/17 10:50:56 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/17 10:51:33 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_whitespace(char c)
-{
-	return (c == ' ' || (c >= 9 && c <= 13));
-}
+#ifndef PARSE_MAP_H
+# define PARSE_MAP_H
 
-void	clean_line(char *str)
-{
-	int	i;
+#include "cub3d.h"
 
-	i = 0;
-	while (str[i])
-	{
-		if (is_whitespace(str[i]))
-			str[i] = '1';
-		i++;
-	}
-}
+int	parse_map(t_ctx *ctx);
+
+#endif

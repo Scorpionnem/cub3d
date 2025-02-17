@@ -6,40 +6,15 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 13:09:58 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/15 17:17:45 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 11:38:48 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parse_file_internals.h"
 
-int	get_color(t_ctx *ctx, char *line, t_id id)
-{
-	char		*raw_color;
-	char		**raw_colors;
-	t_rgb		rgb;
-
-	if (ctx->ginfo.colors[convert_id(id)])
-		return (!!print_error(DUPLICATE_COLOR));
-	raw_color = get_raw_color(line);
-	if (!raw_color)
-		return (!!print_error(ALLOC_ERROR));
-	raw_colors = ft_split(raw_color, ',');
-	free(raw_color);
-	if (!raw_colors)
-		return (!!print_error(ALLOC_ERROR));
-	if (!check_color_format(raw_colors, &rgb))
-	{
-		free_2d(raw_colors);
-		return (!!print_error(INVALID_COLOR_FORMAT));
-	}
-	ctx->ginfo.colors[convert_id(id)] = (rgb.red << 24)
-		| (rgb.green << 16) | (rgb.blue << 8) | 255;
-	free_2d(raw_colors);
-	return (1);
-}
-
-int	add_line_map(t_ctx *ctx, char *line, char *no_nl_line, char *added_walls)
+static int	add_line_map(t_ctx *ctx, char *line,
+	char *no_nl_line, char *added_walls)
 {
 	static int	i = 0;
 
@@ -50,13 +25,13 @@ int	add_line_map(t_ctx *ctx, char *line, char *no_nl_line, char *added_walls)
 	{
 		added_walls = ft_calloc(ctx->ginfo.map_width - ft_strlen(line) + 1, 1);
 		if (!added_walls)
-			return (!!print_error_free(ALLOC_ERROR, no_nl_line));	
+			return (!!print_error_free(ALLOC_ERROR, no_nl_line));
 		ft_memset(added_walls, '1', ctx->ginfo.map_width - ft_strlen(line));
 		ctx->ginfo.map[i] = ft_strjoin(no_nl_line, added_walls);
 		if (!ctx->ginfo.map[i])
 		{
 			free(added_walls);
-			return (!!print_error_free(ALLOC_ERROR, no_nl_line));	
+			return (!!print_error_free(ALLOC_ERROR, no_nl_line));
 		}
 		free(no_nl_line);
 	}
@@ -68,21 +43,10 @@ int	add_line_map(t_ctx *ctx, char *line, char *no_nl_line, char *added_walls)
 	return (1);
 }
 
-int	choose_method(t_ctx *ctx, char *line, t_id id)
-{
-	if (id >= north_tx && id <= east_tx)
-		return (get_tx_path(ctx, line, id));
-	if (id == floor_color || id == ceiling_color)
-		return (get_color(ctx, line, id));
-	if (id == other)
-		return (add_line_map(ctx, line, NULL, NULL));
-	return (1);
-}
-
 static int	count_map_height(t_ctx *ctx)
 {
-	int	i;
-	int	res;
+	int		i;
+	int		res;
 	t_id	id;
 
 	id = other;
@@ -102,6 +66,52 @@ static int	count_map_height(t_ctx *ctx)
 	return (res);
 }
 
+static int	choose_method(t_ctx *ctx, char *line, t_id id, int step)
+{
+	if ((id >= north_tx && id <= east_tx) && step == 1)
+		return (!!print_error(INVALID_FILE_FORMAT));
+	else if (id >= north_tx && id <= east_tx)
+		return (get_tx_path(ctx, line, id));
+	if ((id == floor_color || id == ceiling_color) && step == 1)
+		return (!!print_error(INVALID_FILE_FORMAT));
+	else if (id == floor_color || id == ceiling_color)
+		return (get_color(ctx, line, id));
+	if (id == other && step == 0)
+		return (!!print_error(INVALID_FILE_FORMAT));
+	if (id == new_line && step == 1)
+		return (!!print_error(INVALID_FILE_FORMAT));
+	if (id == other)
+		return (add_line_map(ctx, line, NULL, NULL));
+	return (1);
+}
+
+static int	take_map_loop(t_ctx *ctx, int i)
+{
+	t_id	id;
+
+	id = other;
+	if (!ctx->ginfo.wall_tx[north_tx] || !ctx->ginfo.wall_tx[south_tx]
+		|| !ctx->ginfo.wall_tx[east_tx] || !ctx->ginfo.wall_tx[west_tx]
+		|| !ctx->ginfo.colors[floor_id] || !ctx->ginfo.colors[ceiling_id])
+	{
+		free_2d(ctx->ginfo.map);
+		free_tx_path(ctx);
+		return (!!print_error(INVALID_FILE_FORMAT));
+	}
+	while (ctx->file.lines[i])
+	{
+		id = get_line_identifier(ctx->file.lines[i]);
+		if (!choose_method(ctx, ctx->file.lines[i], id, 1))
+		{
+			free_2d(ctx->ginfo.map);
+			free_tx_path(ctx);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	parse_file(t_ctx *ctx)
 {
 	int		i;
@@ -114,7 +124,9 @@ int	parse_file(t_ctx *ctx)
 	while (ctx->file.lines[i])
 	{
 		id = get_line_identifier(ctx->file.lines[i]);
-		if (!choose_method(ctx, ctx->file.lines[i], id))
+		if (id == other)
+			break ;
+		if (!choose_method(ctx, ctx->file.lines[i], id, 0))
 		{
 			free(ctx->ginfo.map);
 			free_tx_path(ctx);
@@ -122,5 +134,5 @@ int	parse_file(t_ctx *ctx)
 		}
 		i++;
 	}
-	return (1);
+	return (take_map_loop(ctx, i));
 }

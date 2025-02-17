@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:04:50 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/15 16:14:04 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 10:39:09 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include "cub3d.h"
 
-t_color_id	convert_id(t_id id);
 char		*get_raw_color(char *line);
 int			check_color_format(char **raw_colors, t_rgb *rgb);
 int			is_whitespace(char c);
 int			get_tx_path(t_ctx *ctx, char *line, t_id id);
 t_id		get_line_identifier(char *str);
+int			get_color(t_ctx *ctx, char *line, t_id id);
 
 #endif

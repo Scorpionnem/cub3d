@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:04:42 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/15 17:48:43 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 10:50:09 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ char	*get_raw_color(char *line)
 	if (!res)
 		return (NULL);
 	return (res);
-}
-
-t_color_id	convert_id(t_id id)
-{
-	if (id == floor_color)
-		return (floor_id);
-	return (ceiling_id);
 }
 
 int	check_color_format(char **raw_colors, t_rgb *rgb)
@@ -80,5 +73,31 @@ int	get_tx_path(t_ctx *ctx, char *line, t_id id)
 	ctx->ginfo.wall_tx[id] = ft_substr(line, i, ft_strlen(line) - i - 1);
 	if (!ctx->ginfo.wall_tx[id])
 		return (!!print_error(ALLOC_ERROR));
+	return (1);
+}
+
+int	get_color(t_ctx *ctx, char *line, t_id id)
+{
+	char		*raw_color;
+	char		**raw_colors;
+	t_rgb		rgb;
+
+	if (ctx->ginfo.colors[id == ceiling_color])
+		return (!!print_error(DUPLICATE_COLOR));
+	raw_color = get_raw_color(line);
+	if (!raw_color)
+		return (!!print_error(ALLOC_ERROR));
+	raw_colors = ft_split(raw_color, ',');
+	free(raw_color);
+	if (!raw_colors)
+		return (!!print_error(ALLOC_ERROR));
+	if (!check_color_format(raw_colors, &rgb))
+	{
+		free_2d(raw_colors);
+		return (!!print_error(INVALID_COLOR_FORMAT));
+	}
+	ctx->ginfo.colors[id == ceiling_color] = (rgb.red << 24)
+		| (rgb.green << 16) | (rgb.blue << 8) | 255;
+	free_2d(raw_colors);
 	return (1);
 }

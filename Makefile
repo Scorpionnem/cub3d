@@ -17,7 +17,7 @@ OBJ_DIR := ./obj/
 OBJECTS = $(SOURCES:.c=.o)
 
 C_FILES := main ctx read_file error parse_file parse_file_internals utils/ft_safe_atoi \
-			utils/string_manip
+			utils/string_manip parse_map textures
 
 C_FILES := $(addsuffix .c, $(C_FILES))
 

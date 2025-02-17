@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_manip.c                                     :+:      :+:    :+:   */
+/*   textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 16:12:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 11:39:48 by mbatty           ###   ########.fr       */
+/*   Created: 2025/02/17 11:17:51 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/17 11:23:36 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_whitespace(char c)
-{
-	return (c == ' ' || (c >= 9 && c <= 13));
-}
+#ifndef TEXTURES_H
+# define TEXTURES_H
 
-void	clean_line(char *str)
-{
-	int	i;
+# include "cub3d.h"
 
-	i = 0;
-	while (str[i])
-	{
-		if (is_whitespace(str[i]))
-			str[i] = '1';
-		i++;
-	}
-}
+void	free_textures(t_ctx	*ctx);
+int		open_textures(t_ctx *ctx);
+
+#endif
