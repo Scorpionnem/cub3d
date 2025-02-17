@@ -50,7 +50,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJ_DIR) $(LIBFT) $(GNL) $(OBJECTS)
 	@cc $(OBJECTS) $(LIBFT) $(GNL) $(MLX) $(MLXFLAGS) -o $(NAME)
-	@echo "----- $(NAME) compiled"
+	@echo "$(NAME) compiled"
 
 bonus: $(NAME)
 
@@ -68,7 +68,7 @@ clean:
 	@rm -rf $(OBJ_DIR)
 	@if [ $(display_clean_message) -eq 1 ] ;\
 	then \
-		echo "----- Clean done" ;\
+		echo "Clean done" ;\
 	fi
 
 fclean:
@@ -76,7 +76,7 @@ fclean:
 	$(MAKE_GNL) fclean
 	$(MAKE) display_clean_message=0 clean
 	@rm -f $(NAME)
-	@echo "----- Fclean done"
+	@echo "Fclean done"
 
 re: fclean all
 
