@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:06 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 14:44:29 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 17:05:27 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ctx_deinit(t_ctx *ctx)
 	free_2d(ctx->ginfo.map);
 	free_textures(ctx);
 	free_tx_path(ctx);
+	mlx_delete_image(ctx->winfo.mlx, ctx->winfo.img);
+	mlx_terminate(ctx->winfo.mlx);
 }
 
 static void	init_nulls(t_ctx *ctx)
@@ -35,20 +37,32 @@ static void	init_nulls(t_ctx *ctx)
 	ctx->ginfo.map_width = 0;
 }
 
-void	print_ctx(t_ctx *ctx)
+static int	init_window(t_ctx *ctx)
 {
-	printf("Textures: \n");
-	printf("North: %s\n", ctx->ginfo.wall_tx[north_tx]);
-	printf("South: %s\n", ctx->ginfo.wall_tx[south_tx]);
-	printf("East: %s\n", ctx->ginfo.wall_tx[east_tx]);
-	printf("West: %s\n", ctx->ginfo.wall_tx[west_tx]);
-	printf("\nColors: \n");
-	printf("Floor: %u\n", ctx->ginfo.colors[floor_id]);
-	printf("Ceiling: %u\n", ctx->ginfo.colors[ceiling_id]);
-	printf("\nMap: \n");
-	for (int i = 0; ctx->ginfo.map[i]; i++)
-		printf("%s\n", ctx->ginfo.map[i]);
-	printf("\nSpawn X:%d Spawn Y:%d Facing: %c\n", ctx->ginfo.x, ctx->ginfo.x, ctx->ginfo.spawn_facing);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	ctx->winfo.mlx = mlx_init(screen_width, screen_height, CUB_NAME, true);
+	if (!ctx->winfo.mlx)
+	{
+		free_2d(ctx->ginfo.map);
+		free_tx_path(ctx);
+		free_textures(ctx);
+		return (!!print_error(MLX_INIT_ERROR));
+	}
+	ctx->winfo.img = mlx_new_image(ctx->winfo.mlx, screen_width, screen_height);
+	if (!ctx->winfo.img)
+	{
+		mlx_terminate(ctx->winfo.mlx);
+		free_2d(ctx->ginfo.map);
+		free_tx_path(ctx);
+		free_textures(ctx);
+		return (!!print_error(MLX_IMG_ERROR));
+	}
+	if (mlx_image_to_window(ctx->winfo.mlx, ctx->winfo.img, 0, 0) == -1)
+	{
+		ctx_deinit(ctx);
+		return (!!print_error(ALLOC_ERROR));
+	}
+	return (1);
 }
 
 int	ctx_init(t_ctx *ctx, char *filename)
@@ -75,5 +89,5 @@ int	ctx_init(t_ctx *ctx, char *filename)
 		free_textures(ctx);
 		return (0);
 	}
-	return (1);
+	return (init_window(ctx));
 }

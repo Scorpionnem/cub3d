@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 14:42:23 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 17:01:47 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,5 @@ typedef struct s_ctx
 
 int		ctx_init(t_ctx *ctx, char *filename);
 void	ctx_deinit(t_ctx *ctx);
-
-//REMOVE ME LATER
-void	print_ctx(t_ctx *ctx);
-//REMOVE ME LATER
 
 #endif

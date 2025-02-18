@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:33:29 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 15:45:59 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/17 16:36:08 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	render_frame(void *ctx_ptr)
 		for (int j = 0; j < screen_height; j++)
 		{
 			if (j < screen_height / 2)
-      			// mlx_put_pixel(ctx->winfo.img, i, j, ctx->ginfo.colors[ceiling_id]);
-      			mlx_put_pixel(ctx->winfo.img, i, j, uint8_to_uint32(&ctx->winfo.wall_tx[north_tx]->pixels[(i + (j * ctx->winfo.wall_tx[north_tx]->width)) * 4]));	
+      			mlx_put_pixel(ctx->winfo.img, i, j, ctx->ginfo.colors[ceiling_id]);
+      			// mlx_put_pixel(ctx->winfo.img, i, j, uint8_to_uint32(&ctx->winfo.wall_tx[north_tx]->pixels[(i + (j * ctx->winfo.wall_tx[north_tx]->width)) * 4]));	
 			else
       			mlx_put_pixel(ctx->winfo.img, i, j, ctx->ginfo.colors[floor_id]);
 		}
