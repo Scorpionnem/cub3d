@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:06 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 17:05:27 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/18 12:41:28 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,18 @@ static void	init_nulls(t_ctx *ctx)
 	ctx->winfo.wall_tx[west_tx] = NULL;
 	ctx->ginfo.map_height = 0;
 	ctx->ginfo.map_width = 0;
+	ctx->keys.w = false;
+	ctx->keys.a = false;
+	ctx->keys.s = false;
+	ctx->keys.d = false;
+	ctx->keys.left = false;
+	ctx->keys.right = false;
 }
 
 static int	init_window(t_ctx *ctx)
 {
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	ctx->winfo.mlx = mlx_init(screen_width, screen_height, CUB_NAME, true);
+	ctx->winfo.mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, CUB_NAME, true);
 	if (!ctx->winfo.mlx)
 	{
 		free_2d(ctx->ginfo.map);
@@ -48,7 +54,7 @@ static int	init_window(t_ctx *ctx)
 		free_textures(ctx);
 		return (!!print_error(MLX_INIT_ERROR));
 	}
-	ctx->winfo.img = mlx_new_image(ctx->winfo.mlx, screen_width, screen_height);
+	ctx->winfo.img = mlx_new_image(ctx->winfo.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!ctx->winfo.img)
 	{
 		mlx_terminate(ctx->winfo.mlx);

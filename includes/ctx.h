@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:45:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 17:01:47 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/18 12:41:19 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ typedef struct s_maths
 	double		move_speed;
 	long int	color;
 }	t_maths;
+
+typedef struct s_keys
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+} t_keys;
 
 typedef struct s_winfo
 {
@@ -62,6 +72,7 @@ typedef struct s_ctx
 	t_winfo		winfo;
 	t_maths		maths;
 	t_file		file;
+	t_keys		keys;
 }	t_ctx;
 
 int		ctx_init(t_ctx *ctx, char *filename);

@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:33:29 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 16:36:08 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/18 12:38:54 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ void	render_frame(void *ctx_ptr)
     ctx->maths.move_speed = ctx->maths.frame_time / 30; //the constant value is in squares/second
     ctx->maths.rot_speed = ctx->maths.frame_time / 400; //the constant value is in radians/second
 
-	for (int i = 0; i < screen_width; i++)
+	for (int i = 0; i < SCREEN_WIDTH; i++)
 	{
-		for (int j = 0; j < screen_height; j++)
+		for (int j = 0; j < SCREEN_HEIGHT; j++)
 		{
-			if (j < screen_height / 2)
+			if (j < SCREEN_HEIGHT / 2)
       			mlx_put_pixel(ctx->winfo.img, i, j, ctx->ginfo.colors[ceiling_id]);
       			// mlx_put_pixel(ctx->winfo.img, i, j, uint8_to_uint32(&ctx->winfo.wall_tx[north_tx]->pixels[(i + (j * ctx->winfo.wall_tx[north_tx]->width)) * 4]));	
 			else
       			mlx_put_pixel(ctx->winfo.img, i, j, ctx->ginfo.colors[floor_id]);
 		}
 	}
-	for (int x = 0; x < screen_width; x ++)
+	for (int x = 0; x < SCREEN_WIDTH; x ++)
 	{
-		double camera_x = 2 * x / (float)screen_width - 1;
+		double camera_x = 2 * x / (float)SCREEN_WIDTH - 1;
 		double ray_dir_x = ctx->maths.dir_x + ctx->maths.plane_x * camera_x;
 		double ray_dir_y = ctx->maths.dir_y + ctx->maths.plane_y * camera_x;		
 
@@ -108,14 +108,14 @@ void	render_frame(void *ctx_ptr)
     	else
 			perp_wall_dist = (side_dist_y - delta_dist_y);
 
-    	int line_height = (int)(screen_height / perp_wall_dist);
+    	int line_height = (int)(SCREEN_HEIGHT / perp_wall_dist);
 
-    	int draw_start = -line_height / 2 + screen_height / 2;
+    	int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
     	if (draw_start < 0)
 			draw_start = 0;
-    	int draw_end = line_height / 2 + screen_height / 2;
-    	if (draw_end > screen_height)
-			draw_end = screen_height;
+    	int draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
+    	if (draw_end > SCREEN_HEIGHT)
+			draw_end = SCREEN_HEIGHT;
 
 		long int color = rand() * ctx->ginfo.map[map_x][map_y];
 		if (ctx->ginfo.map[map_x][map_y] == '1')

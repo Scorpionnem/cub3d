@@ -6,18 +6,20 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 09:55:16 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 15:44:38 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/18 12:38:54 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#define SCREEN_WIDTH 1024
+#define SCREEN_HEIGHT 512
+
+#define PI 3.1415926535
+
 # include "libft.h"
 # include "get_next_line.h"
-
-#define screen_width 1050
-#define screen_height 800
 
 # include "MLX42.h"
 # include "error.h"
