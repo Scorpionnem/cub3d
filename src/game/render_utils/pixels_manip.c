@@ -25,8 +25,8 @@ int	safe_put_pixel(mlx_image_t *image, int x, int y, uint32_t color)
 
 void	clear_image(mlx_image_t *img)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	while (x < (int)img->width)
@@ -43,8 +43,8 @@ void	clear_image(mlx_image_t *img)
 
 void	draw_sky(t_ctx *ctx)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	while (x < (int)ctx->winfo.img->width)
@@ -53,9 +53,11 @@ void	draw_sky(t_ctx *ctx)
 		while (y < (int)ctx->winfo.img->height)
 		{
 			if (y > (int)ctx->winfo.img->height / 2)
-				safe_put_pixel(ctx->winfo.img, x, y, ctx->ginfo.colors[floor_id]);
+				safe_put_pixel(ctx->winfo.img, x, y,
+					ctx->ginfo.colors[floor_id]);
 			else
-				safe_put_pixel(ctx->winfo.img, x, y, ctx->ginfo.colors[ceiling_id]);
+				safe_put_pixel(ctx->winfo.img, x, y,
+					ctx->ginfo.colors[ceiling_id]);
 			y++;
 		}
 		x++;

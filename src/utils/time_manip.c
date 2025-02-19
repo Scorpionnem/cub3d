@@ -15,7 +15,7 @@
 long int	get_time_usec(void)
 {
 	struct timeval	time;
-	
+
 	gettimeofday(&time, NULL);
 	return (time.tv_usec);
 }

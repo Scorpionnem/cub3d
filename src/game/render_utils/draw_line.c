@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void init_draw_line(t_line_vars *vars, int x1, int y1, int x2, int y2)
+static void	init_draw_line(t_line_vars *vars, int x1, int y1, int x2, int y2)
 {
 	vars->sx = -1;
 	if (x1 < x2)
@@ -27,7 +27,7 @@ static void init_draw_line(t_line_vars *vars, int x1, int y1, int x2, int y2)
 
 void	draw_line(mlx_image_t *image, int x1, int y1, int x2, int y2, uint32_t color)
 {
-	t_line_vars vars;
+	t_line_vars	vars;
 
 	init_draw_line(&vars, x1, y1, x2, y2);
 	while (1)
@@ -36,7 +36,7 @@ void	draw_line(mlx_image_t *image, int x1, int y1, int x2, int y2, uint32_t colo
 		if (x1 == x2 && y1 == y2)
 			break;
 		vars.e2 = 2 * vars.err;
-		if (vars.e2 > -vars.dy)
+		if (vars.e2 > - vars.dy)
 		{
 			vars.err -= vars.dy;
 			x1 += vars.sx;

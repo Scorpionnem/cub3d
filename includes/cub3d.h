@@ -13,8 +13,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#define SCREEN_WIDTH 600
-#define SCREEN_HEIGHT 500
+#define SCREEN_WIDTH 1050
+#define SCREEN_HEIGHT 800
 
 #define PI 3.1415926535
 #define P2 PI/2

@@ -12,22 +12,6 @@
 
 #include "cub3d.h"
 
-int	map_x = 8;
-int	map_y = 8;
-int	map_s = 64;
-
-int	map[] =
-{
-	1, 1, 1, 1, 1, 1, 1, 1,
-	1, 0, 1, 0, 0, 0, 0, 1,
-	1, 0, 1, 0, 0, 0, 0, 1,
-	1, 0, 1, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 1, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 1,
-	1, 0, 0, 0, 0, 0, 0, 1,
-	1, 1, 1, 1, 1, 1, 1, 1,
-};
-
 void	calc_height_offset(t_ctx *ctx, t_cube_render *vars)
 {
 	vars->ca = ctx->maths.pa - vars->ra;
@@ -36,7 +20,7 @@ void	calc_height_offset(t_ctx *ctx, t_cube_render *vars)
 	if (vars->ca > 2 * PI)
 		vars->ca -= 2 * PI;
 	vars->dist = vars->dist * cos(vars->ca);
-	vars->line_h = (map_s * (int)ctx->winfo.img->height) / vars->dist;
+	vars->line_h = (MAP_S * (int)ctx->winfo.img->height) / vars->dist;
 	if (vars->line_h > ctx->winfo.img->height)
 		vars->line_h = ctx->winfo.img->height;
 	vars->line_offset = (ctx->winfo.img->height / 2) - vars->line_h / 2;
@@ -44,21 +28,35 @@ void	calc_height_offset(t_ctx *ctx, t_cube_render *vars)
 
 void	choose_ray(t_cube_render *vars)
 {
-	uint32_t color = 0xFF0000FF;
+	vars->face = south;
 	if (vars->ra > PI)
-		color = 0xFF00FFFF;
+		vars->face = north;
 	vars->ry = vars->hy;
 	vars->rx = vars->hx;
 	vars->dist = vars->dist_h;
 	if (vars->dist_v < vars->dist_h)
 	{
-		color = 0x00FF00FF;
+		vars->face = east;
 		if (vars->ra < P2 || vars->ra > P3)
-			color = 0xFFFF00FF;
+			vars->face = west;
 		vars->ry = vars->vy;
 		vars->rx = vars->vx;
 		vars->dist = vars->dist_v;
 	}
+}
+
+void	draw_wall_line(t_ctx *ctx, t_cube_render *vars)
+{
+	uint32_t	color;
+	color = 0xFFFFFFFF;
+	if (vars->face == south)
+		color = 0x0000FFFF;
+	if (vars->face == north)
+		color = 0xFF0000FF;
+	if (vars->face == west)
+		color = 0x00FF00FF;
+	draw_line(ctx->winfo.img, vars->r, vars->line_offset,
+			vars->r, vars->line_h + vars->line_offset, color);
 }
 
 void	draw_cubes(t_ctx *ctx)
@@ -78,8 +76,8 @@ void	draw_cubes(t_ctx *ctx)
 		cast_vertical_rays(ctx, &vars);
 		choose_ray(&vars);
 		calc_height_offset(ctx, &vars);
-		draw_line(ctx->winfo.img, vars.r, vars.line_offset, vars.r, vars.line_h + vars.line_offset, 0xFFFFFFFF);
-		vars.ra += DR / 8;
+		draw_wall_line(ctx, &vars);
+		vars.ra += DR * (60 / (float)ctx->winfo.img->width);
 		check_rad(&vars.ra);
 		vars.r++;
 	}
