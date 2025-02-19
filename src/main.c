@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*   By: mbatty <mbatty@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:09:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/17 17:25:51 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/18 20:31:26 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int ac, char **av)
 	ctx.maths.plane_y = 0.66;
 	ctx.maths.time = 0;
 	ctx.maths.old_time = 0;
+	init();
 	mlx_loop_hook(ctx.winfo.mlx, render_hook, &ctx);
 	mlx_key_hook(ctx.winfo.mlx, key_hook, &ctx);
 	mlx_loop(ctx.winfo.mlx);

@@ -19,7 +19,7 @@ OBJECTS = $(SOURCES:.c=.o)
 C_FILES := main ctx error textures \
 			parsing/read_file parsing/parse_map parsing/parse_file parsing/parse_file_internals \
 			utils/string_manip utils/ft_safe_atoi utils/color_manip utils/time_manip \
-			game/hooks game/render game/movement
+			game/hooks game/render game/movement game/render_utils/draw_line game/render_utils/pixels_manip
 
 C_FILES := $(addsuffix .c, $(C_FILES))
 
