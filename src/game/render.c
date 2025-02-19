@@ -83,7 +83,7 @@ void	render_frame(t_ctx *ctx)
 	draw_sky(ctx);
 	draw_cubes(ctx);
 	draw_minimap(ctx);
-	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 4,
-		ctx->winfo.img->height / 2 - 4, 8);
+	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 2,
+		ctx->winfo.img->height / 2 - 2, 4);
 	display_fps(ctx->ginfo.start_time, 1000);
 }

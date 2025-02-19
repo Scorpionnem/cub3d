@@ -13,8 +13,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#define SCREEN_WIDTH 1050
-#define SCREEN_HEIGHT 800
+# define SCREEN_WIDTH 1050
+# define SCREEN_HEIGHT 800
+
+# define RENDER_DISTANCE 128
 
 # include <math.h>
 # include <fcntl.h>

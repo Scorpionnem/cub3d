@@ -38,6 +38,8 @@ int	main(int ac, char **av)
 	ctx.maths.pa = find_face_angle(&ctx);
 	ctx.maths.pdx = cos(ctx.maths.pa) * 5;
 	ctx.maths.pdy = sin(ctx.maths.pa) * 5;
+	mlx_image_t *a = mlx_texture_to_image(ctx.winfo.mlx, ctx.winfo.wall_tx[north_tx]);
+	mlx_image_to_window(ctx.winfo.mlx, a, 600, 400);
 	mlx_loop_hook(ctx.winfo.mlx, render_hook, &ctx);
 	mlx_key_hook(ctx.winfo.mlx, key_hook, &ctx);
 	mlx_loop(ctx.winfo.mlx);

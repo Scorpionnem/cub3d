@@ -49,7 +49,7 @@ void	init_horizontal_rays(t_ctx *ctx, t_cube_render *vars)
 
 void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars)
 {
-	while (vars->dof < 128)
+	while (vars->dof < RENDER_DISTANCE)
 	{
 		vars->mx = (int)(vars->rx) / 64;
 		vars->my = (int)(vars->ry) / 64;
@@ -61,7 +61,7 @@ void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars)
 			vars->hy = vars->ry;
 			vars->dist_h = distance(ctx->maths.px,
 					ctx->maths.py, vars->hx, vars->hy);
-			vars->dof = 128;
+			vars->dof = RENDER_DISTANCE;
 		}
 		else
 		{

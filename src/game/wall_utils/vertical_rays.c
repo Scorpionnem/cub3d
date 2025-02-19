@@ -47,7 +47,7 @@ void	init_vertical_rays(t_ctx *ctx, t_cube_render *vars)
 
 void	cast_vertical_rays(t_ctx *ctx, t_cube_render *vars)
 {
-	while (vars->dof < 128)
+	while (vars->dof < RENDER_DISTANCE)
 	{
 		vars->mx = (int)(vars->rx) / 64;
 		vars->my = (int)(vars->ry) / 64;
@@ -59,7 +59,7 @@ void	cast_vertical_rays(t_ctx *ctx, t_cube_render *vars)
 			vars->vy = vars->ry;
 			vars->dist_v = distance(ctx->maths.px,
 					ctx->maths.py, vars->vx, vars->vy);
-			vars->dof = 128;
+			vars->dof = RENDER_DISTANCE;
 		}
 		else
 		{
