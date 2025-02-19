@@ -47,11 +47,11 @@ void	init_vertical_rays(t_ctx *ctx, t_cube_render *vars)
 
 void	cast_vertical_rays(t_ctx *ctx, t_cube_render *vars)
 {
-	while (vars->dof < 32)
+	while (vars->dof < 128)
 	{
 		vars->mx = (int)(vars->rx) / 64;
 		vars->my = (int)(vars->ry) / 64;
-		if (vars->my > 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_height
+		if (vars->my >= 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_height
 			&& vars->my <= ctx->ginfo.map_width
 			&& ctx->ginfo.map[vars->mx][vars->my] == '1')
 		{
@@ -59,7 +59,7 @@ void	cast_vertical_rays(t_ctx *ctx, t_cube_render *vars)
 			vars->vy = vars->ry;
 			vars->dist_v = distance(ctx->maths.px,
 					ctx->maths.py, vars->vx, vars->vy);
-			vars->dof = 32;
+			vars->dof = 128;
 		}
 		else
 		{
