@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbatty <mbatty@student.42angouleme.fr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 10:38:30 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/18 20:10:20 by mbatty           ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   movement.c										 :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2025/02/18 10:38:30 by mbatty			#+#	#+#			 */
+/*   Updated: 2025/02/19 10:45:46 by mbatty		   ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "cub3d.h"
@@ -40,3 +40,37 @@ void	press_key(mlx_key_data_t keydata, t_ctx *ctx)
 		ctx->keys.right = false;
 }
 
+static void	move_player_w_s(t_ctx *ctx)
+{
+	if (ctx->keys.w)
+	{
+		ctx->maths.px += ctx->maths.pdx;
+		ctx->maths.py += ctx->maths.pdy;
+	}
+	if (ctx->keys.s)
+	{
+		ctx->maths.px -= ctx->maths.pdx;
+		ctx->maths.py -= ctx->maths.pdy;
+	}
+}
+
+void	move_player(t_ctx *ctx)
+{
+	if (ctx->keys.a)
+	{
+		ctx->maths.pa -= 0.1;
+		if (ctx->maths.pa < 0)
+			ctx->maths.pa += 2 * PI;
+		ctx->maths.pdx = cos(ctx->maths.pa) * 5;
+		ctx->maths.pdy = sin(ctx->maths.pa) * 5;
+	}
+	if (ctx->keys.d)
+	{
+		ctx->maths.pa += 0.1;
+		if (ctx->maths.pa > 2 * PI)
+			ctx->maths.pa -= 2 * PI;
+		ctx->maths.pdx = cos(ctx->maths.pa) * 5;
+		ctx->maths.pdy = sin(ctx->maths.pa) * 5;
+	}
+	move_player_w_s(ctx);
+}

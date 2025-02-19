@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*																			*/
 /*														:::	  ::::::::   */
-/*   hooks.c											:+:	  :+:	:+:   */
+/*   math_utils.c									   :+:	  :+:	:+:   */
 /*													+:+ +:+		 +:+	 */
 /*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/17 15:37:18 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/18 13:13:19 by mbatty		   ###   ########.fr	   */
+/*   Created: 2025/02/19 10:12:00 by mbatty			#+#	#+#			 */
+/*   Updated: 2025/02/19 10:40:42 by mbatty		   ###   ########.fr	   */
 /*																			*/
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	key_hook(mlx_key_data_t keydata, void *ctx_ptr)
+float	distance(float x1, float y1, float x2, float y2)
 {
-	press_key(keydata, ctx_ptr);
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-void	render_hook(void *ctx_ptr)
+void	check_rad(float *angle)
 {
-	move_player(ctx_ptr);
-	render_frame(ctx_ptr);
+	if (*angle < 0)
+		(*angle) += 2 * PI;
+	if (*angle > 2 * PI)
+		(*angle) -= 2 * PI;
 }

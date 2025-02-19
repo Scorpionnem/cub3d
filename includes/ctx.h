@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ctx.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 10:45:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/18 12:41:19 by mbatty           ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   ctx.h											  :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2025/01/24 10:45:47 by mbatty			#+#	#+#			 */
+/*   Updated: 2025/02/19 09:47:25 by mbatty		   ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #ifndef CTX_H
@@ -17,18 +17,11 @@
 
 typedef struct s_maths
 {
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
-	double		time;
-	double		old_time;
-	double		frame_time;
-	double		rot_speed;
-	double		move_speed;
-	long int	color;
+	float	px;
+	float	py;
+	float	pdx;
+	float	pdy;
+	float	pa;
 }	t_maths;
 
 typedef struct s_keys
