@@ -12,6 +12,17 @@
 
 #include "cub3d.h"
 
+double	find_face_angle(t_ctx *ctx)
+{
+	if (ctx->ginfo.spawn_facing == 'S')
+		return (P2);
+	if (ctx->ginfo.spawn_facing == 'N')
+		return (P3);
+	if (ctx->ginfo.spawn_facing == 'E')
+		return (PI);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_ctx	ctx;
@@ -24,7 +35,7 @@ int	main(int ac, char **av)
 	ctx.maths.pdy = 0;
 	ctx.maths.px = (ctx.ginfo.x + .5) * MAP_S;
 	ctx.maths.py = (ctx.ginfo.y + .5) * MAP_S;
-	ctx.maths.pa = 0;
+	ctx.maths.pa = find_face_angle(&ctx);
 	ctx.maths.pdx = cos(ctx.maths.pa) * 5;
 	ctx.maths.pdy = sin(ctx.maths.pa) * 5;
 	mlx_loop_hook(ctx.winfo.mlx, render_hook, &ctx);

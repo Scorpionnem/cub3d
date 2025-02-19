@@ -25,7 +25,7 @@ void	init_vertical_rays(t_ctx *ctx, t_cube_render *vars)
 {
 	if (vars->ra > P2 && vars->ra < P3)
 	{
-		vars->rx = (((int)ctx->maths.px / 64) * 64) - 0.0001;
+		vars->rx = (((int)ctx->maths.px / 64) * 64) - 0.001;
 		vars->ry = (ctx->maths.px - vars->rx) * vars->n_tan + ctx->maths.py;
 		vars->xo = -64;
 		vars->yo = -vars->xo * vars->n_tan;
@@ -51,8 +51,9 @@ void	cast_vertical_rays(t_ctx *ctx, t_cube_render *vars)
 	{
 		vars->mx = (int)(vars->rx) / 64;
 		vars->my = (int)(vars->ry) / 64;
-		// vars->mp = vars->my * map_x + vars->mx;
-		if (vars->my > 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_height && vars->my <= ctx->ginfo.map_width && ctx->ginfo.map[vars->mx][vars->my] == '1')
+		if (vars->my > 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_height
+			&& vars->my <= ctx->ginfo.map_width
+			&& ctx->ginfo.map[vars->mx][vars->my] == '1')
 		{
 			vars->vx = vars->rx;
 			vars->vy = vars->ry;

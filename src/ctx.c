@@ -41,6 +41,7 @@ static void	init_nulls(t_ctx *ctx)
 	ctx->keys.d = false;
 	ctx->keys.left = false;
 	ctx->keys.right = false;
+	ctx->keys.escape = false;
 }
 
 static int	init_window(t_ctx *ctx)

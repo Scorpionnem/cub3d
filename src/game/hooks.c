@@ -12,9 +12,16 @@
 
 #include "cub3d.h"
 
+static void	check_special_keys(t_ctx *ctx)
+{
+	if (ctx->keys.escape)
+		mlx_close_window(ctx->winfo.mlx);
+}
+
 void	key_hook(mlx_key_data_t keydata, void *ctx_ptr)
 {
 	press_key(keydata, ctx_ptr);
+	check_special_keys(ctx_ptr);
 }
 
 void	render_hook(void *ctx_ptr)

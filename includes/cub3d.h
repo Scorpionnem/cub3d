@@ -16,7 +16,14 @@
 #define SCREEN_WIDTH 1050
 #define SCREEN_HEIGHT 800
 
-#define PI 3.1415926535
+# include <math.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <errno.h>
+# include <sys/time.h>
+
+#define PI M_PI
 #define P2 PI/2
 #define P3 3*PI/2
 #define DR 0.0174533
@@ -36,11 +43,5 @@
 # include "hooks.h"
 # include "render.h"
 
-# include <math.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <errno.h>
-# include <sys/time.h>
 
 #endif

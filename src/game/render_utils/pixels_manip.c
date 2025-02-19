@@ -63,3 +63,21 @@ void	draw_sky(t_ctx *ctx)
 		x++;
 	}
 }
+
+void	render_square(t_ctx *ctx, int x, int y, int size, uint32_t color)
+{
+	int	t_x;
+	int	t_y;
+
+	t_x = 0;
+	while (t_x < size)
+	{
+		t_y = 0;
+		while (t_y < size)
+		{
+			safe_put_pixel(ctx->winfo.img, t_y + y, t_x + x, color);
+			t_y++;
+		}
+		t_x++;
+	}
+}

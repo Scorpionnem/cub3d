@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+static void	press_secondary_keys(mlx_key_data_t keydata, t_ctx *ctx)
+{
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		ctx->keys.escape = true;
+}
+
 void	press_key(mlx_key_data_t keydata, t_ctx *ctx)
 {
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
@@ -38,6 +44,7 @@ void	press_key(mlx_key_data_t keydata, t_ctx *ctx)
 		ctx->keys.right = true;
 	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
 		ctx->keys.right = false;
+	press_secondary_keys(keydata, ctx);
 }
 
 static void	move_player_w_s(t_ctx *ctx)
@@ -52,11 +59,25 @@ static void	move_player_w_s(t_ctx *ctx)
 		ctx->maths.px -= ctx->maths.pdx;
 		ctx->maths.py -= ctx->maths.pdy;
 	}
+	ctx->maths.pdx = cos(ctx->maths.pa + P2) * 5;
+	ctx->maths.pdy = sin(ctx->maths.pa + P2) * 5;
+	if (ctx->keys.d)
+	{
+		ctx->maths.px += ctx->maths.pdx;
+		ctx->maths.py += ctx->maths.pdy;
+	}
+	if (ctx->keys.a)
+	{
+		ctx->maths.px -= ctx->maths.pdx;
+		ctx->maths.py -= ctx->maths.pdy;
+	}
+	ctx->maths.pdx = cos(ctx->maths.pa) * 5;
+	ctx->maths.pdy = sin(ctx->maths.pa) * 5;
 }
 
 void	move_player(t_ctx *ctx)
 {
-	if (ctx->keys.a)
+	if (ctx->keys.left)
 	{
 		ctx->maths.pa -= 0.1;
 		if (ctx->maths.pa < 0)
@@ -64,7 +85,7 @@ void	move_player(t_ctx *ctx)
 		ctx->maths.pdx = cos(ctx->maths.pa) * 5;
 		ctx->maths.pdy = sin(ctx->maths.pa) * 5;
 	}
-	if (ctx->keys.d)
+	if (ctx->keys.right)
 	{
 		ctx->maths.pa += 0.1;
 		if (ctx->maths.pa > 2 * PI)

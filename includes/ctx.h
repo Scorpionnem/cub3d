@@ -32,6 +32,7 @@ typedef struct s_keys
 	bool	d;
 	bool	left;
 	bool	right;
+	bool	escape;
 } t_keys;
 
 typedef struct s_winfo
@@ -51,6 +52,7 @@ typedef struct s_ginfo
 	int				map_width;
 	char			*wall_tx[4];
 	unsigned int	colors[2];
+	 struct timeval    start_time;
 }	t_ginfo;
 
 typedef struct s_file

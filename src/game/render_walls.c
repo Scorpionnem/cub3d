@@ -48,6 +48,7 @@ void	choose_ray(t_cube_render *vars)
 void	draw_wall_line(t_ctx *ctx, t_cube_render *vars)
 {
 	uint32_t	color;
+
 	color = 0xFFFFFFFF;
 	if (vars->face == south)
 		color = 0x0000FFFF;
@@ -56,7 +57,7 @@ void	draw_wall_line(t_ctx *ctx, t_cube_render *vars)
 	if (vars->face == west)
 		color = 0x00FF00FF;
 	draw_line(ctx->winfo.img, vars->r, vars->line_offset,
-			vars->r, vars->line_h + vars->line_offset, color);
+		vars->r, vars->line_h + vars->line_offset, color);
 }
 
 void	draw_cubes(t_ctx *ctx)
@@ -77,6 +78,7 @@ void	draw_cubes(t_ctx *ctx)
 		choose_ray(&vars);
 		calc_height_offset(ctx, &vars);
 		draw_wall_line(ctx, &vars);
+		draw_line(ctx->winfo.img, ctx->maths.px / 4, ctx->maths.py / 4, vars.rx / 4, vars.ry / 4, 0xFF9999FF);
 		vars.ra += DR * (60 / (float)ctx->winfo.img->width);
 		check_rad(&vars.ra);
 		vars.r++;

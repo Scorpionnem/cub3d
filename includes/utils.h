@@ -20,6 +20,8 @@ int		charset_iter(char **map, char *charset);
 long int	get_time_usec(void);
 
 uint32_t	uint8_to_uint32(uint8_t *pixels);
+uint32_t	inverted_uint8_to_uint32(uint8_t *pixels);
+
 float	distance(float x1, float y1, float x2, float y2);
 void	check_rad(float *angle);
 

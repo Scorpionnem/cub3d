@@ -62,6 +62,7 @@ void	draw_line(mlx_image_t *image, int x1, int y1, int x2, int y2, uint32_t colo
 int	safe_put_pixel(mlx_image_t *image, int x, int y, uint32_t color);
 void	clear_image(mlx_image_t *img);
 void	draw_sky(t_ctx *ctx);
+void	render_square(t_ctx *ctx, int x, int y, int size, uint32_t color);
 
 void	draw_cubes(t_ctx *ctx);
 void	init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
@@ -73,10 +74,6 @@ void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
 
 # define MAP_S 64
 
-
 void	render_frame(t_ctx *ctx);
-
-
-
 
 #endif
