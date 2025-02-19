@@ -25,7 +25,7 @@
 # include <errno.h>
 # include <sys/time.h>
 
-#define PI M_PI
+#define PI 3.14159265359
 #define P2 PI/2
 #define P3 3*PI/2
 #define DR 0.0174533
