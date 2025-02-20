@@ -33,7 +33,7 @@ typedef struct s_keys
 	bool	left;
 	bool	right;
 	bool	escape;
-} t_keys;
+}	t_keys;
 
 typedef struct s_winfo
 {
@@ -44,15 +44,15 @@ typedef struct s_winfo
 
 typedef struct s_ginfo
 {
-	int				x;
-	int				y;
-	char			spawn_facing;
-	char			**map;
-	int				map_height;
-	int				map_width;
-	char			*wall_tx[4];
-	unsigned int	colors[2];
-	 struct timeval    start_time;
+	int					x;
+	int					y;
+	char				spawn_facing;
+	char				**map;
+	int					map_height;
+	int					map_width;
+	char				*wall_tx[4];
+	unsigned int		colors[2];
+	struct timeval		start_time;
 }	t_ginfo;
 
 typedef struct s_file
@@ -68,6 +68,8 @@ typedef struct s_ctx
 	t_maths		maths;
 	t_file		file;
 	t_keys		keys;
+	int			mouse_diff;
+	float		rotate_amount;
 }	t_ctx;
 
 int		ctx_init(t_ctx *ctx, char *filename);

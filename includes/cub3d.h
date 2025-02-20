@@ -25,10 +25,16 @@
 # include <errno.h>
 # include <sys/time.h>
 
-#define PI 3.14159265359
-#define P2 PI/2
-#define P3 3*PI/2
-#define DR 0.0174533
+# define PI 3.14159265359
+
+// PI / 2
+# define P2 1.570796
+
+// 3 * PI / 2
+# define P3 4.712389
+
+// 1 Degre in radian
+# define DR 0.0174533
 
 # include "libft.h"
 # include "get_next_line.h"
@@ -44,6 +50,5 @@
 # include "textures.h"
 # include "hooks.h"
 # include "render.h"
-
 
 #endif

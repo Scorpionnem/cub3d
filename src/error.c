@@ -15,14 +15,14 @@
 void	*print_error(char *str)
 {
 	ft_putstr_fd(ERROR_NL, 2);
-	ft_putstr_fd(str, 2);
+	ft_putendl_fd(str, 2);
 	return (NULL);
 }
 
 void	*print_error_read_file(char *str, int fd)
 {
 	ft_putstr_fd(ERROR_NL, 2);
-	ft_putstr_fd(str, 2);
+	ft_putendl_fd(str, 2);
 	close(fd);
 	return (NULL);
 }
@@ -30,7 +30,7 @@ void	*print_error_read_file(char *str, int fd)
 void	*print_error_free(char *str, void *ptr)
 {
 	ft_putstr_fd(ERROR_NL, 2);
-	ft_putstr_fd(str, 2);
+	ft_putendl_fd(str, 2);
 	free(ptr);
 	return (NULL);
 }

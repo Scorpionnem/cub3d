@@ -1,7 +1,7 @@
-NO 	./textures/sky.png
-SO ./textures/south.png
-EA ./textures/east.png
-WE ./textures/west.png
+NO 	./textures/hand.png
+SO ./textures/hand.png
+EA ./textures/hand.png
+WE ./textures/hand.png
 
 
 F 255,50,50

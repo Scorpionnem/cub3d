@@ -23,22 +23,27 @@
 // ERROR MESSAGES
 # define ERROR_NL	"Error\n"
 
-# define PARSE_WRONG_AC			YELLOW"Wrong argument count\n"BASE
-# define INVALID_CHARS			YELLOW"Invalid character in map\n"BASE
-# define INVALID_FILE_NAME		YELLOW"Invalid file name\n"BASE
-# define INVALID_FILE_FORMAT	YELLOW"Invalid file format\n"BASE
-# define INVALID_COLOR_FORMAT	YELLOW"Invalid color format\n"BASE
-# define DUPLICATE_TOKEN		YELLOW"Duplicate texture path\n"BASE
-# define DUPLICATE_COLOR		YELLOW"Duplicate color\n"BASE
-# define PLAYER_COUNT_ERROR		YELLOW"Invalid amount of player spawning position\n"BASE
-# define INVALID_MAP_SIDES		YELLOW"Map walls are not closed\n"BASE
+# define PARSE_WRONG_AC			"\033[0;93mWrong argument count\033[0m"
+# define INVALID_CHARS			"\033[0;93mInvalid character in map\033[0m"
+# define INVALID_FILE_NAME		"\033[0;93mInvalid file name\033[0m"
+# define INVALID_FILE_FORMAT	"\033[0;93mInvalid file format\033[0m"
+# define INVALID_COLOR_FORMAT	"\033[0;93mInvalid color format\033[0m"
+# define DUPLICATE_TOKEN		"\033[0;93mDuplicate texture path\033[0m"
+# define DUPLICATE_COLOR		"\033[0;93mDuplicate color\033[0m"
+# define PLAYER_COUNT_ERROR \
+	"\033[0;93mInvalid amount of player spawning position\033[0m"
+# define INVALID_MAP_SIDES		"\033[0;93mMap walls are not closed\033[0m"
 
-# define OPEN_FAIL			RED"Failed to open file\n"BASE
+# define OPEN_FAIL			"\033[0;91mFailed to open file\033[0m"
 
-# define ALLOC_ERROR		BOLDRED"Fatal error allocating memory\n"BASE
-# define TEXTURE_LOAD_FAIL	BOLDRED"Fatal error allocating memory: Failed to load texture\n"BASE
-# define MLX_INIT_ERROR		BOLDRED"Fatal error allocating memory: Failed to init MLX\n"BASE
-# define MLX_IMG_ERROR		BOLDRED"Fatal error allocating memory: Failed create an image\n"BASE
+# define ALLOC_ERROR \
+"\033[0;91m\033[1mFatal error allocating memory\033[0m"
+# define TEXTURE_LOAD_FAIL \
+"\033[0;91m\033[1mFatal error allocating memory: Failed to load texture\033[0m"
+# define MLX_INIT_ERROR \
+"\033[0;91m\033[1mFatal error allocating memory: Failed to init MLX\033[0m"
+# define MLX_IMG_ERROR \
+"\033[0;91m\033[1mFatal error allocating memory: Failed create an image\033[0m"
 
 // MISC
 # define CUB_NAME		"cub3D"

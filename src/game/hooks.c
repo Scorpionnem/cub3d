@@ -26,6 +26,23 @@ void	key_hook(mlx_key_data_t keydata, void *ctx_ptr)
 
 void	render_hook(void *ctx_ptr)
 {
+	int	x;
+	int	y;
+	t_ctx *ctx;
+
+	ctx = ctx_ptr;
+	mlx_get_mouse_pos(ctx->winfo.mlx, &x, &y);
+	if (x != ctx->winfo.img->width / 2)
+	{
+		ctx->rotate_amount = ((float)ctx->mouse_diff - (float)x) / 200.f;
+		ctx->mouse_diff = x;
+	}
 	move_player(ctx_ptr);
 	render_frame(ctx_ptr);
+	if (ctx->rotate_amount)
+	{
+		mlx_set_mouse_pos(ctx->winfo.mlx, ctx->winfo.img->width / 2, ctx->winfo.img->height / 2);
+		ctx->rotate_amount = 0;
+		ctx->mouse_diff = ctx->winfo.img->width / 2;
+	}
 }

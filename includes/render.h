@@ -13,15 +13,17 @@
 #ifndef RENDER_H
 # define RENDER_H
 
+# define MAP_S 64
+
 typedef struct s_line_vars
 {
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
 	int	e2;
-} t_line_vars;
+}	t_line_vars;
 
 typedef enum s_facing
 {
@@ -29,7 +31,7 @@ typedef enum s_facing
 	south,
 	east,
 	west
-} t_facing;
+}	t_facing;
 
 typedef struct s_cube_render
 {
@@ -56,24 +58,41 @@ typedef struct s_cube_render
 	float		vx;
 	float		vy;
 	t_facing	face;
-} t_cube_render;
+}	t_cube_render;
 
-void	draw_line(mlx_image_t *image, int x1, int y1, int x2, int y2, uint32_t color);
-int	safe_put_pixel(mlx_image_t *image, int x, int y, uint32_t color);
-void	clear_image(mlx_image_t *img);
-void	draw_sky(t_ctx *ctx);
-void	render_square(t_ctx *ctx, int x, int y, int size, uint32_t color);
+typedef struct s_points
+{
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
+}	t_points;
 
-void	draw_cubes(t_ctx *ctx);
-void	init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
-void	init_vertical_rays(t_ctx *ctx, t_cube_render *vars);
-void	cast_vertical_rays(t_ctx *ctx, t_cube_render *vars);
-void	init_horizontal_rays_vars(t_ctx *ctx, t_cube_render *vars);
-void	init_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
-void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
+typedef struct s_draw_wall
+{
+	int				y;
+	int				x;
+	float			y_offset;
+	float			t_y;
+}	t_draw_wall;
 
-# define MAP_S 64
+t_points	init_dl_vars(int x1, int y1, int x2, int y2);
 
-void	render_frame(t_ctx *ctx);
+void		draw_line(mlx_image_t *image, t_points pts, uint32_t color);
+
+int			safe_put_pixel(mlx_image_t *image, int x, int y, uint32_t color);
+void		clear_image(mlx_image_t *img);
+void		draw_sky(t_ctx *ctx);
+void		render_square(t_ctx *ctx, int x, int y, int size, uint32_t color);
+
+void		draw_cubes(t_ctx *ctx);
+void		init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
+void		init_vertical_rays(t_ctx *ctx, t_cube_render *vars);
+void		cast_vertical_rays(t_ctx *ctx, t_cube_render *vars);
+void		init_horizontal_rays_vars(t_ctx *ctx, t_cube_render *vars);
+void		init_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
+void		cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
+
+void		render_frame(t_ctx *ctx);
 
 #endif

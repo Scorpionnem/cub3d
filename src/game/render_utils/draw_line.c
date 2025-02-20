@@ -12,39 +12,50 @@
 
 #include "cub3d.h"
 
-static void	init_draw_line(t_line_vars *vars, int x1, int y1, int x2, int y2)
+static void	init_draw_line(t_line_vars *vars, t_points pts)
 {
 	vars->sx = -1;
-	if (x1 < x2)
+	if (pts.x1 < pts.x2)
 		vars->sx = 1;
 	vars->sy = -1;
-	if (y1 < y2)
+	if (pts.y1 < pts.y2)
 		vars->sy = 1;
-	vars->dx = abs(x2 - x1);
-	vars->dy = abs(y2 - y1);
+	vars->dx = abs(pts.x2 - pts.x1);
+	vars->dy = abs(pts.y2 - pts.y1);
 	vars->err = vars->dx - vars->dy;
 }
 
-void	draw_line(mlx_image_t *image, int x1, int y1, int x2, int y2, uint32_t color)
+t_points	init_dl_vars(int x1, int y1, int x2, int y2)
+{
+	t_points	res;
+
+	res.x1 = x1;
+	res.y1 = y1;
+	res.x2 = x2;
+	res.y2 = y2;
+	return (res);
+}
+
+void	draw_line(mlx_image_t *image, t_points pts, uint32_t color)
 {
 	t_line_vars	vars;
 
-	init_draw_line(&vars, x1, y1, x2, y2);
+	init_draw_line(&vars, pts);
 	while (1)
 	{
-		safe_put_pixel(image, x1, y1, color);
-		if (x1 == x2 && y1 == y2)
-			break;
+		safe_put_pixel(image, pts.x1, pts.y1, color);
+		if (pts.x1 == pts.x2 && pts.y1 == pts.y2)
+			break ;
 		vars.e2 = 2 * vars.err;
-		if (vars.e2 > - vars.dy)
+		if (vars.e2 > -vars.dy)
 		{
 			vars.err -= vars.dy;
-			x1 += vars.sx;
+			pts.x1 += vars.sx;
 		}
 		if (vars.e2 < vars.dx)
 		{
 			vars.err += vars.dx;
-			y1 += vars.sy;
+			pts.y1 += vars.sy;
 		}
 	}
 }

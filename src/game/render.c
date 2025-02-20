@@ -28,16 +28,17 @@ void	display_fps(struct timeval start_time, int target_fps)
 	}
 	gettimeofday(&end_time, NULL);
 	end = end_time.tv_sec * 1000000 + end_time.tv_usec;
-	printf("%d fps\n", 1000000 / abs(end - start + 1));
+	printf("%d\n", 1000000 / abs(end - start + 1));
 }
 
 void	draw_minimap(t_ctx *ctx)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
+	t_points	pts;
 
-	x = 0;
-	while (x < ctx->ginfo.map_width)
+	x = -1;
+	while (++x < ctx->ginfo.map_width - 1)
 	{
 		y = 0;
 		while (y < ctx->ginfo.map_height)
@@ -47,13 +48,13 @@ void	draw_minimap(t_ctx *ctx)
 					(x * MAP_S) / 4, 16, 0xFF0000FF);
 			y++;
 		}
-		x++;
 	}
 	render_square(ctx, (ctx->maths.py - 16) / 4,
 		(ctx->maths.px - 16) / 4, 8, 0xFFFFFFFF);
-	draw_line(ctx->winfo.img, ctx->maths.px / 4, ctx->maths.py / 4,
-		(ctx->maths.px + ctx->maths.pdx * 8) / 4,
-		(ctx->maths.py + ctx->maths.pdy * 8) / 4, 0x00FF00FF);
+	pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
+			(ctx->maths.px + ctx->maths.pdx * 8) / 4,
+			(ctx->maths.py + ctx->maths.pdy * 8) / 4);
+	draw_line(ctx->winfo.img, pts, 0x00FF00FF);
 }
 
 void	draw_crosshair(t_ctx *ctx, int x, int y, int size)
@@ -82,8 +83,8 @@ void	render_frame(t_ctx *ctx)
 	gettimeofday(&ctx->ginfo.start_time, NULL);
 	draw_sky(ctx);
 	draw_cubes(ctx);
-	draw_minimap(ctx);
+	// draw_minimap(ctx);
 	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 2,
 		ctx->winfo.img->height / 2 - 2, 4);
-	display_fps(ctx->ginfo.start_time, 1000);
+	display_fps(ctx->ginfo.start_time, 200);
 }

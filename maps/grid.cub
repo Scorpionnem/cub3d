@@ -1,7 +1,7 @@
-NO 	./textures/sky.png
-SO ./textures/sky.png
-EA ./textures/sky.png
-WE ./textures/sky.png
+NO 	./textures/north.png
+SO ./textures/south.png
+EA ./textures/east.png
+WE ./textures/west.png
 
 C 190,190,190
 F 100,100,100

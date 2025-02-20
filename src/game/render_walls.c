@@ -15,15 +15,15 @@
 void	calc_height_offset(t_ctx *ctx, t_cube_render *vars)
 {
 	vars->ca = ctx->maths.pa - vars->ra;
-	if (vars->ca < 0)
-		vars->ca += 2 * PI;
-	if (vars->ca > 2 * PI)
-		vars->ca -= 2 * PI;
+	if (vars->ca < 0.f)
+		vars->ca += 2.f * PI;
+	if (vars->ca > 2.f * PI)
+		vars->ca -= 2.f * PI;
 	vars->dist = vars->dist * cos(vars->ca);
 	vars->line_h = (MAP_S * (int)ctx->winfo.img->height) / vars->dist;
-	if (vars->line_h > ctx->winfo.img->height)
-		vars->line_h = ctx->winfo.img->height;
-	vars->line_offset = (ctx->winfo.img->height / 2) - vars->line_h / 2;
+	// if (vars->line_h > ctx->winfo.img->height)
+		// vars->line_h = ctx->winfo.img->height;
+	vars->line_offset = (ctx->winfo.img->height / 2.f) - vars->line_h / 2.f;
 }
 
 void	choose_ray(t_cube_render *vars)
@@ -45,45 +45,55 @@ void	choose_ray(t_cube_render *vars)
 	}
 }
 
+float	get_x(t_cube_render *vars, mlx_texture_t *tex)
+{
+	int	res;
+
+	res = (vars->rx / 64.f - floor(vars->rx / 64.f)) * ((float)tex->width);
+	if (vars->face == south)
+		res = (float)tex->width
+			- (vars->rx / 64.f - floor(vars->rx / 64.f)) * ((float)tex->width);
+	if (vars->face == east)
+		res = (vars->ry / 64.f - floor(vars->ry / 64.f)) * ((float)tex->width);
+	if (vars->face == west)
+		res = (float)tex->width
+			- (vars->ry / 64.f - floor(vars->ry / 64.f)) * ((float)tex->width);
+	return (res);
+}
+
 void	draw_wall_line(t_ctx *ctx, t_cube_render *vars)
 {
 	uint32_t		color;
 	mlx_texture_t	*tex;
-	int				y;
-	int				x;
-	float			y_offset;
-	float				t_y;
+	t_draw_wall		coords;
 
-	// color = 0xFFFFFFFF;
 	tex = ctx->winfo.wall_tx[east_tx];
 	if (vars->face == south)
 		tex = ctx->winfo.wall_tx[south_tx];
-		// color = 0x0000FFFF;
 	if (vars->face == north)
 		tex = ctx->winfo.wall_tx[north_tx];
-		// color = 0xFF0000FF;
 	if (vars->face == west)
 		tex = ctx->winfo.wall_tx[west_tx];
-		// color = 0x00FF00FF;
-	y = 0;
-	x = ((int)vars->rx / 2) % tex->width;
-	if (vars->face == east || vars->face == west)
-		x = ((int)vars->ry / 2) % tex->width;
-	t_y = 0;
-	y_offset = tex->height / vars->line_h;
-	while (y < vars->line_h)
+	coords.y = 0;
+	coords.x = get_x(vars, tex);
+	coords.t_y = 0;
+	coords.y_offset = tex->height / vars->line_h;
+	while (coords.y < vars->line_h)
 	{
-		color = uint8_to_uint32(&tex->pixels
-				[((x) + (((int)t_y) * tex->width)) * 4]);
-		safe_put_pixel(ctx->winfo.img, vars->r, vars->line_offset + y, color);
-		y++;
-		t_y += y_offset;
+		if (((coords.x) + (((int)coords.t_y) * tex->width)) * 4 < tex->width * tex->height * 4)
+			color = uint8_to_uint32(&tex->pixels
+			[((coords.x) + (((int)coords.t_y) * tex->width)) * 4]);
+		safe_put_pixel(ctx->winfo.img, vars->r,
+			vars->line_offset + coords.y, color);
+		coords.y++;
+		coords.t_y += coords.y_offset;
 	}
 }
 
 void	draw_cubes(t_ctx *ctx)
 {
 	t_cube_render	vars;
+	t_points		pts;
 
 	vars.ra = ctx->maths.pa - DR * 30;
 	check_rad(&vars.ra);
@@ -99,7 +109,9 @@ void	draw_cubes(t_ctx *ctx)
 		choose_ray(&vars);
 		calc_height_offset(ctx, &vars);
 		draw_wall_line(ctx, &vars);
-		draw_line(ctx->winfo.img, ctx->maths.px / 4, ctx->maths.py / 4, vars.rx / 4, vars.ry / 4, 0xFF9999FF);
+		pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
+				vars.rx / 4, vars.ry / 4);
+		// draw_line(ctx->winfo.img, pts, 0xFF9999FF);
 		vars.ra += DR * (60 / (float)ctx->winfo.img->width);
 		check_rad(&vars.ra);
 		vars.r++;

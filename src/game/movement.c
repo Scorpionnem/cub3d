@@ -98,6 +98,16 @@ static void	move_player_w_s(t_ctx *ctx)
 
 void	move_player(t_ctx *ctx)
 {
+	if (ctx->rotate_amount != 0)
+	{
+		ctx->maths.pa -= ctx->rotate_amount;
+		if (ctx->maths.pa < 0)
+			ctx->maths.pa += 2 * PI;
+		if (ctx->maths.pa > 2 * PI)
+			ctx->maths.pa -= 2 * PI;
+		ctx->maths.pdx = cos(ctx->maths.pa) * 5;
+		ctx->maths.pdy = sin(ctx->maths.pa) * 5;
+	}
 	if (ctx->keys.left)
 	{
 		ctx->maths.pa -= 0.1;
