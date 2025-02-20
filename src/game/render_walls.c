@@ -47,17 +47,38 @@ void	choose_ray(t_cube_render *vars)
 
 void	draw_wall_line(t_ctx *ctx, t_cube_render *vars)
 {
-	uint32_t	color;
+	uint32_t		color;
+	mlx_texture_t	*tex;
+	int				y;
+	int				x;
+	float			y_offset;
+	float				t_y;
 
-	color = 0xFFFFFFFF;
+	// color = 0xFFFFFFFF;
+	tex = ctx->winfo.wall_tx[east_tx];
 	if (vars->face == south)
-		color = 0x0000FFFF;
+		tex = ctx->winfo.wall_tx[south_tx];
+		// color = 0x0000FFFF;
 	if (vars->face == north)
-		color = 0xFF0000FF;
+		tex = ctx->winfo.wall_tx[north_tx];
+		// color = 0xFF0000FF;
 	if (vars->face == west)
-		color = 0x00FF00FF;
-	draw_line(ctx->winfo.img, vars->r, vars->line_offset,
-		vars->r, vars->line_h + vars->line_offset, color);
+		tex = ctx->winfo.wall_tx[west_tx];
+		// color = 0x00FF00FF;
+	y = 0;
+	x = ((int)vars->rx / 2) % tex->width;
+	if (vars->face == east || vars->face == west)
+		x = ((int)vars->ry / 2) % tex->width;
+	t_y = 0;
+	y_offset = tex->height / vars->line_h;
+	while (y < vars->line_h)
+	{
+		color = uint8_to_uint32(&tex->pixels
+				[((x) + (((int)t_y) * tex->width)) * 4]);
+		safe_put_pixel(ctx->winfo.img, vars->r, vars->line_offset + y, color);
+		y++;
+		t_y += y_offset;
+	}
 }
 
 void	draw_cubes(t_ctx *ctx)
