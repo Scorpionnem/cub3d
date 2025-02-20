@@ -47,32 +47,53 @@ void	press_key(mlx_key_data_t keydata, t_ctx *ctx)
 	press_secondary_keys(keydata, ctx);
 }
 
-static void	move_player_w_s(t_ctx *ctx)
+static void	move_player_a_d(t_ctx *ctx)
 {
-	if (ctx->keys.w)
-	{
-		ctx->maths.px += ctx->maths.pdx;
-		ctx->maths.py += ctx->maths.pdy;
-	}
-	if (ctx->keys.s)
-	{
-		ctx->maths.px -= ctx->maths.pdx;
-		ctx->maths.py -= ctx->maths.pdy;
-	}
 	ctx->maths.pdx = cos(ctx->maths.pa + P2) * 5;
 	ctx->maths.pdy = sin(ctx->maths.pa + P2) * 5;
 	if (ctx->keys.d)
 	{
-		ctx->maths.px += ctx->maths.pdx;
-		ctx->maths.py += ctx->maths.pdy;
+		if (ctx->ginfo.map[(int)(ctx->maths.px + ctx->maths.pdx) / 64]
+			[(int)ctx->maths.py / 64] == '0')
+			ctx->maths.px += ctx->maths.pdx;
+		if (ctx->ginfo.map[(int)ctx->maths.px / 64]
+			[(int)(ctx->maths.py + ctx->maths.pdy) / 64] == '0')
+			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.a)
 	{
-		ctx->maths.px -= ctx->maths.pdx;
-		ctx->maths.py -= ctx->maths.pdy;
+		if (ctx->ginfo.map[(int)(ctx->maths.px - ctx->maths.pdx) / 64]
+			[(int)ctx->maths.py / 64] == '0')
+			ctx->maths.px -= ctx->maths.pdx;
+		if (ctx->ginfo.map[(int)ctx->maths.px / 64]
+			[(int)(ctx->maths.py - ctx->maths.pdy) / 64] == '0')
+			ctx->maths.py -= ctx->maths.pdy;
 	}
 	ctx->maths.pdx = cos(ctx->maths.pa) * 5;
 	ctx->maths.pdy = sin(ctx->maths.pa) * 5;
+}
+
+static void	move_player_w_s(t_ctx *ctx)
+{
+	if (ctx->keys.w)
+	{
+		if (ctx->ginfo.map[(int)(ctx->maths.px + ctx->maths.pdx) / 64]
+			[(int)ctx->maths.py / 64] == '0')
+			ctx->maths.px += ctx->maths.pdx;
+		if (ctx->ginfo.map[(int)ctx->maths.px / 64]
+			[(int)(ctx->maths.py + ctx->maths.pdy) / 64] == '0')
+			ctx->maths.py += ctx->maths.pdy;
+	}
+	if (ctx->keys.s)
+	{
+		if (ctx->ginfo.map[(int)(ctx->maths.px - ctx->maths.pdx) / 64]
+			[(int)ctx->maths.py / 64] == '0')
+			ctx->maths.px -= ctx->maths.pdx;
+		if (ctx->ginfo.map[(int)ctx->maths.px / 64]
+			[(int)(ctx->maths.py - ctx->maths.pdy) / 64] == '0')
+			ctx->maths.py -= ctx->maths.pdy;
+	}
+	move_player_a_d(ctx);
 }
 
 void	move_player(t_ctx *ctx)
