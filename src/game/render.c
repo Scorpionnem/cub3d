@@ -36,18 +36,18 @@ void	draw_minimap(t_ctx *ctx)
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y < ctx->ginfo.map_width)
+	x = 0;
+	while (x < ctx->ginfo.map_width)
 	{
-		x = 0;
-		while (x < ctx->ginfo.map_height)
+		y = 0;
+		while (y < ctx->ginfo.map_height)
 		{
-			if (ctx->ginfo.map[x][y] == '1')
+			if (ctx->ginfo.map[y][x] == '1')
 				render_square(ctx, (y * MAP_S) / 4,
 					(x * MAP_S) / 4, 16, 0xFF0000FF);
-			x++;
+			y++;
 		}
-		y++;
+		x++;
 	}
 	render_square(ctx, (ctx->maths.py - 16) / 4,
 		(ctx->maths.px - 16) / 4, 8, 0xFFFFFFFF);

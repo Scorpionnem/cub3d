@@ -53,9 +53,9 @@ void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars)
 	{
 		vars->mx = (int)(vars->rx) / 64;
 		vars->my = (int)(vars->ry) / 64;
-		if (vars->my >= 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_height
-			&& vars->my <= ctx->ginfo.map_width
-			&& ctx->ginfo.map[vars->mx][vars->my] == '1')
+		if (vars->my >= 0 && vars->mx >= 0 && vars->mx <= ctx->ginfo.map_width
+			&& vars->my < ctx->ginfo.map_height
+			&& ctx->ginfo.map[vars->my][vars->mx] == '1')
 		{
 			vars->hx = vars->rx;
 			vars->hy = vars->ry;

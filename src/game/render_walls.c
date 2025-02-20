@@ -36,9 +36,9 @@ void	choose_ray(t_cube_render *vars)
 	vars->dist = vars->dist_h;
 	if (vars->dist_v < vars->dist_h)
 	{
-		vars->face = east;
+		vars->face = west;
 		if (vars->ra < P2 || vars->ra > P3)
-			vars->face = west;
+			vars->face = east;
 		vars->ry = vars->vy;
 		vars->rx = vars->vx;
 		vars->dist = vars->dist_v;

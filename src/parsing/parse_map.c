@@ -46,8 +46,8 @@ static void	get_player_pos(t_ctx *ctx)
 			if (ft_strchr(PLAYER_CHARSET, ctx->ginfo.map[x][y]))
 			{
 				ctx->ginfo.spawn_facing = ctx->ginfo.map[x][y];
-				ctx->ginfo.x = x;
-				ctx->ginfo.y = y;
+				ctx->ginfo.x = y;
+				ctx->ginfo.y = x;
 				ctx->ginfo.map[x][y] = '0';
 				return ;
 			}

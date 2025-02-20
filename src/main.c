@@ -23,6 +23,17 @@ double	find_face_angle(t_ctx *ctx)
 	return (0);
 }
 
+void	init_math_vars(t_ctx *ctx)
+{
+	ctx->maths.pdx = 0;
+	ctx->maths.pdy = 0;
+	ctx->maths.px = (ctx->ginfo.x + .5) * MAP_S;
+	ctx->maths.py = (ctx->ginfo.y + .5) * MAP_S;
+	ctx->maths.pa = find_face_angle(ctx);
+	ctx->maths.pdx = cos(ctx->maths.pa) * 5;
+	ctx->maths.pdy = sin(ctx->maths.pa) * 5;
+}
+
 int	main(int ac, char **av)
 {
 	t_ctx	ctx;
@@ -31,15 +42,7 @@ int	main(int ac, char **av)
 		return (!print_error(PARSE_WRONG_AC));
 	if (!ctx_init(&ctx, av[1]))
 		return (1);
-	ctx.maths.pdx = 0;
-	ctx.maths.pdy = 0;
-	ctx.maths.px = (ctx.ginfo.x + .5) * MAP_S;
-	ctx.maths.py = (ctx.ginfo.y + .5) * MAP_S;
-	ctx.maths.pa = find_face_angle(&ctx);
-	ctx.maths.pdx = cos(ctx.maths.pa) * 5;
-	ctx.maths.pdy = sin(ctx.maths.pa) * 5;
-	mlx_image_t *a = mlx_texture_to_image(ctx.winfo.mlx, ctx.winfo.wall_tx[north_tx]);
-	mlx_image_to_window(ctx.winfo.mlx, a, 600, 400);
+	init_math_vars(&ctx);
 	mlx_loop_hook(ctx.winfo.mlx, render_hook, &ctx);
 	mlx_key_hook(ctx.winfo.mlx, key_hook, &ctx);
 	mlx_loop(ctx.winfo.mlx);

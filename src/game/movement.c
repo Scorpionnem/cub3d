@@ -53,20 +53,20 @@ static void	move_player_a_d(t_ctx *ctx)
 	ctx->maths.pdy = sin(ctx->maths.pa + P2) * 5;
 	if (ctx->keys.d)
 	{
-		if (ctx->ginfo.map[(int)(ctx->maths.px + ctx->maths.pdx) / 64]
-			[(int)ctx->maths.py / 64] == '0')
+		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
+			[(int)(ctx->maths.px + ctx->maths.pdx) / 64] == '0')
 			ctx->maths.px += ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)ctx->maths.px / 64]
-			[(int)(ctx->maths.py + ctx->maths.pdy) / 64] == '0')
+		if (ctx->ginfo.map[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64] == '0')
 			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.a)
 	{
-		if (ctx->ginfo.map[(int)(ctx->maths.px - ctx->maths.pdx) / 64]
-			[(int)ctx->maths.py / 64] == '0')
+		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
+			[(int)(ctx->maths.px - ctx->maths.pdx) / 64] == '0')
 			ctx->maths.px -= ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)ctx->maths.px / 64]
-			[(int)(ctx->maths.py - ctx->maths.pdy) / 64] == '0')
+		if (ctx->ginfo.map[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64] == '0')
 			ctx->maths.py -= ctx->maths.pdy;
 	}
 	ctx->maths.pdx = cos(ctx->maths.pa) * 5;
@@ -77,20 +77,20 @@ static void	move_player_w_s(t_ctx *ctx)
 {
 	if (ctx->keys.w)
 	{
-		if (ctx->ginfo.map[(int)(ctx->maths.px + ctx->maths.pdx) / 64]
-			[(int)ctx->maths.py / 64] == '0')
+		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
+			[(int)(ctx->maths.px + ctx->maths.pdx) / 64] == '0')
 			ctx->maths.px += ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)ctx->maths.px / 64]
-			[(int)(ctx->maths.py + ctx->maths.pdy) / 64] == '0')
+		if (ctx->ginfo.map[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64] == '0')
 			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.s)
 	{
-		if (ctx->ginfo.map[(int)(ctx->maths.px - ctx->maths.pdx) / 64]
-			[(int)ctx->maths.py / 64] == '0')
+		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
+			[(int)(ctx->maths.px - ctx->maths.pdx) / 64] == '0')
 			ctx->maths.px -= ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)ctx->maths.px / 64]
-			[(int)(ctx->maths.py - ctx->maths.pdy) / 64] == '0')
+		if (ctx->ginfo.map[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64] == '0')
 			ctx->maths.py -= ctx->maths.pdy;
 	}
 	move_player_a_d(ctx);
