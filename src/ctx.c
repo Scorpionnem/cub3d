@@ -18,6 +18,8 @@ void	ctx_deinit(t_ctx *ctx)
 	free_textures(ctx);
 	free_tx_path(ctx);
 	mlx_delete_image(ctx->winfo.mlx, ctx->winfo.img);
+	if (ctx->winfo.fps)
+		mlx_delete_image(ctx->winfo.mlx, ctx->winfo.fps);
 	mlx_terminate(ctx->winfo.mlx);
 }
 
@@ -33,6 +35,7 @@ static void	init_nulls(t_ctx *ctx)
 	ctx->winfo.wall_tx[south_tx] = NULL;
 	ctx->winfo.wall_tx[east_tx] = NULL;
 	ctx->winfo.wall_tx[west_tx] = NULL;
+	ctx->winfo.fps = NULL;
 	ctx->ginfo.map_height = 0;
 	ctx->ginfo.map_width = 0;
 	ctx->keys.w = false;
@@ -43,6 +46,7 @@ static void	init_nulls(t_ctx *ctx)
 	ctx->keys.right = false;
 	ctx->keys.escape = false;
 	ctx->mouse.toggle = false;
+	ctx->winfo.fps_toggle = false;
 }
 
 static int	init_window(t_ctx *ctx)

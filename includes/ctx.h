@@ -38,6 +38,8 @@ typedef struct s_keys
 typedef struct s_winfo
 {
 	mlx_image_t		*img;
+	mlx_image_t		*fps;
+	bool			fps_toggle;
 	mlx_texture_t	*wall_tx[4];
 	mlx_t			*mlx;
 }	t_winfo;

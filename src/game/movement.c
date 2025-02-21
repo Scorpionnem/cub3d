@@ -18,6 +18,8 @@ static void	press_secondary_keys(mlx_key_data_t keydata, t_ctx *ctx)
 		ctx->keys.escape = true;
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		mouse_toggle(ctx);
+	if (keydata.key == MLX_KEY_F3 && keydata.action == MLX_PRESS)
+		ctx->winfo.fps_toggle = !ctx->winfo.fps_toggle;
 }
 
 void	press_key(mlx_key_data_t keydata, t_ctx *ctx)
