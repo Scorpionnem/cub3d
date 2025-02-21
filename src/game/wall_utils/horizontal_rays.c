@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:38:58 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:39:01 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:02:11 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_horizontal_rays(t_ctx *ctx, t_cube_render *vars)
 	}
 }
 
-void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars)
+void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars, char *charset)
 {
 	while (vars->dof < RENDER_DISTANCE)
 	{
@@ -55,7 +55,7 @@ void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars)
 		vars->my = (int)(vars->ry) / 64;
 		if (vars->my >= 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_width
 			&& vars->my < ctx->ginfo.map_height
-			&& ctx->ginfo.map[vars->my][vars->mx] == '1')
+			&& ft_strchr(charset, ctx->ginfo.map[vars->my][vars->mx]))
 		{
 			vars->hx = vars->rx;
 			vars->hy = vars->ry;

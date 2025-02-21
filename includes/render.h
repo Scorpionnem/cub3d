@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:23 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:49:16 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:04:00 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,12 @@ void		draw_cubes(t_ctx *ctx);
 void		draw_fps(t_ctx *ctx);
 void		init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
 void		init_vertical_rays(t_ctx *ctx, t_cube_render *vars);
-void		cast_vertical_rays(t_ctx *ctx, t_cube_render *vars);
 void		init_horizontal_rays_vars(t_ctx *ctx, t_cube_render *vars);
 void		init_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
-void		cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
+
+void		cast_vertical_rays(t_ctx *ctx, t_cube_render *vars, char *charset);
+void		cast_horizontal_rays(t_ctx *ctx,
+				t_cube_render *vars, char *charset);
 
 void		calc_height_offset(t_ctx *ctx, t_cube_render *vars);
 void		choose_ray(t_cube_render *vars);

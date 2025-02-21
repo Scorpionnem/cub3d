@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:38:23 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:38:24 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:27:22 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,22 @@ static void	move_player_a_d(t_ctx *ctx)
 	ctx->maths.pdy = sin(ctx->maths.pa + P2) * 5;
 	if (ctx->keys.d)
 	{
-		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
-			[(int)(ctx->maths.px + ctx->maths.pdx) / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
+				[(int)(ctx->maths.px + ctx->maths.pdx) / 64]))
 			ctx->maths.px += ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
+				[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64]))
 			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.a)
 	{
-		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
-			[(int)(ctx->maths.px - ctx->maths.pdx) / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
+				[(int)(ctx->maths.px - ctx->maths.pdx) / 64]))
 			ctx->maths.px -= ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
+				[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64]))
 			ctx->maths.py -= ctx->maths.pdy;
 	}
 	ctx->maths.pdx = cos(ctx->maths.pa) * 5;
@@ -86,20 +88,22 @@ static void	move_player_w_s(t_ctx *ctx)
 {
 	if (ctx->keys.w)
 	{
-		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
-			[(int)(ctx->maths.px + ctx->maths.pdx) / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
+				[(int)(ctx->maths.px + ctx->maths.pdx) / 64]))
 			ctx->maths.px += ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
+				[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64]))
 			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.s)
 	{
-		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
-			[(int)(ctx->maths.px - ctx->maths.pdx) / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
+				[(int)(ctx->maths.px - ctx->maths.pdx) / 64]))
 			ctx->maths.px -= ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
+				[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64]))
 			ctx->maths.py -= ctx->maths.pdy;
 	}
 	move_player_a_d(ctx);

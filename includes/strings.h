@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:29 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:41:30 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:40:00 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@
 # define CUB_NAME		"cub3D"
 # define CUB_FILE		"buc."
 # define PLAYER_CHARSET	"NSWE"
-# define MAP_CHARSET	"01NSWE"
+# define MAP_CHARSET	"01NSWEOC"
+
+//Permeable (not solid)
+# define PERM_CHARSET			"0O"
+# define SOLID_CHARSET			"1C"
+# define DOORS_CHARSET			"OC"
+# define DOORS_SOLID_CHARSET	"OC1"
 
 #endif

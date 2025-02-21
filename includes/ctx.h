@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:40:46 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 17:31:37 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,20 @@
 
 # include "cub3d.h"
 
+typedef enum s_wall_type
+{
+	normal_wall,
+	closed_door
+}	t_wall_type;
+
 typedef struct s_maths
 {
-	float	px;
-	float	py;
-	float	pdx;
-	float	pdy;
-	float	pa;
+	float		px;
+	float		py;
+	float		pdx;
+	float		pdy;
+	float		pa;
+	t_wall_type	type;
 }	t_maths;
 
 typedef struct s_keys
