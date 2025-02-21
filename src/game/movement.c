@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   movement.c										 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/18 10:38:30 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/19 10:45:46 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:38:23 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/21 15:38:24 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
@@ -19,7 +19,12 @@ static void	press_secondary_keys(mlx_key_data_t keydata, t_ctx *ctx)
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		mouse_toggle(ctx);
 	if (keydata.key == MLX_KEY_F3 && keydata.action == MLX_PRESS)
+	{
 		ctx->winfo.fps_toggle = !ctx->winfo.fps_toggle;
+		if (!ctx->winfo.fps_toggle)
+			if (ctx->winfo.fps)
+				mlx_delete_image(ctx->winfo.mlx, ctx->winfo.fps);
+	}
 }
 
 void	press_key(mlx_key_data_t keydata, t_ctx *ctx)
