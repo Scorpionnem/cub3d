@@ -50,5 +50,6 @@
 # include "textures.h"
 # include "hooks.h"
 # include "render.h"
+# include "mouse.h"
 
 #endif

@@ -61,6 +61,12 @@ typedef struct s_file
 	int		lines_count;
 }	t_file;
 
+typedef struct s_mouse
+{
+	float		rotate_amount;
+	int			old_x;
+}	t_mouse;
+
 typedef struct s_ctx
 {
 	t_ginfo		ginfo;
@@ -68,8 +74,7 @@ typedef struct s_ctx
 	t_maths		maths;
 	t_file		file;
 	t_keys		keys;
-	int			mouse_diff;
-	float		rotate_amount;
+	t_mouse		mouse;
 }	t_ctx;
 
 int		ctx_init(t_ctx *ctx, char *filename);
