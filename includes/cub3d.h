@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:49 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:40:50 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:13:04 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@
 # include "hooks.h"
 # include "render.h"
 # include "mouse.h"
+# include "doors.h"
 
 #endif

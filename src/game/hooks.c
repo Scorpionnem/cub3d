@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:16 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:39:17 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 16:30:50 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ static void	check_special_keys(t_ctx *ctx)
 {
 	if (ctx->keys.escape)
 		mlx_close_window(ctx->winfo.mlx);
+}
+
+void	mouse_hook(enum mouse_key button, enum action action,
+	enum modifier_key mod, void *ctx_ptr)
+{
+	(void)mod;
+	(void)ctx_ptr;
+	if (button == MLX_MOUSE_BUTTON_RIGHT && action == MLX_PRESS)
+		cast_door_ray(ctx_ptr);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *ctx_ptr)
