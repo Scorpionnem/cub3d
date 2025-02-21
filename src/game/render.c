@@ -6,40 +6,11 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:37 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:39:39 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:49:31 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-mlx_image_t	*display_fps(t_ctx *ctx, struct timeval start_time, int target_fps)
-{
-	struct timeval		end_time;
-	int					start;
-	int					end;
-	mlx_image_t			*res;
-	char				*str;
-
-	res = NULL;
-	gettimeofday(&end_time, NULL);
-	start = start_time.tv_sec * 1000000 + start_time.tv_usec;
-	end = end_time.tv_sec * 1000000 + end_time.tv_usec;
-	while (1000000 / abs(end - start + 1) > target_fps)
-	{
-		gettimeofday(&end_time, NULL);
-		end = end_time.tv_sec * 1000000 + end_time.tv_usec;
-	}
-	gettimeofday(&end_time, NULL);
-	end = end_time.tv_sec * 1000000 + end_time.tv_usec;
-	str = ft_itoa(1000000 / abs(end - start + 1));
-	if (!str)
-		return (NULL);
-	if (ctx->winfo.fps)
-		mlx_delete_image(ctx->winfo.mlx, ctx->winfo.fps);
-	res = mlx_put_string(ctx->winfo.mlx, str, 0, 0);
-	free(str);
-	return (res);
-}
 
 void	draw_player(t_ctx *ctx)
 {
@@ -108,10 +79,5 @@ void	render_frame(t_ctx *ctx)
 	draw_minimap(ctx);
 	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 2,
 		ctx->winfo.img->height / 2 - 2, 4);
-	if (ctx->winfo.fps_toggle)
-	{
-		ctx->winfo.fps = display_fps(ctx, ctx->ginfo.start_time, 200);
-		if (!ctx->winfo.fps)
-			mlx_close_window(ctx->winfo.mlx);
-	}
+	draw_fps(ctx);
 }

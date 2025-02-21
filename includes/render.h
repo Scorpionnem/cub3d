@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:23 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:41:24 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/21 15:49:16 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void		render_square(t_ctx *ctx, t_rsquare vars, uint32_t color);
 t_rsquare	init_rsquare_vars(int x, int y, int size);
 
 void		draw_cubes(t_ctx *ctx);
+void		draw_fps(t_ctx *ctx);
 void		init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
 void		init_vertical_rays(t_ctx *ctx, t_cube_render *vars);
 void		cast_vertical_rays(t_ctx *ctx, t_cube_render *vars);
