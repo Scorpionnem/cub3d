@@ -16,6 +16,8 @@ static void	press_secondary_keys(mlx_key_data_t keydata, t_ctx *ctx)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		ctx->keys.escape = true;
+	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
+		mouse_toggle(ctx);
 }
 
 void	press_key(mlx_key_data_t keydata, t_ctx *ctx)

@@ -42,6 +42,7 @@ static void	init_nulls(t_ctx *ctx)
 	ctx->keys.left = false;
 	ctx->keys.right = false;
 	ctx->keys.escape = false;
+	ctx->mouse.toggle = false;
 }
 
 static int	init_window(t_ctx *ctx)

@@ -76,6 +76,13 @@ typedef struct s_draw_wall
 	float			t_y;
 }	t_draw_wall;
 
+typedef struct s_rsquare
+{
+	int				y;
+	int				x;
+	float			size;
+}	t_rsquare;
+
 t_points	init_dl_vars(int x1, int y1, int x2, int y2);
 
 void		draw_line(mlx_image_t *image, t_points pts, uint32_t color);
@@ -83,7 +90,9 @@ void		draw_line(mlx_image_t *image, t_points pts, uint32_t color);
 int			safe_put_pixel(mlx_image_t *image, int x, int y, uint32_t color);
 void		clear_image(mlx_image_t *img);
 void		draw_sky(t_ctx *ctx);
-void		render_square(t_ctx *ctx, int x, int y, int size, uint32_t color);
+
+void		render_square(t_ctx *ctx, t_rsquare vars, uint32_t color);
+t_rsquare	init_rsquare_vars(int x, int y, int size);
 
 void		draw_cubes(t_ctx *ctx);
 void		init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
@@ -92,6 +101,9 @@ void		cast_vertical_rays(t_ctx *ctx, t_cube_render *vars);
 void		init_horizontal_rays_vars(t_ctx *ctx, t_cube_render *vars);
 void		init_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
 void		cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
+
+void		calc_height_offset(t_ctx *ctx, t_cube_render *vars);
+void		choose_ray(t_cube_render *vars);
 
 void		render_frame(t_ctx *ctx);
 

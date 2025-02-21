@@ -63,6 +63,7 @@ typedef struct s_file
 
 typedef struct s_mouse
 {
+	bool		toggle;
 	float		rotate_amount;
 	int			old_x;
 }	t_mouse;

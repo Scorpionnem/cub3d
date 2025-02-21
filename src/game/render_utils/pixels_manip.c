@@ -64,18 +64,28 @@ void	draw_sky(t_ctx *ctx)
 	}
 }
 
-void	render_square(t_ctx *ctx, int x, int y, int size, uint32_t color)
+t_rsquare	init_rsquare_vars(int x, int y, int size)
+{
+	t_rsquare	res;
+
+	res.x = x;
+	res.y = y;
+	res.size = size;
+	return (res);
+}
+
+void	render_square(t_ctx *ctx, t_rsquare vars, uint32_t color)
 {
 	int	t_x;
 	int	t_y;
 
 	t_x = 0;
-	while (t_x < size)
+	while (t_x < vars.size)
 	{
 		t_y = 0;
-		while (t_y < size)
+		while (t_y < vars.size)
 		{
-			safe_put_pixel(ctx->winfo.img, t_y + y, t_x + x, color);
+			safe_put_pixel(ctx->winfo.img, t_y + vars.y, t_x + vars.x, color);
 			t_y++;
 		}
 		t_x++;

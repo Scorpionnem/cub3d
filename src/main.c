@@ -43,9 +43,6 @@ int	main(int ac, char **av)
 	if (!ctx_init(&ctx, av[1]))
 		return (1);
 	init_math_vars(&ctx);
-	ctx.mouse.old_x = ctx.winfo.img->width / 2;
-	ctx.mouse.rotate_amount = 0;
-	mlx_set_cursor_mode(ctx.winfo.mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop_hook(ctx.winfo.mlx, render_hook, &ctx);
 	mlx_key_hook(ctx.winfo.mlx, key_hook, &ctx);
 	mlx_loop(ctx.winfo.mlx);
