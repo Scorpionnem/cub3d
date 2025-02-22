@@ -3,6 +3,7 @@ SO ./textures/south.png
 EA ./textures/east.png
 WE ./textures/west.png
 
+DO ./textures/door.png
 
 F 255,200,80
 C 0,0,0

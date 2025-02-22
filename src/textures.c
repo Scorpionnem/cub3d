@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:38 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:40:38 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/22 11:22:24 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	free_tx_path(t_ctx *ctx)
 		free(ctx->ginfo.wall_tx[east_tx]);
 	if (ctx->ginfo.wall_tx[west_tx])
 		free(ctx->ginfo.wall_tx[west_tx]);
+	if (ctx->ginfo.wall_tx[door_tx])
+		free(ctx->ginfo.wall_tx[door_tx]);
 }
 
 void	free_textures(t_ctx	*ctx)
@@ -34,6 +36,8 @@ void	free_textures(t_ctx	*ctx)
 		mlx_delete_texture(ctx->winfo.wall_tx[east_tx]);
 	if (ctx->winfo.wall_tx[west_tx])
 		mlx_delete_texture(ctx->winfo.wall_tx[west_tx]);
+	if (ctx->winfo.wall_tx[door_tx])
+		mlx_delete_texture(ctx->winfo.wall_tx[door_tx]);
 }
 
 int	open_textures(t_ctx *ctx)
@@ -49,6 +53,9 @@ int	open_textures(t_ctx *ctx)
 		return (!!print_error(TEXTURE_LOAD_FAIL));
 	ctx->winfo.wall_tx[west_tx] = mlx_load_png(ctx->ginfo.wall_tx[west_tx]);
 	if (!ctx->winfo.wall_tx[west_tx])
+		return (!!print_error(TEXTURE_LOAD_FAIL));
+	ctx->winfo.wall_tx[door_tx] = mlx_load_png(ctx->ginfo.wall_tx[door_tx]);
+	if (!ctx->winfo.wall_tx[door_tx])
 		return (!!print_error(TEXTURE_LOAD_FAIL));
 	return (1);
 }

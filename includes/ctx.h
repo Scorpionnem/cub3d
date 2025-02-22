@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 17:31:37 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/22 11:23:39 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_winfo
 	mlx_image_t		*img;
 	mlx_image_t		*fps;
 	bool			fps_toggle;
-	mlx_texture_t	*wall_tx[4];
+	mlx_texture_t	*wall_tx[5];
 	mlx_t			*mlx;
 }	t_winfo;
 
@@ -59,7 +59,7 @@ typedef struct s_ginfo
 	char				**map;
 	int					map_height;
 	int					map_width;
-	char				*wall_tx[4];
+	char				*wall_tx[5];
 	unsigned int		colors[2];
 	struct timeval		start_time;
 }	t_ginfo;

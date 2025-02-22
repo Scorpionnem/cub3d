@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:22 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:40:23 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/22 11:21:31 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static void	init_nulls(t_ctx *ctx)
 	ctx->ginfo.wall_tx[south_tx] = NULL;
 	ctx->ginfo.wall_tx[east_tx] = NULL;
 	ctx->ginfo.wall_tx[west_tx] = NULL;
+	ctx->ginfo.wall_tx[door_tx] = NULL;
 	ctx->winfo.wall_tx[north_tx] = NULL;
 	ctx->winfo.wall_tx[south_tx] = NULL;
 	ctx->winfo.wall_tx[east_tx] = NULL;
 	ctx->winfo.wall_tx[west_tx] = NULL;
+	ctx->winfo.wall_tx[door_tx] = NULL;
 	ctx->winfo.fps = NULL;
 	ctx->ginfo.map_height = 0;
 	ctx->ginfo.map_width = 0;

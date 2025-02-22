@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:30 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 17:32:51 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/22 11:22:31 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ mlx_texture_t	*choose_texture(t_ctx *ctx, t_cube_render *vars)
 	if (vars->face == west)
 		res = ctx->winfo.wall_tx[west_tx];
 	if (ctx->maths.type == closed_door)
-		res = ctx->winfo.wall_tx[west_tx];
+		res = ctx->winfo.wall_tx[door_tx];
 	return (res);
 }
 
