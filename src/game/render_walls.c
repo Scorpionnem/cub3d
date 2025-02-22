@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:30 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/22 11:22:31 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/22 17:25:22 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	draw_cubes(t_ctx *ctx)
 
 	vars.ra = ctx->maths.pa - DR * 30;
 	check_rad(&vars.ra);
-	vars.r = 0;
-	while (vars.r < (int)ctx->winfo.img->width)
+	vars.r = -1;
+	while (++vars.r < (int)ctx->winfo.img->width)
 	{
 		init_horizontal_rays_vars(ctx, &vars);
 		init_horizontal_rays(ctx, &vars);
@@ -98,14 +98,14 @@ void	draw_cubes(t_ctx *ctx)
 		init_vertical_rays(ctx, &vars);
 		cast_vertical_rays(ctx, &vars, SOLID_CHARSET);
 		choose_ray(&vars);
+		ctx->maths.depth[vars.r] = vars.dist;
 		get_wall_type(ctx, &vars);
 		calc_height_offset(ctx, &vars);
 		draw_wall_line(ctx, &vars);
 		pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
 				vars.rx / 4, vars.ry / 4);
-		draw_line(ctx->winfo.img, pts, 0xFF9999FF);
+		// draw_line(ctx->winfo.img, pts, 0xFF9999FF);
 		vars.ra += DR * (60 / (float)ctx->winfo.img->width);
 		check_rad(&vars.ra);
-		vars.r++;
 	}
 }

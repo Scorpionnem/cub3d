@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/22 11:23:39 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/22 16:43:10 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_maths
 	float		pdx;
 	float		pdy;
 	float		pa;
+	float		depth[SCREEN_WIDTH];
 	t_wall_type	type;
 }	t_maths;
 
@@ -77,6 +78,14 @@ typedef struct s_mouse
 	int			old_x;
 }	t_mouse;
 
+typedef struct s_sprite
+{
+	float			x;
+	float			y;
+	float			z;
+	mlx_texture_t	*tex;
+}	t_sprite;
+
 typedef struct s_ctx
 {
 	t_ginfo		ginfo;
@@ -85,6 +94,7 @@ typedef struct s_ctx
 	t_file		file;
 	t_keys		keys;
 	t_mouse		mouse;
+	t_sprite	sprite;
 }	t_ctx;
 
 int		ctx_init(t_ctx *ctx, char *filename);

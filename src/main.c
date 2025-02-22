@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:33 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 16:11:50 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/22 16:48:31 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ int	main(int ac, char **av)
 	if (!ctx_init(&ctx, av[1]))
 		return (1);
 	init_math_vars(&ctx);
+	ctx.sprite.x = 6.5f * 64.f;
+	ctx.sprite.y = 6.5f * 64.f;
+	ctx.sprite.z = -30.f;
+	ctx.sprite.tex = ctx.winfo.wall_tx[door_tx];
 	mlx_loop_hook(ctx.winfo.mlx, render_hook, &ctx);
 	mlx_key_hook(ctx.winfo.mlx, key_hook, &ctx);
 	mlx_mouse_hook(ctx.winfo.mlx, mouse_hook, &ctx);
