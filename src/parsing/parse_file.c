@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:49 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 14:42:56 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:10:46 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ static int	take_map_loop(t_ctx *ctx, int i)
 		|| !ctx->ginfo.all_tx[east_tx] || !ctx->ginfo.all_tx[west_tx]
 		|| !ctx->ginfo.colors[floor_id] || !ctx->ginfo.colors[ceiling_id]
 		|| !ctx->ginfo.all_tx[door_tx] || !ctx->ginfo.all_tx[enemy0_tx]
-		|| !ctx->ginfo.all_tx[enemy1_tx] || !ctx->ginfo.all_tx[enemy2_tx])
+		|| !ctx->ginfo.all_tx[enemy1_tx] || !ctx->ginfo.all_tx[enemy2_tx]
+		|| !ctx->ginfo.all_tx[collec_tx])
 	{
 		free_2d(ctx->ginfo.map);
 		free_tx_path(ctx);

@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:12:27 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 14:11:39 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:34:55 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	init_sprite_vars(t_ctx *ctx, t_sprite *sprite, t_sprite_vars *vars)
 	vars->sy = (vars->sz * (float)ctx->winfo.img->height / vars->sy)
 		+ ((float)ctx->winfo.img->height / 2.f);
 	vars->dist = distance(sprite->x, sprite->y, ctx->maths.px, ctx->maths.py);
-	vars->line_height = (MAP_S * (int)ctx->winfo.img->height) / vars->dist;
-	vars->line_width = (MAP_S * (int)ctx->winfo.img->width) / vars->dist;
+	vars->line_height = (sprite->scale
+			* (int)ctx->winfo.img->height) / vars->dist;
+	vars->line_width = (sprite->scale
+			* (int)ctx->winfo.img->width) / vars->dist;
 	vars->tex = sprite->tex;
 	vars->y_offset = vars->tex->height / vars->line_height;
 	vars->x_offset = vars->tex->width / vars->line_width;

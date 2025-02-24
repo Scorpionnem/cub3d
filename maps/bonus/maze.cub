@@ -2,9 +2,18 @@ NO 	./textures/mbirou.png
 SO ./textures/pboucher.png
 EA ./textures/mbatty.png
 WE ./textures/sky.png
+DO ./textures/door.png
 
+E0 ./textures/freaky.png
+E1 ./textures/freaky.png
+E2 ./textures/freaky.png
+
+
+CO ./textures/collectible.png
 F 255,200,80
 C 0,0,0
+
+
 
 1111111111111111111111111111111111111111
 1S10000000001000000000000101000100000001

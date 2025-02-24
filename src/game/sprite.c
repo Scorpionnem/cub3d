@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:57:38 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 14:49:53 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:43:45 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,43 @@ void	draw_sprite(t_ctx *ctx, t_sprite *sprite)
 	}
 }
 
-int	is_sprite_on_pos(t_ctx *ctx, int x, int y, t_sprite *sprite)
+int	is_collec_on_pos(t_ctx *ctx, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->ginfo.sprites_count)
+	{
+		if ((int)ctx->ginfo.sprites[i].x / 64 == x / 64
+			&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64
+			&& ctx->ginfo.sprites[i].active
+			&& ctx->ginfo.sprites[i].type == collec)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void		collect_collectible(t_ctx *ctx, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->ginfo.sprites_count)
+	{
+		if ((int)ctx->ginfo.sprites[i].x / 64 == (int)x / 64
+			&& (int)ctx->ginfo.sprites[i].y / 64 == (int)y / 64
+			&& ctx->ginfo.sprites[i].type == collec
+			&& ctx->ginfo.sprites[i].active)
+		{
+			ctx->ginfo.sprites[i].active = false;
+			ctx->ginfo.coins++;
+		}
+		i++;
+	}
+}
+
+int	is_enemy_on_pos(t_ctx *ctx, int x, int y, t_sprite *sprite)
 {
 	int	i;
 
@@ -52,15 +88,35 @@ int	is_sprite_on_pos(t_ctx *ctx, int x, int y, t_sprite *sprite)
 		{
 			if ((int)ctx->ginfo.sprites[i].x / 64 == x / 64
 				&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64
-				&& sprite != &ctx->ginfo.sprites[i])
+				&& sprite != &ctx->ginfo.sprites[i]
+				&& ctx->ginfo.sprites[i].active
+				&& ctx->ginfo.sprites[i].type == enemy)
 				return (1);
 		}
 		else if ((int)ctx->ginfo.sprites[i].x / 64 == x / 64
-			&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64)
-			return (0);
+			&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64
+			&& ctx->ginfo.sprites[i].active
+			&& ctx->ginfo.sprites[i].type == enemy)
+			return (1);
 		i++;
 	}
 	return (0);
+}
+
+void	kill_enemy(t_ctx *ctx, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->ginfo.sprites_count)
+	{
+		if ((int)ctx->ginfo.sprites[i].x / 64 == (int)x / 64
+			&& (int)ctx->ginfo.sprites[i].y / 64 == (int)y / 64
+			&& ctx->ginfo.sprites[i].type == enemy
+			&& ctx->ginfo.sprites[i].active)
+			ctx->ginfo.sprites[i].active = false;
+		i++;
+	}
 }
 
 void	move_enemies(t_ctx *ctx, t_sprite *sprite)
@@ -68,25 +124,25 @@ void	move_enemies(t_ctx *ctx, t_sprite *sprite)
 	if (sprite->x < ctx->maths.px && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)sprite->y / 64]
 			[(int)(sprite->x + 2.1f) / 64])
-			&& !is_sprite_on_pos(ctx, (int)sprite->x + 2.1f,
+			&& !is_enemy_on_pos(ctx, (int)sprite->x + 2.1f,
 			(int)sprite->y, sprite))
 		sprite->x += 2.1f;
 	if (sprite->y < ctx->maths.py && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)(sprite->y + 2.1f) / 64]
 		[(int)(sprite->x) / 64])
-		&& !is_sprite_on_pos(ctx, (int)sprite->x,
+		&& !is_enemy_on_pos(ctx, (int)sprite->x,
 		(int)sprite->y + 2.1f, sprite))
 		sprite->y += 2.1f;
 	if (sprite->x > ctx->maths.px && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)sprite->y / 64]
 			[(int)(sprite->x - 2.1f) / 64])
-			&& !is_sprite_on_pos(ctx, (int)sprite->x - 2.1f,
+			&& !is_enemy_on_pos(ctx, (int)sprite->x - 2.1f,
 			(int)sprite->y, sprite))
 		sprite->x -= 2.1f;
 	if (sprite->y > ctx->maths.py && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)(sprite->y - 2.1f) / 64]
 		[(int)(sprite->x) / 64])
-		&& !is_sprite_on_pos(ctx, (int)sprite->x,
+		&& !is_enemy_on_pos(ctx, (int)sprite->x,
 		(int)sprite->y - 2.1f, sprite))
 		sprite->y -= 2.1f;
 }
@@ -100,16 +156,22 @@ static void	swap_sprites(t_sprite *a, t_sprite *b)
 	temp.z = a->z;
 	temp.type = a->type;
 	temp.tex = a->tex;
+	temp.active = a->active;
+	temp.scale = a->scale;
 	a->x = b->x;
 	a->y = b->y;
 	a->z = b->z;
 	a->type = b->type;
 	a->tex = b->tex;
+	a->active = b->active;
+	a->scale = b->scale;
 	b->x = temp.x;
 	b->y = temp.y;
 	b->z = temp.z;
 	b->type = temp.type;
 	b->tex = temp.tex;
+	b->active = temp.active;
+	b->scale = temp.scale;
 }
 
 void	sort_sprites(t_ctx *ctx)

@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:23 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 11:55:29 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:40:21 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,10 @@ void		draw_sprite(t_ctx *ctx, t_sprite *sprite);
 void		move_enemies(t_ctx *ctx, t_sprite *sprite);
 void		init_sprite_vars(t_ctx *ctx, t_sprite *sprite, t_sprite_vars *vars);
 void		draw_y(t_ctx *ctx, t_sprite_vars *vars, int x);
-int			is_sprite_on_pos(t_ctx *ctx, int x, int y, t_sprite *sprite);
+int			is_enemy_on_pos(t_ctx *ctx, int x, int y, t_sprite *sprite);
+int			is_collec_on_pos(t_ctx *ctx, int x, int y);
+void		kill_enemy(t_ctx *ctx, int x, int y);
+void		collect_collectible(t_ctx *ctx, int x, int y);
 
 void		sort_sprites(t_ctx *ctx);
 
@@ -138,6 +141,11 @@ void		init_horizontal_rays(t_ctx *ctx, t_cube_render *vars);
 
 void		cast_vertical_rays(t_ctx *ctx, t_cube_render *vars, char *charset);
 void		cast_horizontal_rays(t_ctx *ctx,
+				t_cube_render *vars, char *charset);
+
+void		cast_horizontal_enemy(t_ctx *ctx,
+				t_cube_render *vars, char *charset);
+void		cast_vertical_enemy(t_ctx *ctx,
 				t_cube_render *vars, char *charset);
 
 void		calc_height_offset(t_ctx *ctx, t_cube_render *vars);
