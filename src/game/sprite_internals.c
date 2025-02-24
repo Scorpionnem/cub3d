@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:12:27 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 10:20:00 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:20:23 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	draw_y(t_ctx *ctx, t_sprite_vars *vars, int x)
 			break ;
 		if ((((int)vars->t_x) + (((int)vars->t_y) * vars->tex->width))
 			* 4 < vars->tex->width * vars->tex->height * 4)
-			vars->color = uint8_to_uint32(&vars->tex->pixels
+			vars->color = adv_uint8_to_uint32(&vars->tex->pixels
 				[(((int)vars->t_x) + (((int)vars->t_y)
 							* vars->tex->width)) * 4]);
-		if (vars->color != 0x000000FF)
+		if (vars->color != 0x00000000)
 			safe_put_pixel(ctx->winfo.img, vars->sx + x,
 				vars->sy + y, vars->color);
 		vars->t_y += vars->y_offset;

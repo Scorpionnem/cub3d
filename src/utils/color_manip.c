@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:03 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:40:04 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:19:20 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 uint32_t	uint8_to_uint32(uint8_t *pixels)
 {
 	return ((pixels[0] << 24) | (pixels[1] << 16) | (pixels[2] << 8) | 255);
+}
+
+uint32_t	adv_uint8_to_uint32(uint8_t *pixels)
+{
+	return ((pixels[0] << 24) | (pixels[1] << 16)
+		| (pixels[2] << 8) | pixels[3]);
 }
 
 uint32_t	inverted_uint8_to_uint32(uint8_t *pixels)

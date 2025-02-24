@@ -4,7 +4,7 @@ EA ./textures/east.png
 WE ./textures/west.png
 
 DO ./textures/door.png
-EN ./textures/freaky.png
+EN ./textures/obama.png
 
 F 255,200,80
 C 0,0,0
