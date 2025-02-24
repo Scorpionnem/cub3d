@@ -3,6 +3,7 @@ SO ./textures/south.png
 EA ./textures/east.png
 WE ./textures/west.png
 DO ./textures/door.png
+EN ./textures/obama.png
 
 C 190,190,190
 F 100,100,100

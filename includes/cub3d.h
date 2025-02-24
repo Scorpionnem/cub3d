@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:49 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 10:38:15 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:47:47 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define SCREEN_WIDTH 1050
 # define SCREEN_HEIGHT 800
 
-# define RENDER_DISTANCE 128
+# define RENDER_DISTANCE 1024
 
 # include <math.h>
 # include <fcntl.h>

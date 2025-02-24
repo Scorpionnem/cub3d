@@ -1,10 +1,10 @@
-NO 	./textures/north.png
-SO ./textures/south.png
-EA ./textures/east.png
-WE ./textures/west.png
+NO 	./textures/stone.png
+SO ./textures/cobblestone.png
+EA ./textures/stone_bricks.png
+WE ./textures/mossy_bricks.png
 
 DO ./textures/door.png
-EN ./textures/obama.png
+EN ./textures/freaky.png
 
 F 255,200,80
 C 0,0,0
