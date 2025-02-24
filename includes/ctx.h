@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 13:18:51 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:43:43 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_winfo
 	mlx_image_t		*img;
 	mlx_image_t		*fps;
 	bool			fps_toggle;
-	mlx_texture_t	*all_tx[6];
+	mlx_texture_t	*all_tx[8];
 	mlx_t			*mlx;
 }	t_winfo;
 
@@ -75,11 +75,12 @@ typedef struct s_ginfo
 	char				**map;
 	int					map_height;
 	int					map_width;
-	char				*all_tx[6];
+	char				*all_tx[8];
 	unsigned int		colors[2];
 	struct timeval		start_time;
 	t_sprite			*sprites;
 	int					sprites_count;
+	int					enemy_frame;
 }	t_ginfo;
 
 typedef struct s_file

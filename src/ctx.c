@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:22 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 13:18:55 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:44:34 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,14 @@ static void	init_nulls2(t_ctx *ctx)
 	ctx->winfo.fps_toggle = false;
 	ctx->winfo.mlx = NULL;
 	ctx->winfo.img = NULL;
-	ctx->winfo.all_tx[enemy_tx] = NULL;
-	ctx->ginfo.all_tx[enemy_tx] = NULL;
+	ctx->winfo.all_tx[enemy0_tx] = NULL;
+	ctx->ginfo.all_tx[enemy0_tx] = NULL;
+	ctx->winfo.all_tx[enemy1_tx] = NULL;
+	ctx->ginfo.all_tx[enemy1_tx] = NULL;
+	ctx->winfo.all_tx[enemy2_tx] = NULL;
+	ctx->ginfo.all_tx[enemy2_tx] = NULL;
 	ctx->running = true;
+	ctx->ginfo.enemy_frame = enemy0_tx;
 }
 
 static void	init_nulls(t_ctx *ctx)

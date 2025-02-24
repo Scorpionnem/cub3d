@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:57:38 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 12:04:15 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:49:53 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,28 @@ void	move_enemies(t_ctx *ctx, t_sprite *sprite)
 {
 	if (sprite->x < ctx->maths.px && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)sprite->y / 64]
-			[(int)(sprite->x + 2.f) / 64])
-			&& !is_sprite_on_pos(ctx, (int)sprite->x + 2.f,
+			[(int)(sprite->x + 2.1f) / 64])
+			&& !is_sprite_on_pos(ctx, (int)sprite->x + 2.1f,
 			(int)sprite->y, sprite))
-		sprite->x += 2;
+		sprite->x += 2.1f;
 	if (sprite->y < ctx->maths.py && ft_strchr(PERM_CHARSET,
-			ctx->ginfo.map[(int)(sprite->y + 2.f) / 64]
+			ctx->ginfo.map[(int)(sprite->y + 2.1f) / 64]
 		[(int)(sprite->x) / 64])
-		&& !is_sprite_on_pos(ctx, (int)sprite->x, (int)sprite->y + 2.f, sprite))
-		sprite->y += 2;
+		&& !is_sprite_on_pos(ctx, (int)sprite->x,
+		(int)sprite->y + 2.1f, sprite))
+		sprite->y += 2.1f;
 	if (sprite->x > ctx->maths.px && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)sprite->y / 64]
-			[(int)(sprite->x - 2.f) / 64])
-			&& !is_sprite_on_pos(ctx, (int)sprite->x - 2.f,
+			[(int)(sprite->x - 2.1f) / 64])
+			&& !is_sprite_on_pos(ctx, (int)sprite->x - 2.1f,
 			(int)sprite->y, sprite))
-		sprite->x -= 2;
+		sprite->x -= 2.1f;
 	if (sprite->y > ctx->maths.py && ft_strchr(PERM_CHARSET,
-			ctx->ginfo.map[(int)(sprite->y - 2.f) / 64]
+			ctx->ginfo.map[(int)(sprite->y - 2.1f) / 64]
 		[(int)(sprite->x) / 64])
-		&& !is_sprite_on_pos(ctx, (int)sprite->x, (int)sprite->y - 2.f, sprite))
-		sprite->y -= 2;
+		&& !is_sprite_on_pos(ctx, (int)sprite->x,
+		(int)sprite->y - 2.1f, sprite))
+		sprite->y -= 2.1f;
 }
 
 static void	swap_sprites(t_sprite *a, t_sprite *b)

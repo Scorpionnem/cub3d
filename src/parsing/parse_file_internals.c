@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:42 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 11:23:39 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:42:14 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,12 @@ t_id	get_line_identifier(char *str)
 		return (east_tx);
 	if (!ft_strncmp(str, "DO", 2))
 		return (door_tx);
-	if (!ft_strncmp(str, "EN", 2))
-		return (enemy_tx);
+	if (!ft_strncmp(str, "E0", 2))
+		return (enemy0_tx);
+	if (!ft_strncmp(str, "E1", 2))
+		return (enemy1_tx);
+	if (!ft_strncmp(str, "E2", 2))
+		return (enemy2_tx);
 	if (!ft_strncmp(str, "F", 1))
 		return (floor_color);
 	if (!ft_strncmp(str, "C", 1))

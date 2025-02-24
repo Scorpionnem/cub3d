@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:37 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 13:41:16 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:24:44 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,26 @@ void	draw_crosshair(t_ctx *ctx, int x, int y, int size)
 	}
 }
 
-static void	handle_sprites(t_ctx *ctx)
+static void	handle_sprites(t_ctx *ctx, int frame)
 {
 	int	i;
 
 	i = 0;
+	if (frame % 2)
+	{
+		ctx->ginfo.enemy_frame++;
+		if (ctx->ginfo.enemy_frame == enemy2_tx + 1)
+			ctx->ginfo.enemy_frame = enemy0_tx;
+	}
 	sort_sprites(ctx);
 	while (i < ctx->ginfo.sprites_count)
 	{
 		if (ctx->ginfo.sprites[i].type == enemy)
+		{
+			ctx->ginfo.sprites[i].tex
+				= ctx->winfo.all_tx[ctx->ginfo.enemy_frame];
 			move_enemies(ctx, &ctx->ginfo.sprites[i]);
+		}
 		draw_sprite(ctx, &ctx->ginfo.sprites[i]);
 		i++;
 	}
@@ -66,13 +76,15 @@ static void	handle_sprites(t_ctx *ctx)
 
 void	render_frame(t_ctx *ctx)
 {
+	static int	frame = 0;
 	if (!ctx->running)
 		return ;
+	frame++;
 	gettimeofday(&ctx->ginfo.start_time, NULL);
 	draw_sky(ctx);
 	draw_cubes(ctx);
 	// draw_minimap(ctx);
-	handle_sprites(ctx);
+	handle_sprites(ctx, frame);
 	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 2,
 		ctx->winfo.img->height / 2 - 2, 4);
 	draw_fps(ctx);
