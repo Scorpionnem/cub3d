@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:37 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 13:23:09 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 13:41:16 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	handle_sprites(t_ctx *ctx)
 void	render_frame(t_ctx *ctx)
 {
 	if (!ctx->running)
-		return (draw_minimap(ctx));
+		return ;
 	gettimeofday(&ctx->ginfo.start_time, NULL);
 	draw_sky(ctx);
 	draw_cubes(ctx);
