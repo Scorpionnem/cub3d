@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:37 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 15:24:44 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:26:12 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	handle_sprites(t_ctx *ctx, int frame)
 void	render_frame(t_ctx *ctx)
 {
 	static int	frame = 0;
+
 	if (!ctx->running)
 		return ;
 	frame++;

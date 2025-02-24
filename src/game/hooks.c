@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:16 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 13:18:40 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:26:22 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	mouse_hook(enum mouse_key button, enum action action,
 	enum modifier_key mod, void *ctx_ptr)
 {
 	t_ctx	*ctx;
-	
+
 	(void)mod;
 	ctx = ctx_ptr;
 	if (ctx->running
