@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:16 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 16:30:50 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 13:18:40 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ static void	check_special_keys(t_ctx *ctx)
 void	mouse_hook(enum mouse_key button, enum action action,
 	enum modifier_key mod, void *ctx_ptr)
 {
+	t_ctx	*ctx;
+	
 	(void)mod;
-	(void)ctx_ptr;
-	if (button == MLX_MOUSE_BUTTON_RIGHT && action == MLX_PRESS)
+	ctx = ctx_ptr;
+	if (ctx->running
+		&& button == MLX_MOUSE_BUTTON_RIGHT && action == MLX_PRESS)
 		cast_door_ray(ctx_ptr);
 }
 

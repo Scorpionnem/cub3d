@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 11:40:22 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 13:18:51 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_ctx
 	t_file		file;
 	t_keys		keys;
 	t_mouse		mouse;
+	bool		running;
 }	t_ctx;
 
 int		ctx_init(t_ctx *ctx, char *filename);

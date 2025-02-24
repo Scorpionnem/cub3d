@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:37 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 11:58:39 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 13:23:09 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,6 @@ void	draw_player(t_ctx *ctx)
 			(ctx->maths.px + ctx->maths.pdx * 8) / 4,
 			(ctx->maths.py + ctx->maths.pdy * 8) / 4);
 	draw_line(ctx->winfo.img, pts, 0x00FF00FF);
-}
-
-void	draw_minimap(t_ctx *ctx)
-{
-	int			x;
-	int			y;
-	t_rsquare	square_vars;
-
-	x = -1;
-	while (++x < ctx->ginfo.map_width - 1)
-	{
-		y = 0;
-		while (y < ctx->ginfo.map_height)
-		{
-			if (ctx->ginfo.map[y][x] == '1')
-			{
-				square_vars = init_rsquare_vars((y * MAP_S) / 4,
-						(x * MAP_S) / 4, 16);
-				render_square(ctx, square_vars, 0xFF0000FF);
-			}
-			y++;
-		}
-	}
-	draw_player(ctx);
 }
 
 void	draw_crosshair(t_ctx *ctx, int x, int y, int size)
@@ -90,6 +66,8 @@ static void	handle_sprites(t_ctx *ctx)
 
 void	render_frame(t_ctx *ctx)
 {
+	if (!ctx->running)
+		return (draw_minimap(ctx));
 	gettimeofday(&ctx->ginfo.start_time, NULL);
 	draw_sky(ctx);
 	draw_cubes(ctx);

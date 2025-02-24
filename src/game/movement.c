@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:38:23 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 17:27:22 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 13:22:11 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ static void	press_secondary_keys(mlx_key_data_t keydata, t_ctx *ctx)
 		if (!ctx->winfo.fps_toggle)
 			if (ctx->winfo.fps)
 				mlx_delete_image(ctx->winfo.mlx, ctx->winfo.fps);
+	}
+	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
+	{
+		ctx->running = !ctx->running;
+		if (ctx->running)
+			mlx_set_mouse_pos(ctx->winfo.mlx,
+				ctx->winfo.img->width / 2, ctx->winfo.img->height / 2);
 	}
 }
 
@@ -111,6 +118,8 @@ static void	move_player_w_s(t_ctx *ctx)
 
 void	move_player(t_ctx *ctx)
 {
+	if (!ctx->running)
+		return ;
 	move_player_mouse(ctx);
 	if (ctx->keys.left)
 	{
