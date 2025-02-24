@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:38:46 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:39:05 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 10:15:44 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,14 @@ void	check_rad(float *angle)
 		(*angle) += 2 * PI;
 	if (*angle > 2 * PI)
 		(*angle) -= 2 * PI;
+}
+
+bool	is_angle_in_range(int angle, int left, int right)
+{
+	left %= 360;
+	right %= 360;
+	angle %= 360;
+	if (left > right)
+		return (angle >= left || angle <= right);
+	return (angle > left && angle < right);
 }
