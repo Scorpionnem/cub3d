@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:23 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 10:18:47 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 11:55:29 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ void		draw_sprite(t_ctx *ctx, t_sprite *sprite);
 void		move_enemies(t_ctx *ctx, t_sprite *sprite);
 void		init_sprite_vars(t_ctx *ctx, t_sprite *sprite, t_sprite_vars *vars);
 void		draw_y(t_ctx *ctx, t_sprite_vars *vars, int x);
+int			is_sprite_on_pos(t_ctx *ctx, int x, int y, t_sprite *sprite);
+
+void		sort_sprites(t_ctx *ctx);
 
 void		draw_sky(t_ctx *ctx);
 void		draw_cubes(t_ctx *ctx);

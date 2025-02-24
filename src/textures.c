@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:38 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/22 11:22:24 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 11:22:01 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,55 @@
 
 void	free_tx_path(t_ctx *ctx)
 {
-	if (ctx->ginfo.wall_tx[north_tx])
-		free(ctx->ginfo.wall_tx[north_tx]);
-	if (ctx->ginfo.wall_tx[south_tx])
-		free(ctx->ginfo.wall_tx[south_tx]);
-	if (ctx->ginfo.wall_tx[east_tx])
-		free(ctx->ginfo.wall_tx[east_tx]);
-	if (ctx->ginfo.wall_tx[west_tx])
-		free(ctx->ginfo.wall_tx[west_tx]);
-	if (ctx->ginfo.wall_tx[door_tx])
-		free(ctx->ginfo.wall_tx[door_tx]);
+	if (ctx->ginfo.all_tx[north_tx])
+		free(ctx->ginfo.all_tx[north_tx]);
+	if (ctx->ginfo.all_tx[south_tx])
+		free(ctx->ginfo.all_tx[south_tx]);
+	if (ctx->ginfo.all_tx[east_tx])
+		free(ctx->ginfo.all_tx[east_tx]);
+	if (ctx->ginfo.all_tx[west_tx])
+		free(ctx->ginfo.all_tx[west_tx]);
+	if (ctx->ginfo.all_tx[door_tx])
+		free(ctx->ginfo.all_tx[door_tx]);
+	if (ctx->ginfo.all_tx[enemy_tx])
+		free(ctx->ginfo.all_tx[enemy_tx]);
 }
 
 void	free_textures(t_ctx	*ctx)
 {
-	if (ctx->winfo.wall_tx[north_tx])
-		mlx_delete_texture(ctx->winfo.wall_tx[north_tx]);
-	if (ctx->winfo.wall_tx[south_tx])
-		mlx_delete_texture(ctx->winfo.wall_tx[south_tx]);
-	if (ctx->winfo.wall_tx[east_tx])
-		mlx_delete_texture(ctx->winfo.wall_tx[east_tx]);
-	if (ctx->winfo.wall_tx[west_tx])
-		mlx_delete_texture(ctx->winfo.wall_tx[west_tx]);
-	if (ctx->winfo.wall_tx[door_tx])
-		mlx_delete_texture(ctx->winfo.wall_tx[door_tx]);
+	if (ctx->winfo.all_tx[north_tx])
+		mlx_delete_texture(ctx->winfo.all_tx[north_tx]);
+	if (ctx->winfo.all_tx[south_tx])
+		mlx_delete_texture(ctx->winfo.all_tx[south_tx]);
+	if (ctx->winfo.all_tx[east_tx])
+		mlx_delete_texture(ctx->winfo.all_tx[east_tx]);
+	if (ctx->winfo.all_tx[west_tx])
+		mlx_delete_texture(ctx->winfo.all_tx[west_tx]);
+	if (ctx->winfo.all_tx[door_tx])
+		mlx_delete_texture(ctx->winfo.all_tx[door_tx]);
+	if (ctx->winfo.all_tx[enemy_tx])
+		mlx_delete_texture(ctx->winfo.all_tx[enemy_tx]);
 }
 
 int	open_textures(t_ctx *ctx)
 {
-	ctx->winfo.wall_tx[north_tx] = mlx_load_png(ctx->ginfo.wall_tx[north_tx]);
-	if (!ctx->winfo.wall_tx[north_tx])
+	ctx->winfo.all_tx[north_tx] = mlx_load_png(ctx->ginfo.all_tx[north_tx]);
+	if (!ctx->winfo.all_tx[north_tx])
 		return (!!print_error(TEXTURE_LOAD_FAIL));
-	ctx->winfo.wall_tx[south_tx] = mlx_load_png(ctx->ginfo.wall_tx[south_tx]);
-	if (!ctx->winfo.wall_tx[south_tx])
+	ctx->winfo.all_tx[south_tx] = mlx_load_png(ctx->ginfo.all_tx[south_tx]);
+	if (!ctx->winfo.all_tx[south_tx])
 		return (!!print_error(TEXTURE_LOAD_FAIL));
-	ctx->winfo.wall_tx[east_tx] = mlx_load_png(ctx->ginfo.wall_tx[east_tx]);
-	if (!ctx->winfo.wall_tx[east_tx])
+	ctx->winfo.all_tx[east_tx] = mlx_load_png(ctx->ginfo.all_tx[east_tx]);
+	if (!ctx->winfo.all_tx[east_tx])
 		return (!!print_error(TEXTURE_LOAD_FAIL));
-	ctx->winfo.wall_tx[west_tx] = mlx_load_png(ctx->ginfo.wall_tx[west_tx]);
-	if (!ctx->winfo.wall_tx[west_tx])
+	ctx->winfo.all_tx[west_tx] = mlx_load_png(ctx->ginfo.all_tx[west_tx]);
+	if (!ctx->winfo.all_tx[west_tx])
 		return (!!print_error(TEXTURE_LOAD_FAIL));
-	ctx->winfo.wall_tx[door_tx] = mlx_load_png(ctx->ginfo.wall_tx[door_tx]);
-	if (!ctx->winfo.wall_tx[door_tx])
+	ctx->winfo.all_tx[door_tx] = mlx_load_png(ctx->ginfo.all_tx[door_tx]);
+	if (!ctx->winfo.all_tx[door_tx])
 		return (!!print_error(TEXTURE_LOAD_FAIL));
-	return (1);
+	ctx->winfo.all_tx[enemy_tx] = mlx_load_png(ctx->ginfo.all_tx[enemy_tx]);
+	if (!ctx->winfo.all_tx[enemy_tx])
+		return (!!print_error(TEXTURE_LOAD_FAIL));
+	return (parse_sprites(ctx));
 }

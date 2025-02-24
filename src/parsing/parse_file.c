@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:49 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/22 11:23:08 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 11:18:49 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ static int	count_map_height(t_ctx *ctx)
 
 static int	choose_method(t_ctx *ctx, char *line, t_id id, int step)
 {
-	if ((id >= north_tx && id <= door_tx) && step == 1)
+	if ((id >= north_tx && id <= enemy_tx) && step == 1)
 		return (!!print_error(INVALID_FILE_FORMAT));
-	else if (id >= north_tx && id <= door_tx)
+	else if (id >= north_tx && id <= enemy_tx)
 		return (get_tx_path(ctx, line, id));
 	if ((id == floor_color || id == ceiling_color) && step == 1)
 		return (!!print_error(INVALID_FILE_FORMAT));
@@ -90,10 +90,10 @@ static int	take_map_loop(t_ctx *ctx, int i)
 	t_id	id;
 
 	id = other;
-	if (!ctx->ginfo.wall_tx[north_tx] || !ctx->ginfo.wall_tx[south_tx]
-		|| !ctx->ginfo.wall_tx[east_tx] || !ctx->ginfo.wall_tx[west_tx]
+	if (!ctx->ginfo.all_tx[north_tx] || !ctx->ginfo.all_tx[south_tx]
+		|| !ctx->ginfo.all_tx[east_tx] || !ctx->ginfo.all_tx[west_tx]
 		|| !ctx->ginfo.colors[floor_id] || !ctx->ginfo.colors[ceiling_id]
-		|| !ctx->ginfo.wall_tx[door_tx])
+		|| !ctx->ginfo.all_tx[door_tx] || !ctx->ginfo.all_tx[enemy_tx])
 	{
 		free_2d(ctx->ginfo.map);
 		free_tx_path(ctx);

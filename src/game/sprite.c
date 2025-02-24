@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:57:38 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 10:22:32 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 12:04:15 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,91 @@ void	draw_sprite(t_ctx *ctx, t_sprite *sprite)
 	}
 }
 
+int	is_sprite_on_pos(t_ctx *ctx, int x, int y, t_sprite *sprite)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->ginfo.sprites_count)
+	{
+		if (sprite)
+		{
+			if ((int)ctx->ginfo.sprites[i].x / 64 == x / 64
+				&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64
+				&& sprite != &ctx->ginfo.sprites[i])
+				return (1);
+		}
+		else if ((int)ctx->ginfo.sprites[i].x / 64 == x / 64
+			&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64)
+			return (0);
+		i++;
+	}
+	return (0);
+}
+
 void	move_enemies(t_ctx *ctx, t_sprite *sprite)
 {
 	if (sprite->x < ctx->maths.px && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)sprite->y / 64]
-			[(int)(sprite->x + 2.f) / 64]))
+			[(int)(sprite->x + 2.f) / 64])
+			&& !is_sprite_on_pos(ctx, (int)sprite->x + 2.f,
+			(int)sprite->y, sprite))
 		sprite->x += 2;
 	if (sprite->y < ctx->maths.py && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)(sprite->y + 2.f) / 64]
-		[(int)(sprite->x) / 64]))
+		[(int)(sprite->x) / 64])
+		&& !is_sprite_on_pos(ctx, (int)sprite->x, (int)sprite->y + 2.f, sprite))
 		sprite->y += 2;
 	if (sprite->x > ctx->maths.px && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)sprite->y / 64]
-			[(int)(sprite->x - 2.f) / 64]))
+			[(int)(sprite->x - 2.f) / 64])
+			&& !is_sprite_on_pos(ctx, (int)sprite->x - 2.f,
+			(int)sprite->y, sprite))
 		sprite->x -= 2;
 	if (sprite->y > ctx->maths.py && ft_strchr(PERM_CHARSET,
 			ctx->ginfo.map[(int)(sprite->y - 2.f) / 64]
-		[(int)(sprite->x) / 64]))
+		[(int)(sprite->x) / 64])
+		&& !is_sprite_on_pos(ctx, (int)sprite->x, (int)sprite->y - 2.f, sprite))
 		sprite->y -= 2;
+}
+
+static void	swap_sprites(t_sprite *a, t_sprite *b)
+{
+	t_sprite	temp;
+
+	temp.x = a->x;
+	temp.y = a->y;
+	temp.z = a->z;
+	temp.type = a->type;
+	temp.tex = a->tex;
+	a->x = b->x;
+	a->y = b->y;
+	a->z = b->z;
+	a->type = b->type;
+	a->tex = b->tex;
+	b->x = temp.x;
+	b->y = temp.y;
+	b->z = temp.z;
+	b->type = temp.type;
+	b->tex = temp.tex;
+}
+
+void	sort_sprites(t_ctx *ctx)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->ginfo.sprites_count)
+	{
+		if (ctx->ginfo.sprites[i + 1].type != empty
+			&& distance(ctx->ginfo.sprites[i].x,
+				ctx->ginfo.sprites[i].y, ctx->maths.px, ctx->maths.py)
+			< distance(ctx->ginfo.sprites[i + 1].x,
+				ctx->ginfo.sprites[i + 1].y, ctx->maths.px, ctx->maths.py))
+		{
+			swap_sprites(&ctx->ginfo.sprites[i], &ctx->ginfo.sprites[i + 1]);
+			i = 0;
+		}
+		i++;
+	}
 }

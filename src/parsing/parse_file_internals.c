@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:42 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/22 11:22:46 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/24 11:23:39 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_id	get_line_identifier(char *str)
 		return (east_tx);
 	if (!ft_strncmp(str, "DO", 2))
 		return (door_tx);
+	if (!ft_strncmp(str, "EN", 2))
+		return (enemy_tx);
 	if (!ft_strncmp(str, "F", 1))
 		return (floor_color);
 	if (!ft_strncmp(str, "C", 1))
@@ -68,12 +70,12 @@ int	get_tx_path(t_ctx *ctx, char *line, t_id id)
 	int	i;
 
 	i = 2;
-	if (ctx->ginfo.wall_tx[id])
+	if (ctx->ginfo.all_tx[id])
 		return (!!print_error(DUPLICATE_TOKEN));
 	while (line[i] && is_whitespace(line[i]))
 		i++;
-	ctx->ginfo.wall_tx[id] = ft_substr(line, i, ft_strlen(line) - i - 1);
-	if (!ctx->ginfo.wall_tx[id])
+	ctx->ginfo.all_tx[id] = ft_substr(line, i, ft_strlen(line) - i - 1);
+	if (!ctx->ginfo.all_tx[id])
 		return (!!print_error(ALLOC_ERROR));
 	return (1);
 }

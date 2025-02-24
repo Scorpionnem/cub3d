@@ -1,47 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_file.h                                       :+:      :+:    :+:   */
+/*   parse_sprites.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 15:41:09 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 11:17:17 by mbatty           ###   ########.fr       */
+/*   Created: 2025/02/24 10:34:24 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/24 10:38:32 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_FILE_H
-# define PARSE_FILE_H
+#ifndef PARSE_SPRITES_H
+# define PARSE_SPRITES_H
 
 # include "cub3d.h"
 
-typedef enum e_id
-{
-	north_tx,
-	south_tx,
-	west_tx,
-	east_tx,
-	door_tx,
-	enemy_tx,
-	floor_color,
-	ceiling_color,
-	new_line,
-	other
-}	t_id;
-
-typedef enum e_color_id
-{
-	floor_id,
-	ceiling_id
-}	t_color_id;
-
-typedef struct e_rgb
-{
-	int	red;
-	int	green;
-	int	blue;
-}	t_rgb;
-
-int	parse_file(t_ctx *ctx);
+int	parse_sprites(t_ctx *ctx);
 
 #endif
