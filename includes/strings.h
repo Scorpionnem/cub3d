@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:29 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 16:18:57 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:19:48 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@
 
 # define SPRITE_ENEMY	'X'
 # define SPRITE_COLLEC	'D'
+
+# define PLAYER_NORTH	'N'
+# define PLAYER_SOUTH	'S'
+# define PLAYER_EAST	'E'
+# define PLAYER_WEST	'W'
 
 //Permeable (not solid)
 # define PERM_CHARSET			"0O"
