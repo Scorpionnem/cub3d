@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:38:58 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 16:31:23 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:55:34 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,11 @@ void	cast_horizontal_rays(t_ctx *ctx, t_cube_render *vars, char *charset)
 
 void	cast_horizontal_enemy(t_ctx *ctx, t_cube_render *vars, char *charset)
 {
-	(void)charset;
 	while (vars->dof < RENDER_DISTANCE)
 	{
 		vars->mx = (int)(vars->rx) / 64;
 		vars->my = (int)(vars->ry) / 64;
-		if (vars->my >= 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_width
-			&& vars->my < ctx->ginfo.map_height
-			&& is_enemy_on_pos(ctx, (int)vars->rx, (int)vars->ry, NULL))
+		if (is_enemy_on_pos(ctx, (int)vars->rx, (int)vars->ry, NULL))
 		{
 			vars->hx = vars->rx;
 			vars->hy = vars->ry;
@@ -89,6 +86,10 @@ void	cast_horizontal_enemy(t_ctx *ctx, t_cube_render *vars, char *charset)
 					ctx->maths.py, vars->hx, vars->hy);
 			vars->dof = RENDER_DISTANCE;
 		}
+		if (vars->my >= 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_width
+			&& vars->my < ctx->ginfo.map_height
+			&& ft_strchr(charset, ctx->ginfo.map[vars->my][vars->mx]))
+			vars->dof = RENDER_DISTANCE;
 		else
 		{
 			vars->rx += vars->xo;

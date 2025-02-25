@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:57:38 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 16:43:45 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:22:03 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,84 +38,6 @@ void	draw_sprite(t_ctx *ctx, t_sprite *sprite)
 		else
 			vars.t_x += vars.x_offset;
 		vars.x++;
-	}
-}
-
-int	is_collec_on_pos(t_ctx *ctx, int x, int y)
-{
-	int	i;
-
-	i = 0;
-	while (i < ctx->ginfo.sprites_count)
-	{
-		if ((int)ctx->ginfo.sprites[i].x / 64 == x / 64
-			&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64
-			&& ctx->ginfo.sprites[i].active
-			&& ctx->ginfo.sprites[i].type == collec)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void		collect_collectible(t_ctx *ctx, int x, int y)
-{
-	int	i;
-
-	i = 0;
-	while (i < ctx->ginfo.sprites_count)
-	{
-		if ((int)ctx->ginfo.sprites[i].x / 64 == (int)x / 64
-			&& (int)ctx->ginfo.sprites[i].y / 64 == (int)y / 64
-			&& ctx->ginfo.sprites[i].type == collec
-			&& ctx->ginfo.sprites[i].active)
-		{
-			ctx->ginfo.sprites[i].active = false;
-			ctx->ginfo.coins++;
-		}
-		i++;
-	}
-}
-
-int	is_enemy_on_pos(t_ctx *ctx, int x, int y, t_sprite *sprite)
-{
-	int	i;
-
-	i = 0;
-	while (i < ctx->ginfo.sprites_count)
-	{
-		if (sprite)
-		{
-			if ((int)ctx->ginfo.sprites[i].x / 64 == x / 64
-				&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64
-				&& sprite != &ctx->ginfo.sprites[i]
-				&& ctx->ginfo.sprites[i].active
-				&& ctx->ginfo.sprites[i].type == enemy)
-				return (1);
-		}
-		else if ((int)ctx->ginfo.sprites[i].x / 64 == x / 64
-			&& (int)ctx->ginfo.sprites[i].y / 64 == y / 64
-			&& ctx->ginfo.sprites[i].active
-			&& ctx->ginfo.sprites[i].type == enemy)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	kill_enemy(t_ctx *ctx, int x, int y)
-{
-	int	i;
-
-	i = 0;
-	while (i < ctx->ginfo.sprites_count)
-	{
-		if ((int)ctx->ginfo.sprites[i].x / 64 == (int)x / 64
-			&& (int)ctx->ginfo.sprites[i].y / 64 == (int)y / 64
-			&& ctx->ginfo.sprites[i].type == enemy
-			&& ctx->ginfo.sprites[i].active)
-			ctx->ginfo.sprites[i].active = false;
-		i++;
 	}
 }
 
