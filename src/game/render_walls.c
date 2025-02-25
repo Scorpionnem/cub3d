@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:30 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 12:19:43 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:27:39 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	draw_cubes(t_ctx *ctx)
 		draw_wall_line(ctx, &vars);
 		pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
 				vars.rx / 4, vars.ry / 4);
-		// draw_line(ctx->winfo.img, pts, 0xFF9999FF);
 		vars.ra += DR * (60 / (float)ctx->winfo.img->width);
 		check_rad(&vars.ra);
 	}

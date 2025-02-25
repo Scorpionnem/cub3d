@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:09 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 16:07:33 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:25:22 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ typedef struct e_rgb
 }	t_rgb;
 
 int	parse_file(t_ctx *ctx);
+int	is_all_loaded(t_ctx *ctx);
 
 #endif

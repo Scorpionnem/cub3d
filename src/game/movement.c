@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:38:23 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 16:42:04 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:15:22 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,5 @@ void	move_player(t_ctx *ctx)
 	}
 	move_player_w_s(ctx);
 	collect_collectible(ctx, ctx->maths.px, ctx->maths.py);
+	check_angle(&ctx->maths.pa);
 }

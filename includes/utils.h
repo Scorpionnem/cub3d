@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:39 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 12:19:39 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/25 14:15:09 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ uint32_t	adv_uint8_to_uint32(uint8_t *pixels);
 float		distance(float x1, float y1, float x2, float y2);
 void		check_rad(float *angle);
 bool		is_angle_in_range(int angle, int left, int right);
+void		check_angle(float *angle);
 
 #endif
