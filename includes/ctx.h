@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 20:52:21 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:24:14 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_winfo
 {
 	mlx_image_t		*img;
 	mlx_image_t		*fps;
-	mlx_image_t		*coins;
 	bool			fps_toggle;
 	mlx_texture_t	*all_tx[9];
 	mlx_t			*mlx;

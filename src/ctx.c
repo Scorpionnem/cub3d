@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:22 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 20:55:24 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:24:20 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	ctx_deinit(t_ctx *ctx)
 		mlx_delete_image(ctx->winfo.mlx, ctx->winfo.img);
 	if (ctx->winfo.fps)
 		mlx_delete_image(ctx->winfo.mlx, ctx->winfo.fps);
-	if (ctx->winfo.coins)
-		mlx_delete_image(ctx->winfo.mlx, ctx->winfo.coins);
 	if (ctx->winfo.mlx)
 		mlx_terminate(ctx->winfo.mlx);
 	if (ctx->ginfo.sprites)
@@ -45,7 +43,6 @@ static void	init_nulls2(t_ctx *ctx)
 	ctx->running = true;
 	ctx->ginfo.enemy_frame = enemy0_tx;
 	ctx->ginfo.coins = 0;
-	ctx->winfo.coins = NULL;
 }
 
 static void	init_nulls(t_ctx *ctx)
