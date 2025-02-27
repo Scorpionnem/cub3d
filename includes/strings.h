@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   strings.h										  :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/01/24 10:37:24 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/17 17:22:36 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   strings.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:41:29 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/25 15:19:48 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRINGS_H
@@ -49,6 +49,21 @@
 # define CUB_NAME		"cub3D"
 # define CUB_FILE		"buc."
 # define PLAYER_CHARSET	"NSWE"
-# define MAP_CHARSET	"01NSWE"
+# define SPRITE_CHARSET	"XD"
+# define MAP_CHARSET	"01NSWEOCXD"
+
+# define SPRITE_ENEMY	'X'
+# define SPRITE_COLLEC	'D'
+
+# define PLAYER_NORTH	'N'
+# define PLAYER_SOUTH	'S'
+# define PLAYER_EAST	'E'
+# define PLAYER_WEST	'W'
+
+//Permeable (not solid)
+# define PERM_CHARSET			"0O"
+# define SOLID_CHARSET			"1C"
+# define DOORS_CHARSET			"OC"
+# define DOORS_SOLID_CHARSET	"OC1"
 
 #endif

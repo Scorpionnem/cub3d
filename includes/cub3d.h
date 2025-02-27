@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   cub3d.h											:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2024/11/13 09:55:16 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/19 09:45:14 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:40:49 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/24 12:47:47 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
@@ -16,7 +16,7 @@
 # define SCREEN_WIDTH 1050
 # define SCREEN_HEIGHT 800
 
-# define RENDER_DISTANCE 128
+# define RENDER_DISTANCE 1024
 
 # include <math.h>
 # include <fcntl.h>
@@ -46,10 +46,12 @@
 # include "read_file.h"
 # include "parse_file.h"
 # include "parse_map.h"
+# include "parse_sprites.h"
 # include "utils.h"
 # include "textures.h"
 # include "hooks.h"
 # include "render.h"
 # include "mouse.h"
+# include "doors.h"
 
 #endif

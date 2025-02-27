@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   movement.c										 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/18 10:38:30 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/19 10:45:46 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:38:23 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/25 14:15:22 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
@@ -18,6 +18,20 @@ static void	press_secondary_keys(mlx_key_data_t keydata, t_ctx *ctx)
 		ctx->keys.escape = true;
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		mouse_toggle(ctx);
+	if (keydata.key == MLX_KEY_F3 && keydata.action == MLX_PRESS)
+	{
+		ctx->winfo.fps_toggle = !ctx->winfo.fps_toggle;
+		if (!ctx->winfo.fps_toggle)
+			if (ctx->winfo.fps)
+				mlx_delete_image(ctx->winfo.mlx, ctx->winfo.fps);
+	}
+	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
+	{
+		ctx->running = !ctx->running;
+		if (ctx->running)
+			mlx_set_mouse_pos(ctx->winfo.mlx,
+				ctx->winfo.img->width / 2, ctx->winfo.img->height / 2);
+	}
 }
 
 void	press_key(mlx_key_data_t keydata, t_ctx *ctx)
@@ -55,20 +69,22 @@ static void	move_player_a_d(t_ctx *ctx)
 	ctx->maths.pdy = sin(ctx->maths.pa + P2) * 5;
 	if (ctx->keys.d)
 	{
-		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
-			[(int)(ctx->maths.px + ctx->maths.pdx) / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
+				[(int)(ctx->maths.px + ctx->maths.pdx) / 64]))
 			ctx->maths.px += ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
+				[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64]))
 			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.a)
 	{
-		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
-			[(int)(ctx->maths.px - ctx->maths.pdx) / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
+				[(int)(ctx->maths.px - ctx->maths.pdx) / 64]))
 			ctx->maths.px -= ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
+				[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64]))
 			ctx->maths.py -= ctx->maths.pdy;
 	}
 	ctx->maths.pdx = cos(ctx->maths.pa) * 5;
@@ -79,20 +95,22 @@ static void	move_player_w_s(t_ctx *ctx)
 {
 	if (ctx->keys.w)
 	{
-		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
-			[(int)(ctx->maths.px + ctx->maths.pdx) / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
+				[(int)(ctx->maths.px + ctx->maths.pdx) / 64]))
 			ctx->maths.px += ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
+				[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64]))
 			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.s)
 	{
-		if (ctx->ginfo.map[(int)ctx->maths.py / 64]
-			[(int)(ctx->maths.px - ctx->maths.pdx) / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
+				[(int)(ctx->maths.px - ctx->maths.pdx) / 64]))
 			ctx->maths.px -= ctx->maths.pdx;
-		if (ctx->ginfo.map[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64] == '0')
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
+				[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
+			[(int)ctx->maths.px / 64]))
 			ctx->maths.py -= ctx->maths.pdy;
 	}
 	move_player_a_d(ctx);
@@ -100,6 +118,8 @@ static void	move_player_w_s(t_ctx *ctx)
 
 void	move_player(t_ctx *ctx)
 {
+	if (!ctx->running)
+		return ;
 	move_player_mouse(ctx);
 	if (ctx->keys.left)
 	{
@@ -118,4 +138,6 @@ void	move_player(t_ctx *ctx)
 		ctx->maths.pdy = sin(ctx->maths.pa) * 5;
 	}
 	move_player_w_s(ctx);
+	collect_collectible(ctx, ctx->maths.px, ctx->maths.py);
+	check_angle(&ctx->maths.pa);
 }

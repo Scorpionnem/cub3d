@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   parse_file_internals.c							 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/15 16:04:42 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/17 10:50:09 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file_internals.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:39:42 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/24 16:10:17 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
@@ -52,6 +52,16 @@ t_id	get_line_identifier(char *str)
 		return (west_tx);
 	if (!ft_strncmp(str, "EA", 2))
 		return (east_tx);
+	if (!ft_strncmp(str, "DO", 2))
+		return (door_tx);
+	if (!ft_strncmp(str, "CO", 2))
+		return (collec_tx);
+	if (!ft_strncmp(str, "E0", 2))
+		return (enemy0_tx);
+	if (!ft_strncmp(str, "E1", 2))
+		return (enemy1_tx);
+	if (!ft_strncmp(str, "E2", 2))
+		return (enemy2_tx);
 	if (!ft_strncmp(str, "F", 1))
 		return (floor_color);
 	if (!ft_strncmp(str, "C", 1))
@@ -66,12 +76,12 @@ int	get_tx_path(t_ctx *ctx, char *line, t_id id)
 	int	i;
 
 	i = 2;
-	if (ctx->ginfo.wall_tx[id])
+	if (ctx->ginfo.all_tx[id])
 		return (!!print_error(DUPLICATE_TOKEN));
 	while (line[i] && is_whitespace(line[i]))
 		i++;
-	ctx->ginfo.wall_tx[id] = ft_substr(line, i, ft_strlen(line) - i - 1);
-	if (!ctx->ginfo.wall_tx[id])
+	ctx->ginfo.all_tx[id] = ft_substr(line, i, ft_strlen(line) - i - 1);
+	if (!ctx->ginfo.all_tx[id])
 		return (!!print_error(ALLOC_ERROR));
 	return (1);
 }

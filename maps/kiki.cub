@@ -1,12 +1,10 @@
-NO 	./textures/sky.png
-SO ./textures/south.png
-EA ./textures/east.png
-WE ./textures/west.png
-
+NO 	./textures/stone.png
+SO ./textures/cobblestone.png
+EA ./textures/stone_bricks.png
+WE ./textures/mossy_bricks.png
 
 F 150,0,200
 C 255,0,150
-
 
 111111111111111
 101100010001101

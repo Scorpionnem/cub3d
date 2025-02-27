@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   utils.h											:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/15 16:12:01 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/19 10:40:51 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:41:39 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/25 14:15:09 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
@@ -21,8 +21,11 @@ long int	get_time_usec(void);
 
 uint32_t	uint8_to_uint32(uint8_t *pixels);
 uint32_t	inverted_uint8_to_uint32(uint8_t *pixels);
+uint32_t	adv_uint8_to_uint32(uint8_t *pixels);
 
 float		distance(float x1, float y1, float x2, float y2);
 void		check_rad(float *angle);
+bool		is_angle_in_range(int angle, int left, int right);
+void		check_angle(float *angle);
 
 #endif

@@ -1,35 +1,16 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   render.c										   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/17 15:33:29 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/19 10:45:48 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:39:37 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/25 14:28:12 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	display_fps(struct timeval start_time, int target_fps)
-{
-	struct timeval		end_time;
-	int					start;
-	int					end;
-
-	gettimeofday(&end_time, NULL);
-	start = start_time.tv_sec * 1000000 + start_time.tv_usec;
-	end = end_time.tv_sec * 1000000 + end_time.tv_usec;
-	while (1000000 / abs(end - start + 1) > target_fps)
-	{
-		gettimeofday(&end_time, NULL);
-		end = end_time.tv_sec * 1000000 + end_time.tv_usec;
-	}
-	gettimeofday(&end_time, NULL);
-	end = end_time.tv_sec * 1000000 + end_time.tv_usec;
-	printf("%d\n", 1000000 / abs(end - start + 1));
-}
 
 void	draw_player(t_ctx *ctx)
 {
@@ -45,30 +26,6 @@ void	draw_player(t_ctx *ctx)
 	draw_line(ctx->winfo.img, pts, 0x00FF00FF);
 }
 
-void	draw_minimap(t_ctx *ctx)
-{
-	int			x;
-	int			y;
-	t_rsquare	square_vars;
-
-	x = -1;
-	while (++x < ctx->ginfo.map_width - 1)
-	{
-		y = 0;
-		while (y < ctx->ginfo.map_height)
-		{
-			if (ctx->ginfo.map[y][x] == '1')
-			{
-				square_vars = init_rsquare_vars((y * MAP_S) / 4,
-						(x * MAP_S) / 4, 16);
-				render_square(ctx, square_vars, 0xFF0000FF);
-			}
-			y++;
-		}
-	}
-	draw_player(ctx);
-}
-
 void	draw_crosshair(t_ctx *ctx, int x, int y, int size)
 {
 	uint32_t	color;
@@ -81,8 +38,10 @@ void	draw_crosshair(t_ctx *ctx, int x, int y, int size)
 		t_y = 0;
 		while (t_y < size)
 		{
-			color = inverted_uint8_to_uint32(&ctx->winfo.img->pixels
-				[((t_x + x) + ((t_y + y) * ctx->winfo.img->width)) * 4]);
+			if ((((int)t_x + x) + (((int)t_y + y) * ctx->winfo.img->width)) * 4
+				< ctx->winfo.img->width * ctx->winfo.img->height * 4)
+				color = inverted_uint8_to_uint32(&ctx->winfo.img->pixels
+					[((t_x + x) + ((t_y + y) * ctx->winfo.img->width)) * 4]);
 			safe_put_pixel(ctx->winfo.img, t_x + x, t_y + y, color);
 			t_y++;
 		}
@@ -90,13 +49,55 @@ void	draw_crosshair(t_ctx *ctx, int x, int y, int size)
 	}
 }
 
+static void	handle_sprites_animations(t_ctx *ctx, int frame,
+	int i, int *frame_increment)
+{
+	frame += (*frame_increment);
+	if (ctx->ginfo.sprites[i].type == enemy && ctx->ginfo.sprites[i].active)
+	{
+		ctx->ginfo.sprites[i].tex
+			= ctx->winfo.all_tx[ctx->ginfo.enemy_frame];
+		move_enemies(ctx, &ctx->ginfo.sprites[i]);
+	}
+	if (ctx->ginfo.sprites[i].type == collec && ctx->ginfo.sprites[i].active)
+		ctx->ginfo.sprites[i].z = frame;
+	if (frame > 5 || frame < 0)
+		(*frame_increment) *= -1;
+}
+
+static void	handle_sprites(t_ctx *ctx)
+{
+	static int	frame = 0;
+	static int	frame_increment = 1;
+	int			i;
+
+	i = 0;
+	if (frame == 2)
+	{
+		ctx->ginfo.enemy_frame++;
+		if (ctx->ginfo.enemy_frame == enemy2_tx + 1)
+			ctx->ginfo.enemy_frame = enemy0_tx;
+	}
+	sort_sprites(ctx);
+	while (i < ctx->ginfo.sprites_count)
+	{
+		handle_sprites_animations(ctx, frame, i, &frame_increment);
+		if (ctx->ginfo.sprites[i].active)
+			draw_sprite(ctx, &ctx->ginfo.sprites[i]);
+		i++;
+	}
+	frame += frame_increment;
+}
+
 void	render_frame(t_ctx *ctx)
 {
+	if (!ctx->running)
+		return ;
 	gettimeofday(&ctx->ginfo.start_time, NULL);
 	draw_sky(ctx);
 	draw_cubes(ctx);
-	draw_minimap(ctx);
+	handle_sprites(ctx);
 	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 2,
 		ctx->winfo.img->height / 2 - 2, 4);
-	display_fps(ctx->ginfo.start_time, 200);
+	draw_fps(ctx);
 }

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   parse_file.h									   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/15 13:10:12 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/17 13:42:34 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:41:09 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/25 14:25:22 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_FILE_H
@@ -21,6 +21,11 @@ typedef enum e_id
 	south_tx,
 	west_tx,
 	east_tx,
+	door_tx,
+	collec_tx,
+	enemy0_tx,
+	enemy1_tx,
+	enemy2_tx,
 	floor_color,
 	ceiling_color,
 	new_line,
@@ -41,5 +46,6 @@ typedef struct e_rgb
 }	t_rgb;
 
 int	parse_file(t_ctx *ctx);
+int	is_all_loaded(t_ctx *ctx);
 
 #endif

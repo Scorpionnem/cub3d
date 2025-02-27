@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   render_walls.c									 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/19 10:09:42 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/19 10:42:22 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_walls.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:39:30 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/25 14:27:39 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
@@ -32,13 +32,15 @@ mlx_texture_t	*choose_texture(t_ctx *ctx, t_cube_render *vars)
 {
 	mlx_texture_t	*res;
 
-	res = ctx->winfo.wall_tx[east_tx];
+	res = ctx->winfo.all_tx[east_tx];
 	if (vars->face == south)
-		res = ctx->winfo.wall_tx[south_tx];
+		res = ctx->winfo.all_tx[south_tx];
 	if (vars->face == north)
-		res = ctx->winfo.wall_tx[north_tx];
+		res = ctx->winfo.all_tx[north_tx];
 	if (vars->face == west)
-		res = ctx->winfo.wall_tx[west_tx];
+		res = ctx->winfo.all_tx[west_tx];
+	if (ctx->maths.type == closed_door)
+		res = ctx->winfo.all_tx[door_tx];
 	return (res);
 }
 
@@ -71,6 +73,14 @@ void	draw_wall_line(t_ctx *ctx, t_cube_render *vars)
 	}
 }
 
+static void	get_wall_type(t_ctx *ctx, t_cube_render *vars)
+{
+	if (ctx->ginfo.map[(int)(vars->ry / 64.f)][(int)(vars->rx / 64.f)] == 'C')
+		ctx->maths.type = closed_door;
+	else
+		ctx->maths.type = normal_wall;
+}
+
 void	draw_cubes(t_ctx *ctx)
 {
 	t_cube_render	vars;
@@ -78,23 +88,23 @@ void	draw_cubes(t_ctx *ctx)
 
 	vars.ra = ctx->maths.pa - DR * 30;
 	check_rad(&vars.ra);
-	vars.r = 0;
-	while (vars.r < (int)ctx->winfo.img->width)
+	vars.r = -1;
+	while (++vars.r < (int)ctx->winfo.img->width)
 	{
 		init_horizontal_rays_vars(ctx, &vars);
 		init_horizontal_rays(ctx, &vars);
-		cast_horizontal_rays(ctx, &vars);
+		cast_horizontal_rays(ctx, &vars, SOLID_CHARSET);
 		init_vertical_rays_vars(ctx, &vars);
 		init_vertical_rays(ctx, &vars);
-		cast_vertical_rays(ctx, &vars);
+		cast_vertical_rays(ctx, &vars, SOLID_CHARSET);
 		choose_ray(&vars);
+		ctx->maths.depth[vars.r] = vars.dist;
+		get_wall_type(ctx, &vars);
 		calc_height_offset(ctx, &vars);
 		draw_wall_line(ctx, &vars);
 		pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
 				vars.rx / 4, vars.ry / 4);
-		draw_line(ctx->winfo.img, pts, 0xFF9999FF);
 		vars.ra += DR * (60 / (float)ctx->winfo.img->width);
 		check_rad(&vars.ra);
-		vars.r++;
 	}
 }

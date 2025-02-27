@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   math_utils.c									   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: mbatty <mewen.mewen@hotmail.com>		   +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/02/19 10:12:00 by mbatty			#+#	#+#			 */
-/*   Updated: 2025/02/19 10:40:42 by mbatty		   ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 15:38:46 by mbatty            #+#    #+#             */
+/*   Updated: 2025/02/25 14:20:21 by mbatty           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
@@ -23,4 +23,22 @@ void	check_rad(float *angle)
 		(*angle) += 2 * PI;
 	if (*angle > 2 * PI)
 		(*angle) -= 2 * PI;
+}
+
+bool	is_angle_in_range(int angle, int left, int right)
+{
+	left %= 360;
+	right %= 360;
+	angle %= 360;
+	if (left > right)
+		return (angle >= left || angle <= right);
+	return (angle > left && angle < right);
+}
+
+void	check_angle(float *angle)
+{
+	if ((*angle) == 0.f || (*angle) == 2.f * (float)PI
+		|| (*angle) == (float)PI || (*angle) == (float)P2)
+		(*angle) += 0.001f;
+	check_rad(angle);
 }
