@@ -15,6 +15,18 @@
 
 # define MAP_S 64
 
+typedef struct s_minimap {
+    int view_range;
+    int player_map_x;
+    int player_map_y;
+    int start_x;
+    int start_y;
+    int minimap_x;
+    int minimap_y;
+    float center_x;
+    float center_y;
+} t_minimap;
+
 typedef struct s_line_vars
 {
 	int	dx;
@@ -133,6 +145,7 @@ void		draw_sky(t_ctx *ctx);
 void		draw_cubes(t_ctx *ctx);
 void		draw_fps(t_ctx *ctx);
 void		render_frame(t_ctx *ctx);
+void		draw_minimap(t_ctx *ctx);
 
 void		init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
 void		init_vertical_rays(t_ctx *ctx, t_cube_render *vars);

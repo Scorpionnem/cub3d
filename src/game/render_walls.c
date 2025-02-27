@@ -84,7 +84,7 @@ static void	get_wall_type(t_ctx *ctx, t_cube_render *vars)
 void	draw_cubes(t_ctx *ctx)
 {
 	t_cube_render	vars;
-	t_points		pts;
+	//t_points		pts;
 
 	vars.ra = ctx->maths.pa - DR * 30;
 	check_rad(&vars.ra);
@@ -102,8 +102,8 @@ void	draw_cubes(t_ctx *ctx)
 		get_wall_type(ctx, &vars);
 		calc_height_offset(ctx, &vars);
 		draw_wall_line(ctx, &vars);
-		pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
-				vars.rx / 4, vars.ry / 4);
+		//pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
+		//		vars.rx / 4, vars.ry / 4);
 		vars.ra += DR * (60 / (float)ctx->winfo.img->width);
 		check_rad(&vars.ra);
 	}
