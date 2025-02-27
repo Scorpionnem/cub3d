@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:33 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/25 15:20:19 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/27 11:34:26 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ double	find_face_angle(t_ctx *ctx)
 	if (ctx->ginfo.spawn_facing == PLAYER_NORTH)
 		return (P3);
 	if (ctx->ginfo.spawn_facing == PLAYER_EAST)
-		return (PI);
-	return (0);
+		return (0);
+	return (PI);
 }
 
 void	init_math_vars(t_ctx *ctx)
