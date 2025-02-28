@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:33 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/27 11:34:26 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/02/28 15:20:15 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ void	init_math_vars(t_ctx *ctx)
 	ctx->maths.pdy = sin(ctx->maths.pa) * 5;
 }
 
+int	start_window(t_ctx *ctx)
+{
+	if (!mlx_loop_hook(ctx->winfo.mlx, render_hook, ctx))
+	{
+		ctx_deinit(ctx);
+		return (0);
+	}
+	mlx_key_hook(ctx->winfo.mlx, key_hook, ctx);
+	mlx_mouse_hook(ctx->winfo.mlx, mouse_hook, ctx);
+	mlx_loop(ctx->winfo.mlx);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_ctx	ctx;
@@ -43,9 +56,7 @@ int	main(int ac, char **av)
 	if (!ctx_init(&ctx, av[1]))
 		return (1);
 	init_math_vars(&ctx);
-	mlx_loop_hook(ctx.winfo.mlx, render_hook, &ctx);
-	mlx_key_hook(ctx.winfo.mlx, key_hook, &ctx);
-	mlx_mouse_hook(ctx.winfo.mlx, mouse_hook, &ctx);
-	mlx_loop(ctx.winfo.mlx);
+	if (!start_window(&ctx))
+		return (1);
 	ctx_deinit(&ctx);
 }
