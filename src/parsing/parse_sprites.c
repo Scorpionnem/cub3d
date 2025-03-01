@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:33:47 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/25 16:00:20 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/01 13:39:44 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	get_sprite_pos(t_ctx *ctx, int i)
 				ctx->ginfo.sprites[i].y = (x + .5f) * MAP_S;
 				ctx->ginfo.sprites[i].active = true;
 				set_sprite_type(ctx, i, ctx->ginfo.map[x][y]);
-				ctx->ginfo.map[x][y] = '0';
+				ctx->ginfo.map[x][y] = EMPTY;
 				return ;
 			}
 			y++;

@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:49 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/25 14:24:59 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/01 12:52:00 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	add_line_map(t_ctx *ctx, char *line,
 		added_walls = ft_calloc(ctx->ginfo.map_width - ft_strlen(line) + 1, 1);
 		if (!added_walls)
 			return (!!print_error_free(ALLOC_ERROR, no_nl_line));
-		ft_memset(added_walls, '1', ctx->ginfo.map_width - ft_strlen(line));
+		ft_memset(added_walls, ' ', ctx->ginfo.map_width - ft_strlen(line));
 		ctx->ginfo.map[i] = ft_strjoin(no_nl_line, added_walls);
 		if (!ctx->ginfo.map[i])
 		{

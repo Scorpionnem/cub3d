@@ -19,7 +19,8 @@ void	free_2d(char **str)
 	i = 0;
 	while (str[i])
 	{
-		free(str[i]);
+		if (str[i])
+			free(str[i]);
 		i++;
 	}
 	free(str);

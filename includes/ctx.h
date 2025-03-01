@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/26 14:24:14 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/01 13:35:10 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct s_ginfo
 	int					sprites_count;
 	int					enemy_frame;
 	int					coins;
+	bool				valid_map;
 }	t_ginfo;
 
 typedef struct s_file
