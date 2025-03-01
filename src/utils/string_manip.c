@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:12 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/21 15:40:13 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/01 14:28:59 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	clean_line(char *str)
 	while (str[i])
 	{
 		if (is_whitespace(str[i]))
-			str[i] = '1';
+			str[i] = ' ';
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:53 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 10:50:39 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/01 14:53:00 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,44 +57,57 @@ static void	get_player_pos(t_ctx *ctx)
 	}
 }
 
-static int	is_str_only_char(char *str, char c)
+static int	check_around(t_ctx *ctx, int i, int j)
+{
+	if (i + 1 > 0 && j > 0
+		&& i + 1 < ctx->ginfo.map_height
+		&& j < ctx->ginfo.map_width)
+		if (!ft_strchr(MAP_CHARSET, ctx->ginfo.map[i + 1][j]))
+			return (0);
+	if (i - 1 > 0 && j > 0
+		&& i - 1 < ctx->ginfo.map_height
+		&& j < ctx->ginfo.map_width)
+		if (!ft_strchr(MAP_CHARSET, ctx->ginfo.map[i - 1][j]))
+			return (0);
+	if (i > 0 && j + 1 > 0
+		&& i < ctx->ginfo.map_height
+		&& j + 1 < ctx->ginfo.map_width)
+		if (!ft_strchr(MAP_CHARSET, ctx->ginfo.map[i][j + 1]))
+			return (0);
+	if (i > 0 && j - 1 > 0
+		&& i < ctx->ginfo.map_height
+		&& j - 1 < ctx->ginfo.map_width)
+		if (!ft_strchr(MAP_CHARSET, ctx->ginfo.map[i][j - 1]))
+			return (0);
+	return (1);
+}
+
+static int	check_sides_valid(t_ctx *ctx)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (str[i])
+	while (ctx->ginfo.map[i])
 	{
-		if (str[i] != c)
-			return (0);
+		j = 0;
+		while (ctx->ginfo.map[i][j])
+		{
+			if (ft_strchr(NOT_WALL_CHARSET, ctx->ginfo.map[i][j]))
+				if (!check_around(ctx, i, j))
+					return (0);
+			j++;
+		}
 		i++;
 	}
 	return (1);
 }
 
-static int	check_sides_valid(char **map)
-{
-	int	y;
-
-	y = 0;
-	if (is_str_only_char(map[y], '1') == 0)
-		return (0);
-	while (map[y])
-	{
-		if (map[y][0] == '1' && map[y][ft_strlen(map[y]) - 1] == '1')
-			y++;
-		else
-			return (0);
-	}
-	if (is_str_only_char(map[y - 1], '1') == 0)
-		return (0);
-	return (1);
-}
-
 int	parse_map(t_ctx *ctx)
 {
-	if (!check_valid_charset(ctx->ginfo.map, MAP_CHARSET))
+	if (!check_valid_charset(ctx->ginfo.map, MAP_CHARSET_SPACE))
 		return (!!print_error(INVALID_CHARS));
-	if (!check_sides_valid(ctx->ginfo.map))
+	if (!check_sides_valid(ctx))
 		return (!!print_error(INVALID_MAP_SIDES));
 	if (charset_iter(ctx->ginfo.map, PLAYER_CHARSET) != 1)
 		return (!!print_error(PLAYER_COUNT_ERROR));

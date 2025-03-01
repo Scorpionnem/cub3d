@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:29 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/25 15:19:48 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/01 14:30:37 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,17 @@
 "\033[0;91m\033[1mFatal error allocating memory: Failed create an image\033[0m"
 
 // MISC
-# define CUB_NAME		"cub3D"
-# define CUB_FILE		"buc."
-# define PLAYER_CHARSET	"NSWE"
-# define SPRITE_CHARSET	"XD"
-# define MAP_CHARSET	"01NSWEOCXD"
+# define CUB_NAME			"cub3D"
+# define CUB_FILE			"buc."
+# define PLAYER_CHARSET		"NSWE"
+# define SPRITE_CHARSET		"XD"
+# define MAP_CHARSET		"01NSWEOCXD"
+# define MAP_CHARSET_SPACE	"01NSWE OCXD"
 
 # define SPRITE_ENEMY	'X'
 # define SPRITE_COLLEC	'D'
+
+# define NOT_WALL_CHARSET	"0OCXD"
 
 # define PLAYER_NORTH	'N'
 # define PLAYER_SOUTH	'S'
