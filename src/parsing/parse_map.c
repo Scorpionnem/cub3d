@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:53 by mbatty            #+#    #+#             */
-/*   Updated: 2025/03/01 14:53:00 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/01 15:51:50 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ static void	get_player_pos(t_ctx *ctx)
 
 static int	check_around(t_ctx *ctx, int i, int j)
 {
+	if (i <= 0 || j <= 0
+		|| i >= ctx->ginfo.map_height
+		|| j >= ctx->ginfo.map_width - 2)
+		return (0);
 	if (i + 1 > 0 && j > 0
 		&& i + 1 < ctx->ginfo.map_height
 		&& j < ctx->ginfo.map_width)
