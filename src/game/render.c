@@ -17,12 +17,12 @@ void	draw_player(t_ctx *ctx)
 	t_rsquare	square_vars;
 	t_points	pts;
 
-	square_vars = init_rsquare_vars((ctx->maths.py - 16) / 4,
-			(ctx->maths.px - 16) / 4, 8);
+	square_vars = init_rsquare_vars((ctx->maths.py - 16) / 4, (ctx->maths.px
+				- 16) / 4, 8);
 	render_square(ctx, square_vars, 0xFFFFFFFF);
-	pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
-			(ctx->maths.px + ctx->maths.pdx * 8) / 4,
-			(ctx->maths.py + ctx->maths.pdy * 8) / 4);
+	pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4, (ctx->maths.px
+				+ ctx->maths.pdx * 8) / 4, (ctx->maths.py + ctx->maths.pdy * 8)
+			/ 4);
 	draw_line(ctx->winfo.img, pts, 0x00FF00FF);
 }
 
@@ -38,10 +38,11 @@ void	draw_crosshair(t_ctx *ctx, int x, int y, int size)
 		t_y = 0;
 		while (t_y < size)
 		{
-			if ((((int)t_x + x) + (((int)t_y + y) * ctx->winfo.img->width)) * 4
-				< ctx->winfo.img->width * ctx->winfo.img->height * 4)
-				color = inverted_uint8_to_uint32(&ctx->winfo.img->pixels
-					[((t_x + x) + ((t_y + y) * ctx->winfo.img->width)) * 4]);
+			if ((((int)t_x + x) + (((int)t_y + y) * ctx->winfo.img->width))
+				* 4 < ctx->winfo.img->width * ctx->winfo.img->height * 4)
+				color = inverted_uint8_to_uint32(&ctx->winfo.img->pixels[((t_x
+								+ x) + ((t_y + y) * ctx->winfo.img->width))
+						* 4]);
 			safe_put_pixel(ctx->winfo.img, t_x + x, t_y + y, color);
 			t_y++;
 		}
@@ -49,14 +50,13 @@ void	draw_crosshair(t_ctx *ctx, int x, int y, int size)
 	}
 }
 
-static void	handle_sprites_animations(t_ctx *ctx, int frame,
-	int i, int *frame_increment)
+static void	handle_sprites_animations(t_ctx *ctx, int frame, int i,
+		int *frame_increment)
 {
 	frame += (*frame_increment);
 	if (ctx->ginfo.sprites[i].type == enemy && ctx->ginfo.sprites[i].active)
 	{
-		ctx->ginfo.sprites[i].tex
-			= ctx->winfo.all_tx[ctx->ginfo.enemy_frame];
+		ctx->ginfo.sprites[i].tex = ctx->winfo.all_tx[ctx->ginfo.enemy_frame];
 		move_enemies(ctx, &ctx->ginfo.sprites[i]);
 	}
 	if (ctx->ginfo.sprites[i].type == collec && ctx->ginfo.sprites[i].active)
@@ -97,8 +97,9 @@ void	render_frame(t_ctx *ctx)
 	draw_sky(ctx);
 	draw_cubes(ctx);
 	handle_sprites(ctx);
-	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 2,
-		ctx->winfo.img->height / 2 - 2, 4);
-	draw_minimap(ctx);
+	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 2, ctx->winfo.img->height
+		/ 2 - 2, 4);
+	if (ctx->winfo.minimap_toggle)
+		draw_minimap(ctx);
 	draw_fps(ctx);
 }

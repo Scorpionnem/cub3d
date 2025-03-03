@@ -25,12 +25,14 @@ static void	press_secondary_keys(mlx_key_data_t keydata, t_ctx *ctx)
 			if (ctx->winfo.fps)
 				mlx_delete_image(ctx->winfo.mlx, ctx->winfo.fps);
 	}
+	if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
+		ctx->winfo.minimap_toggle = !ctx->winfo.minimap_toggle;
 	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_PRESS)
 	{
 		ctx->running = !ctx->running;
 		if (ctx->running)
-			mlx_set_mouse_pos(ctx->winfo.mlx,
-				ctx->winfo.img->width / 2, ctx->winfo.img->height / 2);
+			mlx_set_mouse_pos(ctx->winfo.mlx, ctx->winfo.img->width / 2,
+				ctx->winfo.img->height / 2);
 	}
 }
 
@@ -69,22 +71,20 @@ static void	move_player_a_d(t_ctx *ctx)
 	ctx->maths.pdy = sin(ctx->maths.pa + P2) * 5;
 	if (ctx->keys.d)
 	{
-		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
-				[(int)(ctx->maths.px + ctx->maths.pdx) / 64]))
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py
+				/ 64][(int)(ctx->maths.px + ctx->maths.pdx) / 64]))
 			ctx->maths.px += ctx->maths.pdx;
-		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
-				[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64]))
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)(ctx->maths.py
+					+ ctx->maths.pdy) / 64][(int)ctx->maths.px / 64]))
 			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.a)
 	{
-		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
-				[(int)(ctx->maths.px - ctx->maths.pdx) / 64]))
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py
+				/ 64][(int)(ctx->maths.px - ctx->maths.pdx) / 64]))
 			ctx->maths.px -= ctx->maths.pdx;
-		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
-				[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64]))
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)(ctx->maths.py
+					- ctx->maths.pdy) / 64][(int)ctx->maths.px / 64]))
 			ctx->maths.py -= ctx->maths.pdy;
 	}
 	ctx->maths.pdx = cos(ctx->maths.pa) * 5;
@@ -95,22 +95,20 @@ static void	move_player_w_s(t_ctx *ctx)
 {
 	if (ctx->keys.w)
 	{
-		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
-				[(int)(ctx->maths.px + ctx->maths.pdx) / 64]))
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py
+				/ 64][(int)(ctx->maths.px + ctx->maths.pdx) / 64]))
 			ctx->maths.px += ctx->maths.pdx;
-		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
-				[(int)(ctx->maths.py + ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64]))
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)(ctx->maths.py
+					+ ctx->maths.pdy) / 64][(int)ctx->maths.px / 64]))
 			ctx->maths.py += ctx->maths.pdy;
 	}
 	if (ctx->keys.s)
 	{
-		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py / 64]
-				[(int)(ctx->maths.px - ctx->maths.pdx) / 64]))
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)ctx->maths.py
+				/ 64][(int)(ctx->maths.px - ctx->maths.pdx) / 64]))
 			ctx->maths.px -= ctx->maths.pdx;
-		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map
-				[(int)(ctx->maths.py - ctx->maths.pdy) / 64]
-			[(int)ctx->maths.px / 64]))
+		if (ft_strchr(PERM_CHARSET, ctx->ginfo.map[(int)(ctx->maths.py
+					- ctx->maths.pdy) / 64][(int)ctx->maths.px / 64]))
 			ctx->maths.py -= ctx->maths.pdy;
 	}
 	move_player_a_d(ctx);

@@ -100,6 +100,7 @@ static int	init_window(t_ctx *ctx)
 int	ctx_init(t_ctx *ctx, char *filename)
 {
 	init_nulls(ctx);
+	ctx->winfo.minimap_toggle = false;
 	if (!get_file(ctx, filename))
 		return (0);
 	if (!parse_file(ctx))

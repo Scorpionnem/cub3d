@@ -151,6 +151,8 @@ void				render_frame(t_ctx *ctx);
 void				draw_minimap(t_ctx *ctx);
 void				init_minimap_vars(t_minimap *vars, t_ctx *ctx);
 void				cast_all_rays(t_ctx *ctx, t_minimap *vars);
+bool				check_ray_collision(t_ctx *ctx, t_minimap *vars,
+						float ray_x, float ray_y);
 
 void				init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
 void				init_vertical_rays(t_ctx *ctx, t_cube_render *vars);
