@@ -23,7 +23,7 @@ C_FILES := main ctx error textures \
 			game/hooks game/render game/movement game/render_utils/draw_line game/render_utils/pixels_manip game/render_walls \
 			game/render_utils/math_utils game/wall_utils/horizontal_rays game/wall_utils/vertical_rays \
 			game/mouse game/render_walls_internals game/render_utils/fps game/doors \
-			game/sprite game/sprite_internals game/sprite_utils
+			game/sprite game/sprite_internals game/sprite_utils game/render_minimap game/minimap_draw \
 
 C_FILES := $(addsuffix .c, $(C_FILES))
 

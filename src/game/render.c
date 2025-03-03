@@ -99,5 +99,6 @@ void	render_frame(t_ctx *ctx)
 	handle_sprites(ctx);
 	draw_crosshair(ctx, ctx->winfo.img->width / 2 - 2,
 		ctx->winfo.img->height / 2 - 2, 4);
+	draw_minimap(ctx);
 	draw_fps(ctx);
 }
