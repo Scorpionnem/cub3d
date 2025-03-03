@@ -23,7 +23,7 @@ C_FILES := main ctx error textures \
 			game/hooks game/render game/movement game/render_utils/draw_line game/render_utils/pixels_manip game/render_walls \
 			game/render_utils/math_utils game/wall_utils/horizontal_rays game/wall_utils/vertical_rays \
 			game/mouse game/render_walls_internals game/render_utils/fps game/doors \
-			game/sprite game/sprite_internals game/sprite_utils game/render_minimap
+			game/sprite game/sprite_internals game/sprite_utils game/render_minimap game/minimap_draw \
 
 C_FILES := $(addsuffix .c, $(C_FILES))
 
@@ -32,16 +32,13 @@ SOURCES := $(addprefix $(SOURCE_DIR), $(C_FILES))
 OBJECTS := $(addprefix $(OBJ_DIR), $(C_FILES:.c=.o))
 
 #FLAGS
-#CFLAGS = -Wall -Werror -Wextra -g
-CFLAGS = -Wall -Werror -Wextra -g -mmacosx-version-min=12.7
-#MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm
-# Remplacer la ligne MLXFLAGS par :
-MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
+CFLAGS = -Wall -Werror -Wextra -g
+MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm
 
 all: mlx $(NAME)
 
-#mlx :
-#	@if ls | grep -q "MLX42"; then \
+mlx :
+	@if ls | grep -q "MLX42"; then \
 		echo "\033[0;32mMLX42 already exists ✅\033[0m"; \
 	else \
 		git clone https://github.com/codam-coding-college/MLX42.git; \
@@ -49,16 +46,7 @@ all: mlx $(NAME)
 		make -C ./MLX42/build --no-print-directory -j4; \
 		make --directory ./MLX42/build; \
 	fi
-	
-mlx:
-	@if ls | grep -q "MLX42"; then \
-		echo "\033[0;32mMLX42 already exists ✅\033[0m"; \
-	else \
-		git clone https://github.com/codam-coding-college/MLX42.git; \
-		cmake ./MLX42 -B ./MLX42/build -DCMAKE_OSX_DEPLOYMENT_TARGET=12.7; \
-		make -C ./MLX42/build --no-print-directory -j4; \
-		make --directory ./MLX42/build; \
-	fi
+
 
 $(OBJECTS): $(OBJ_DIR)%.o : $(SOURCE_DIR)%.c
 	@cc $(CFLAGS) $(INCLUDE_DIRS) -c $< -o $@
@@ -66,13 +54,9 @@ $(OBJECTS): $(OBJ_DIR)%.o : $(SOURCE_DIR)%.c
 $(OBJ_DIR):
 	@(cd $(SOURCE_DIR) && find . -type d -exec mkdir -p -- $(shell pwd)/$(OBJ_DIR){} \;)
 
-#$(NAME): $(OBJ_DIR) $(LIBFT) $(GNL) $(OBJECTS)
-#	@cc $(OBJECTS) $(LIBFT) $(GNL) $(MLX) $(MLXFLAGS) -o $(NAME)
-#	@echo "$(NAME) compiled"
-
-# Update the $(NAME) rule to include the same version flag
 $(NAME): $(OBJ_DIR) $(LIBFT) $(GNL) $(OBJECTS)
-	@cc $(OBJECTS) $(LIBFT) $(GNL) $(MLX) $(MLXFLAGS) -mmacosx-version-min=12.7 -o $(NAME)
+	@cc $(OBJECTS) $(LIBFT) $(GNL) $(MLX) $(MLXFLAGS) -o $(NAME)
+	@echo "$(NAME) compiled"
 
 bonus: $(NAME)
 

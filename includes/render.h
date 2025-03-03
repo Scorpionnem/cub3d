@@ -146,6 +146,8 @@ void		draw_cubes(t_ctx *ctx);
 void		draw_fps(t_ctx *ctx);
 void		render_frame(t_ctx *ctx);
 void		draw_minimap(t_ctx *ctx);
+void		init_minimap_vars(t_minimap *vars, t_ctx *ctx);
+void		cast_all_rays(t_ctx *ctx, t_minimap *vars);
 
 void		init_vertical_rays_vars(t_ctx *ctx, t_cube_render *vars);
 void		init_vertical_rays(t_ctx *ctx, t_cube_render *vars);

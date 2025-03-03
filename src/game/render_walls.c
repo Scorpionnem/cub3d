@@ -18,13 +18,13 @@ float	get_x(t_cube_render *vars, mlx_texture_t *tex)
 
 	res = (vars->rx / 64.f - floor(vars->rx / 64.f)) * ((float)tex->width);
 	if (vars->face == south)
-		res = (float)tex->width
-			- (vars->rx / 64.f - floor(vars->rx / 64.f)) * ((float)tex->width);
+		res = (float)tex->width - (vars->rx / 64.f - floor(vars->rx / 64.f))
+			* ((float)tex->width);
 	if (vars->face == east)
 		res = (vars->ry / 64.f - floor(vars->ry / 64.f)) * ((float)tex->width);
 	if (vars->face == west)
-		res = (float)tex->width
-			- (vars->ry / 64.f - floor(vars->ry / 64.f)) * ((float)tex->width);
+		res = (float)tex->width - (vars->ry / 64.f - floor(vars->ry / 64.f))
+			* ((float)tex->width);
 	return (res);
 }
 
@@ -60,15 +60,15 @@ void	draw_wall_line(t_ctx *ctx, t_cube_render *vars)
 		coords.t_y = coords.y_offset * (vars->line_offset * -1);
 		vars->line_offset = 0;
 	}
-	while (++coords.y < vars->line_h
-		&& coords.y + vars->line_offset < ctx->winfo.img->height)
+	while (++coords.y < vars->line_h && coords.y
+		+ vars->line_offset < ctx->winfo.img->height)
 	{
-		if (((coords.x) + (((int)coords.t_y) * tex->width))
-			* 4 < tex->width * tex->height * 4)
-			color = uint8_to_uint32(&tex->pixels
-				[((coords.x) + (((int)coords.t_y) * tex->width)) * 4]);
-		safe_put_pixel(ctx->winfo.img, vars->r,
-			vars->line_offset + coords.y, color);
+		if (((coords.x) + (((int)coords.t_y) * tex->width)) * 4 < tex->width
+			* tex->height * 4)
+			color = uint8_to_uint32(&tex->pixels[((coords.x)
+						+ (((int)coords.t_y) * tex->width)) * 4]);
+		safe_put_pixel(ctx->winfo.img, vars->r, vars->line_offset + coords.y,
+			color);
 		coords.t_y += coords.y_offset;
 	}
 }
@@ -84,7 +84,6 @@ static void	get_wall_type(t_ctx *ctx, t_cube_render *vars)
 void	draw_cubes(t_ctx *ctx)
 {
 	t_cube_render	vars;
-	//t_points		pts;
 
 	vars.ra = ctx->maths.pa - DR * 30;
 	check_rad(&vars.ra);
@@ -102,8 +101,6 @@ void	draw_cubes(t_ctx *ctx)
 		get_wall_type(ctx, &vars);
 		calc_height_offset(ctx, &vars);
 		draw_wall_line(ctx, &vars);
-		//pts = init_dl_vars(ctx->maths.px / 4, ctx->maths.py / 4,
-		//		vars.rx / 4, vars.ry / 4);
 		vars.ra += DR * (60 / (float)ctx->winfo.img->width);
 		check_rad(&vars.ra);
 	}
