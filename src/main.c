@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:33 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/28 15:20:15 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:30:53 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	start_window(t_ctx *ctx)
 		return (0);
 	}
 	mlx_key_hook(ctx->winfo.mlx, key_hook, ctx);
-	mlx_mouse_hook(ctx->winfo.mlx, mouse_hook, ctx);
 	mlx_loop(ctx->winfo.mlx);
 	return (1);
 }
@@ -56,6 +55,8 @@ int	main(int ac, char **av)
 	if (!ctx_init(&ctx, av[1]))
 		return (1);
 	init_math_vars(&ctx);
+	// for (int i = 0; i < ctx.ginfo.map_height; i++)
+		// printf("%s\n", ctx.ginfo.map[i]);
 	if (!start_window(&ctx))
 		return (1);
 	ctx_deinit(&ctx);

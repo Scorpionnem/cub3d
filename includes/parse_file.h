@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:09 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/25 14:25:22 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:25:28 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ typedef enum e_id
 	south_tx,
 	west_tx,
 	east_tx,
-	door_tx,
-	collec_tx,
-	enemy0_tx,
-	enemy1_tx,
-	enemy2_tx,
 	floor_color,
 	ceiling_color,
 	new_line,

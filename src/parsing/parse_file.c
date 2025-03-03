@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:49 by mbatty            #+#    #+#             */
-/*   Updated: 2025/03/01 14:28:54 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:39:17 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ static int	count_map_height(t_ctx *ctx)
 
 static int	choose_method(t_ctx *ctx, char *line, t_id id, int step)
 {
-	if ((id >= north_tx && id <= enemy2_tx) && step == 1)
+	if ((id >= north_tx && id <= east_tx) && step == 1)
 		return (!!print_error(INVALID_FILE_FORMAT));
-	else if (id >= north_tx && id <= enemy2_tx)
+	else if (id >= north_tx && id <= east_tx)
 		return (get_tx_path(ctx, line, id));
 	if ((id == floor_color || id == ceiling_color) && step == 1)
 		return (!!print_error(INVALID_FILE_FORMAT));

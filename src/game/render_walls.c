@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:30 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/25 14:27:39 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:19:29 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ mlx_texture_t	*choose_texture(t_ctx *ctx, t_cube_render *vars)
 		res = ctx->winfo.all_tx[north_tx];
 	if (vars->face == west)
 		res = ctx->winfo.all_tx[west_tx];
-	if (ctx->maths.type == closed_door)
-		res = ctx->winfo.all_tx[door_tx];
 	return (res);
 }
 
@@ -73,12 +71,9 @@ void	draw_wall_line(t_ctx *ctx, t_cube_render *vars)
 	}
 }
 
-static void	get_wall_type(t_ctx *ctx, t_cube_render *vars)
+static void	get_wall_type(t_ctx *ctx)
 {
-	if (ctx->ginfo.map[(int)(vars->ry / 64.f)][(int)(vars->rx / 64.f)] == 'C')
-		ctx->maths.type = closed_door;
-	else
-		ctx->maths.type = normal_wall;
+	ctx->maths.type = normal_wall;
 }
 
 void	draw_cubes(t_ctx *ctx)
@@ -98,7 +93,7 @@ void	draw_cubes(t_ctx *ctx)
 		cast_vertical_rays(ctx, &vars, SOLID_CHARSET);
 		choose_ray(&vars);
 		ctx->maths.depth[vars.r] = vars.dist;
-		get_wall_type(ctx, &vars);
+		get_wall_type(ctx);
 		calc_height_offset(ctx, &vars);
 		draw_wall_line(ctx, &vars);
 		vars.ra += DR * (60 / (float)ctx->winfo.img->width);

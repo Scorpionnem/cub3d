@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:38:23 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/25 14:15:22 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:18:26 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,5 @@ void	move_player(t_ctx *ctx)
 		ctx->maths.pdy = sin(ctx->maths.pa) * 5;
 	}
 	move_player_w_s(ctx);
-	collect_collectible(ctx, ctx->maths.px, ctx->maths.py);
 	check_angle(&ctx->maths.pa);
 }

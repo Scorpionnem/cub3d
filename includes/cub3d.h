@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:49 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/24 12:47:47 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:25:55 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 # include "read_file.h"
 # include "parse_file.h"
 # include "parse_map.h"
-# include "parse_sprites.h"
 # include "utils.h"
 # include "textures.h"
 # include "hooks.h"

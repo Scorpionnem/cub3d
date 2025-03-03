@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:41:29 by mbatty            #+#    #+#             */
-/*   Updated: 2025/03/01 14:30:37 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:11:46 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@
 # define CUB_FILE			"buc."
 # define PLAYER_CHARSET		"NSWE"
 # define SPRITE_CHARSET		"XD"
-# define MAP_CHARSET		"01NSWEOCXD"
-# define MAP_CHARSET_SPACE	"01NSWE OCXD"
+# define MAP_CHARSET		"01NSWE"
+# define MAP_CHARSET_SPACE	"01NSWE "
 
 # define SPRITE_ENEMY	'X'
 # define SPRITE_COLLEC	'D'

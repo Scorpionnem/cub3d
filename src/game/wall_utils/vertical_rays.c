@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:11 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/25 14:55:27 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:19:51 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,6 @@ void	cast_vertical_rays(t_ctx *ctx, t_cube_render *vars, char *charset)
 					ctx->maths.py, vars->vx, vars->vy);
 			vars->dof = RENDER_DISTANCE;
 		}
-		else
-		{
-			vars->rx += vars->xo;
-			vars->ry += vars->yo;
-			vars->dof += 1;
-		}
-	}
-}
-
-void	cast_vertical_enemy(t_ctx *ctx, t_cube_render *vars, char *charset)
-{
-	while (vars->dof < RENDER_DISTANCE)
-	{
-		vars->mx = (int)(vars->rx) / 64;
-		vars->my = (int)(vars->ry) / 64;
-		if (is_enemy_on_pos(ctx, (int)vars->rx, (int)vars->ry, NULL))
-		{
-			vars->hx = vars->rx;
-			vars->hy = vars->ry;
-			vars->dist_h = distance(ctx->maths.px,
-					ctx->maths.py, vars->hx, vars->hy);
-			vars->dof = RENDER_DISTANCE;
-		}
-		if (vars->my >= 0 && vars->mx >= 0 && vars->mx < ctx->ginfo.map_width
-			&& vars->my < ctx->ginfo.map_height
-			&& ft_strchr(charset, ctx->ginfo.map[vars->my][vars->mx]))
-			vars->dof = RENDER_DISTANCE;
 		else
 		{
 			vars->rx += vars->xo;

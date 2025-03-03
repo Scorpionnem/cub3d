@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:45 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/26 14:24:14 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:25:59 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 typedef enum s_wall_type
 {
-	normal_wall,
-	closed_door
+	normal_wall
 }	t_wall_type;
 
 typedef struct s_maths
@@ -48,27 +47,9 @@ typedef struct s_winfo
 	mlx_image_t		*img;
 	mlx_image_t		*fps;
 	bool			fps_toggle;
-	mlx_texture_t	*all_tx[9];
+	mlx_texture_t	*all_tx[4];
 	mlx_t			*mlx;
 }	t_winfo;
-
-typedef enum e_sprite_types
-{
-	empty,
-	collec,
-	enemy
-}	t_sprite_types;
-
-typedef struct s_sprite
-{
-	float			x;
-	float			y;
-	float			z;
-	int				scale;
-	bool			active;
-	t_sprite_types	type;
-	mlx_texture_t	*tex;
-}	t_sprite;
 
 typedef struct s_ginfo
 {
@@ -78,13 +59,9 @@ typedef struct s_ginfo
 	char				**map;
 	int					map_height;
 	int					map_width;
-	char				*all_tx[9];
+	char				*all_tx[4];
 	unsigned int		colors[2];
 	struct timeval		start_time;
-	t_sprite			*sprites;
-	int					sprites_count;
-	int					enemy_frame;
-	int					coins;
 }	t_ginfo;
 
 typedef struct s_file

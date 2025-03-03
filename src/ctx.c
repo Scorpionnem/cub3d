@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:40:22 by mbatty            #+#    #+#             */
-/*   Updated: 2025/02/26 14:24:20 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:30:14 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	ctx_deinit(t_ctx *ctx)
 		mlx_delete_image(ctx->winfo.mlx, ctx->winfo.fps);
 	if (ctx->winfo.mlx)
 		mlx_terminate(ctx->winfo.mlx);
-	if (ctx->ginfo.sprites)
-		free(ctx->ginfo.sprites);
 }
 
 static void	init_nulls2(t_ctx *ctx)
@@ -32,17 +30,7 @@ static void	init_nulls2(t_ctx *ctx)
 	ctx->winfo.fps_toggle = false;
 	ctx->winfo.mlx = NULL;
 	ctx->winfo.img = NULL;
-	ctx->winfo.all_tx[enemy0_tx] = NULL;
-	ctx->ginfo.all_tx[enemy0_tx] = NULL;
-	ctx->winfo.all_tx[enemy1_tx] = NULL;
-	ctx->ginfo.all_tx[enemy1_tx] = NULL;
-	ctx->winfo.all_tx[enemy2_tx] = NULL;
-	ctx->ginfo.all_tx[enemy2_tx] = NULL;
-	ctx->winfo.all_tx[collec_tx] = NULL;
-	ctx->ginfo.all_tx[collec_tx] = NULL;
 	ctx->running = true;
-	ctx->ginfo.enemy_frame = enemy0_tx;
-	ctx->ginfo.coins = 0;
 }
 
 static void	init_nulls(t_ctx *ctx)
@@ -53,13 +41,10 @@ static void	init_nulls(t_ctx *ctx)
 	ctx->ginfo.all_tx[south_tx] = NULL;
 	ctx->ginfo.all_tx[east_tx] = NULL;
 	ctx->ginfo.all_tx[west_tx] = NULL;
-	ctx->ginfo.all_tx[door_tx] = NULL;
 	ctx->winfo.all_tx[north_tx] = NULL;
 	ctx->winfo.all_tx[south_tx] = NULL;
 	ctx->winfo.all_tx[east_tx] = NULL;
 	ctx->winfo.all_tx[west_tx] = NULL;
-	ctx->winfo.all_tx[door_tx] = NULL;
-	ctx->ginfo.sprites = NULL;
 	ctx->winfo.fps = NULL;
 	ctx->ginfo.map_height = 0;
 	ctx->ginfo.map_width = 0;
