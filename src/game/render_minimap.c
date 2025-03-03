@@ -31,8 +31,8 @@ void	cast_single_ray(t_ctx *ctx, t_minimap *vars, float angle)
 
 	ray[0] = vars->center_x;
 	ray[1] = vars->center_y;
-	delta[0] = cosf(angle) * 0.1f;
-	delta[1] = sinf(angle) * 0.1f;
+	delta[0] = cosf(angle) * 0.02f;
+	delta[1] = sinf(angle) * 0.02f;
 	dist = 0;
 	while (dist < 8 * vars->view_range)
 	{
@@ -41,7 +41,7 @@ void	cast_single_ray(t_ctx *ctx, t_minimap *vars, float angle)
 		safe_put_pixel(ctx->winfo.img, (int)ray[0], (int)ray[1], 0x00FF00FF);
 		ray[0] += delta[0];
 		ray[1] += delta[1];
-		dist += 0.1f;
+		dist += 0.02f;
 	}
 }
 

@@ -34,14 +34,16 @@ bool	check_ray_collision(t_ctx *ctx, t_minimap *vars, float ray_x,
 	int		prev_coords[2];
 	float	step;
 
-	step = 0.1f;
+	step = 0.05f;
 	get_map_pos(vars, ray_x, ray_y, coords);
 	get_map_pos(vars, ray_x - step, ray_y - step, prev_coords);
 	if (is_wall(ctx, coords[0], coords[1]))
 		return (true);
-	if (prev_coords[0] != coords[0] && prev_coords[1] != coords[1])
-		if (is_wall(ctx, prev_coords[0], coords[1]) && is_wall(ctx, coords[0],
-				prev_coords[1]))
+	if (prev_coords[0] != coords[0] || prev_coords[1] != coords[1])
+	{
+		if (is_wall(ctx, prev_coords[0], coords[1]) || is_wall(ctx, coords[0],
+				prev_coords[1]) || is_wall(ctx, prev_coords[0], prev_coords[1]))
 			return (true);
+	}
 	return (false);
 }
