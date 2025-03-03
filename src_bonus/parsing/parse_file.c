@@ -6,7 +6,7 @@
 /*   By: mbatty <mewen.mewen@hotmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 15:39:49 by mbatty            #+#    #+#             */
-/*   Updated: 2025/03/01 14:28:54 by mbatty           ###   ########.fr       */
+/*   Updated: 2025/03/03 11:42:57 by mbatty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	add_line_map(t_ctx *ctx, char *line,
 {
 	static int	i = 0;
 
-	no_nl_line = ft_substr(line, 0, ft_strlen(line) - 1);
+	no_nl_line = ft_strtrim(line, "\n");
 	if (!no_nl_line)
 		return (!!print_error(ALLOC_ERROR));
 	if (ft_strlen(line) < (size_t)ctx->ginfo.map_width)
