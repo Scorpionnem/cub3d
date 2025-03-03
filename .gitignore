@@ -1,6 +1,8 @@
 *.o
 obj/
+obj_bonus/
 *.txt
 MLX42/
 cub3D
+cub3D_bonus
 *.a
