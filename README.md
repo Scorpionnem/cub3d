@@ -1,3 +1,5 @@
+42 Grade: 125/100
+
 A simple 3D game engine built using raycasting, inspired by *Wolfenstein 3D*
 This project is part of the 42 curriculum, aiming to explore low-level graphics programming with the MiniLibX library.
 
